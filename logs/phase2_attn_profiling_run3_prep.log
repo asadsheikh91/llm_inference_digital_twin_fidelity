@@ -1,0 +1,19 @@
+=== 2026-10-10T19:51:53+05:00 quiet check before attention test with flashinfer 0.1.1
+    PID %CPU %MEM COMMAND
+  23140  6.2  3.3 claude
+  35200  4.0  3.6 claude --continue
+    561  2.3  1.5 claude --continue
+  68485  1.0  0.0 /bin/bash -c source /home/asad/.claude/shell-snapshots/snapshot-bash-1791637882068-07la5g.sh 2>/dev/null || true && shopt 
+none running
+ 19:51:53 up  2:56,  1 user,  load average: 0.66, 0.24, 0.31
+               total        used        free      shared  buff/cache   available
+Mem:           9.7Gi       1.3Gi       3.7Gi       1.0Mi       4.7Gi       8.2Gi
+Swap:          8.0Gi       516Mi       7.5Gi
+$ nvidia-smi --query-compute-apps
+pid, used_gpu_memory [MiB]
+$ nvidia-smi memory.used, utilization x5 (idle baseline)
+430 MiB, 1 %
+430 MiB, 1 %
+430 MiB, 0 %
+430 MiB, 0 %
+430 MiB, 0 %

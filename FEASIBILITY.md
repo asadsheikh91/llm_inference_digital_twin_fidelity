@@ -207,5 +207,5 @@ Evidence: `logs/phase0_vidur.log`, `logs/phase0_vidur_unshallow.log`, `logs/phas
 |------|--------|--------------|
 | `~/.venv-vidur` | 3.10.12 | see `docs/environment/vidur-freeze.txt` |
 | `~/.venv-vllm` | 3.10.12 | vllm 0.31.0, torch 2.13.0+cu130, transformers 5.17.0 (`logs/phase0_vllm_env.log`); py-spy 0.4.2 added for diagnosis |
-| `~/.venv-sarathi` | 3.10.12 | sarathi 0.1.7 (editable, `~/sarathi-serve`), torch 2.3.0+cu121, flashinfer 0.2.0.post1+cu121torch2.3, triton 2.3.0, ray 2.59.0; pinned after Phase 0: transformers 4.42.4, numpy 1.26.4 (`logs/phase1_sarathi_pins.log`) |
+| `~/.venv-sarathi` | 3.10.12 | sarathi 0.1.7 (editable, `~/sarathi-serve`), torch 2.3.0+cu121, flashinfer 0.1.1+cu121torch2.3 (was 0.2.0.post1; pinned in Phase 2, `logs/phase2_flashinfer011_install.log`), triton 2.3.0, ray 2.59.0; pinned after Phase 0: transformers 4.42.4, numpy 1.26.4 (`logs/phase1_sarathi_pins.log`) |
 | `~/micromamba/envs/cuda-12.1` | n/a | CUDA 12.1 build toolchain for sarathi-serve (nvcc 12.1.105), used only via `CUDA_HOME` (`logs/phase0_sarathi_fix2.log`) |
