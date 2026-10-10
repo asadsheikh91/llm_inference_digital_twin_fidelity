@@ -8,7 +8,7 @@ Every number in this file comes from a log in `logs/`. The log is named next to 
 |------|---------|
 | 0.1 GPU visible in WSL | GO |
 | 0.2 vLLM serves TinyLlama-1.1B | GO (with deviation D1) |
-| 0.3 sarathi-serve installs and imports | NO-GO as of now: README install fails, fixes not yet tried (awaiting decision) |
+| 0.3 sarathi-serve installs and imports | NO-GO as of now: README install fails; fix 1 not executable (no pip nvcc for CUDA 12); awaiting decision |
 | 0.4 vLLM serves LLaVA-OneVision-0.5B with an image | GO (with deviation D1) |
 | 0.5 Vidur cloned and installed | GO |
 
@@ -101,7 +101,7 @@ GPU memory (`logs/phase0_tinyllama_retry_gpumem.csv`, summary in `logs/phase0_ti
 
 Shutdown: SIGINT to the API server. vLLM logged `force killing remaining process EngineCore pid 20730` (lines 103 and 104). GPU memory returned to 430 MiB.
 
-## 0.3 sarathi-serve installs and imports: NO-GO as of now (0 of 2 allowed fixes tried)
+## 0.3 sarathi-serve installs and imports: NO-GO as of now (fix 1 approved but not executable; no build run under it)
 
 Evidence: `logs/phase0_sarathi_size.log`, `logs/phase0_sarathi_install.log`
 
@@ -118,7 +118,13 @@ Evidence: `logs/phase0_sarathi_size.log`, `logs/phase0_sarathi_install.log`
   - Failed at 17:53:20 in "Getting requirements to build editable" with `RuntimeError: Cannot find CUDA_HOME. CUDA must be available to build the package.` (log line 52)
   - Cause: `setup.py` builds three CUDA extensions (`sarathi.pos_encoding_ops`, `sarathi.layernorm_ops`, `sarathi.activation_ops`) and stops at line 23 when torch's `CUDA_HOME` lookup finds no toolkit. WSL has no CUDA toolkit (see Host).
 - `import sarathi`: fails with `ModuleNotFoundError: No module named 'sarathi'`, because nothing was installed. torch is not installed in the venv either.
-- Fixes: none tried yet. Both candidate fixes provide a CUDA 12.x `nvcc`, which needs approval first:
+- Fix 1, approved: install a pip `nvcc` 12.x into `~/.venv-sarathi` and point `CUDA_HOME` at it (`logs/phase0_sarathi_fix1.log`)
+  - Prerequisite present: gcc/g++ 11.4.0 on Ubuntu 22.04.5
+  - Installed `nvidia-cuda-nvcc-cu12==12.1.105` (19,996,355-byte wheel) and `nvidia-cuda-runtime-cu12==12.1.105` (823,596-byte wheel). `nvidia/cuda_nvcc/bin/` contains only `ptxas`. There is no `nvcc` binary.
+  - Downloaded, but did not install, the newest wheel of every later cu12 minor: 12.2.140, 12.3.107, 12.4.131, 12.5.82, 12.6.85, 12.8.93, 12.9.86. Listed each wheel's `bin/` entries: every one has only `ptxas`.
+  - Result: PyPI has no CUDA 12 `nvcc`, so fix 1 cannot be executed as a pip install. No sarathi-serve build was run.
+  - The two nvidia packages above are still installed in `~/.venv-sarathi`. `import sarathi` still fails with `ModuleNotFoundError`.
+- Candidate fixes considered at the outset (both need a CUDA 12.x `nvcc`):
   1. Install a pip `nvcc` 12.1 into `~/.venv-sarathi` and point `CUDA_HOME` at it, for this build only.
   2. Install a CUDA 12.x toolkit in WSL. Needs sudo.
 - Not yet answered: whether sarathi-serve's CUDA kernels and its pinned flashinfer support this GPU (compute capability 8.6). The README says it was tested with CUDA 12.1 on A100 and A40 GPUs.
@@ -173,4 +179,4 @@ Evidence: `logs/phase0_vidur.log`, `logs/phase0_vidur_unshallow.log`, `logs/phas
 |------|--------|--------------|
 | `~/.venv-vidur` | 3.10.12 | see `docs/environment/vidur-freeze.txt` |
 | `~/.venv-vllm` | 3.10.12 | vllm 0.31.0, torch 2.13.0+cu130, transformers 5.17.0 (`logs/phase0_vllm_env.log`); py-spy 0.4.2 added for diagnosis |
-| `~/.venv-sarathi` | 3.10.12 | empty apart from pip; README install failed (`logs/phase0_sarathi_install.log`) |
+| `~/.venv-sarathi` | 3.10.12 | only nvidia-cuda-nvcc-cu12 and nvidia-cuda-runtime-cu12 12.1.105; sarathi not installed (`logs/phase0_sarathi_install.log`, `logs/phase0_sarathi_fix1.log`) |
