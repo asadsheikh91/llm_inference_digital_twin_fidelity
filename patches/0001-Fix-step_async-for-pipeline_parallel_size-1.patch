@@ -1,0 +1,41 @@
+From 03233cb062b35238b10f6d50604f7afd2a348c69 Mon Sep 17 00:00:00 2001
+From: Asad Amad <asadamad81@gmail.com>
+Date: Sat, 10 Oct 2026 20:22:32 +0500
+Subject: [PATCH] Fix step_async for pipeline_parallel_size == 1
+
+c94dbf4 passes block=False to engine.step, which only PipelineParallelLLMEngine
+accepts; BaseLLMEngine.step takes no arguments, so the OpenAI server failed with
+TypeError at PP=1. Pass the argument only to PipelineParallelLLMEngine.
+
+---
+ sarathi/engine/async_llm_engine.py | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/sarathi/engine/async_llm_engine.py b/sarathi/engine/async_llm_engine.py
+index febb7b5..7ad339c 100644
+--- a/sarathi/engine/async_llm_engine.py
++++ b/sarathi/engine/async_llm_engine.py
+@@ -16,6 +16,7 @@ from sarathi.config import ModelConfig, SystemConfig
+ from sarathi.core.datatypes.request_output import RequestOutput
+ from sarathi.core.datatypes.sampling_params import SamplingParams
+ from sarathi.engine.llm_engine import LLMEngine
++from sarathi.engine.pipeline_parallel_llm_engine import PipelineParallelLLMEngine
+ from sarathi.logger import init_logger
+ 
+ logger = init_logger(__name__)
+@@ -230,8 +231,11 @@ class _AsyncLLMEngine(LLMEngine):
+         """
+         Simple wrapper around the synchronous `step` method to make it
+         """
++        # Only PipelineParallelLLMEngine.step accepts the `block` argument;
++        # BaseLLMEngine.step (pipeline_parallel_size == 1) takes none.
++        args = (False,) if isinstance(self.engine, PipelineParallelLLMEngine) else ()
+         return await asyncio.get_event_loop().run_in_executor(
+-            None, self.engine.step, False
++            None, self.engine.step, *args
+         )
+ 
+ 
+-- 
+2.34.1
+
