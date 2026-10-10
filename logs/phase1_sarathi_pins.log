@@ -1,0 +1,53 @@
+=== 2026-10-10T18:45:20+05:00 step 1: version hints in ~/sarathi-serve (branch vidur, commit c94dbf4, Tue Jul 23 04:47:47 2024 -0400)
+$ grep -rnE 'transformers|numpy' --include=*.txt --include=*.toml --include=*.cfg --include=*.yml --include=*.yaml --include=Dockerfile* --include=*.sh ~/sarathi-serve
+/home/asad/sarathi-serve/requirements.txt:7:numpy
+/home/asad/sarathi-serve/requirements.txt:9:transformers >= 4.37.0  # Required for Mistral.
+$ git -C ~/sarathi-serve log -S'transformers' --format='%h %cd %s' -- requirements.txt
+19b403a Sat Nov 4 19:02:21 2023 -0400 Initial commit  (#1)
+$ grep -n 'transformers\|numpy' ~/sarathi-serve/setup.py
+
+=== 2026-10-10T18:45:29+05:00 newest releases before 2024-07-23 (PyPI upload_time of first file)
+transformers 4.42.2 uploaded 2024-06-28T06:42:22
+transformers 4.42.3 uploaded 2024-06-28T15:35:32
+transformers 4.42.4 uploaded 2024-07-11T17:09:33
+numpy 1.26.2 uploaded 2023-11-12T22:51:49
+numpy 1.26.3 uploaded 2024-01-02T22:20:37
+numpy 1.26.4 uploaded 2024-02-05T23:48:01
+
+=== 2026-10-10T18:45:40+05:00 apply pins
+$ ~/.venv-sarathi/bin/pip install 'transformers==4.42.4' 'numpy==1.26.4'
+  Downloading transformers-4.42.4-py3-none-any.whl.metadata (43 kB)
+  Downloading numpy-1.26.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+  Downloading huggingface_hub-0.36.2-py3-none-any.whl.metadata (15 kB)
+  Downloading tokenizers-0.19.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.7 kB)
+Downloading transformers-4.42.4-py3-none-any.whl (9.3 MB)
+Downloading numpy-1.26.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (18.2 MB)
+Downloading huggingface_hub-0.36.2-py3-none-any.whl (566 kB)
+Downloading tokenizers-0.19.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.6 MB)
+      Successfully uninstalled numpy-2.2.6
+      Successfully uninstalled huggingface_hub-2.2.0
+      Successfully uninstalled tokenizers-0.23.3
+      Successfully uninstalled transformers-5.19.0
+Successfully installed huggingface-hub-0.36.2 numpy-1.26.4 tokenizers-0.19.1 transformers-4.42.4
+exit=0
+$ pip check
+No broken requirements found.
+exit=0
+
+$ diff logs/phase1_sarathi_freeze_before_pins.txt logs/phase1_sarathi_freeze_after_pins.txt
+43c43
+< huggingface_hub==2.2.0
+---
+> huggingface_hub==0.36.2
+86c86
+< numpy==2.2.6
+---
+> numpy==1.26.4
+164c164
+< tokenizers==0.23.3
+---
+> tokenizers==0.19.1
+170c170
+< transformers==5.19.0
+---
+> transformers==4.42.4

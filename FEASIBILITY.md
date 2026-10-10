@@ -147,7 +147,12 @@ Evidence: `logs/phase0_sarathi_size.log`, `logs/phase0_sarathi_install.log`
   - `import sarathi` OK (version 0.1.7). The three extension modules load. `from sarathi import LLMEngine` OK. `sarathi.model_executor.model_loader` imports OK.
   - Kernel check: `layernorm_ops.rms_norm` ran on the GPU on a 4x2048 fp16 tensor. Max abs diff vs a PyTorch reference: 0.0.
   - flashinfer 0.2.0.post1+cu121torch2.3 imports.
-- Caveats, not yet tested and not fixed:
+- Follow-up after Phase 0 (`logs/phase1_sarathi_pins.log`, `logs/phase1_sarathi_import_after_pins.log`):
+  - Pinned transformers 4.42.4 and numpy 1.26.4, the newest 4.x and 1.x releases uploaded before the `vidur` branch commit date (2024-07-23). The repo itself has no version pins.
+  - The pins also changed huggingface_hub (2.2.0 to 0.36.2) and tokenizers (0.23.3 to 0.19.1). `pip check`: no broken requirements.
+  - Freezes before and after: `logs/phase1_sarathi_freeze_before_pins.txt`, `logs/phase1_sarathi_freeze_after_pins.txt`
+  - Rerun checks pass: transformers now sees torch, and `rms_norm` max abs diff is 0.0.
+- Caveats as originally recorded (the first two are resolved by the pins above):
   - transformers resolved to 5.19.0, because `requirements.txt` says only `>= 4.37.0`. It prints `Disabling PyTorch because PyTorch >= 2.5 is required but found 2.3.0`. sarathi only imports config and tokenizer classes from transformers, and those import fine. Whether transformers 5.x configs behave the way this 2024 code expects will only show when a model is served.
   - numpy resolved to 2.2.6 alongside torch 2.3.0
   - The README says sarathi-serve was tested with CUDA 12.1 on A100 and A40 GPUs. Serving a model on this RTX 3060 (sm_86, 6 GB) has not been tried.
@@ -202,5 +207,5 @@ Evidence: `logs/phase0_vidur.log`, `logs/phase0_vidur_unshallow.log`, `logs/phas
 |------|--------|--------------|
 | `~/.venv-vidur` | 3.10.12 | see `docs/environment/vidur-freeze.txt` |
 | `~/.venv-vllm` | 3.10.12 | vllm 0.31.0, torch 2.13.0+cu130, transformers 5.17.0 (`logs/phase0_vllm_env.log`); py-spy 0.4.2 added for diagnosis |
-| `~/.venv-sarathi` | 3.10.12 | sarathi 0.1.7 (editable, `~/sarathi-serve`), torch 2.3.0+cu121, flashinfer 0.2.0.post1+cu121torch2.3, transformers 5.19.0, triton 2.3.0, ray 2.59.0, numpy 2.2.6 (`logs/phase0_sarathi_import.log`) |
+| `~/.venv-sarathi` | 3.10.12 | sarathi 0.1.7 (editable, `~/sarathi-serve`), torch 2.3.0+cu121, flashinfer 0.2.0.post1+cu121torch2.3, triton 2.3.0, ray 2.59.0; pinned after Phase 0: transformers 4.42.4, numpy 1.26.4 (`logs/phase1_sarathi_pins.log`) |
 | `~/micromamba/envs/cuda-12.1` | n/a | CUDA 12.1 build toolchain for sarathi-serve (nvcc 12.1.105), used only via `CUDA_HOME` (`logs/phase0_sarathi_fix2.log`) |
