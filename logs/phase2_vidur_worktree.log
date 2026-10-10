@@ -1,0 +1,40 @@
+=== 2026-10-10T18:52:19+05:00 state of ~/vidur before worktree
+$ git -C ~/vidur worktree list
+/home/asad/vidur  abae7f6 [main]
+$ git -C ~/vidur status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+$ git -C ~/vidur branch -a
+* main
+  remotes/origin/HEAD -> origin/main
+  remotes/origin/main
+$ git -C ~/vidur stash list
+$ ps (vidur processes)
+  54673       00:28 bash /home/asad/fidelity-phase1/scripts/run_vidur.sh meta-llama/Meta-Llama-3-8B 4 43 sweep_Meta-Llama-3-8B_qps4_seed43 1.2_sweep
+  54678       00:28 /usr/bin/time -v /home/asad/.venv-vidur/bin/python -m vidur.main --seed 43 --replica_config_device a100 --replica_config_model_name meta-llama/Meta-Llama-3-8B --cluster_config_num_
+  54679       00:28 /home/asad/.venv-vidur/bin/python -m vidur.main --seed 43 --replica_config_device a100 --replica_config_model_name meta-llama/Meta-Llama-3-8B --cluster_config_num_replicas 1 --repl
+
+=== 2026-10-10T18:52:28+05:00 create worktree
+$ git -C ~/vidur worktree add ~/vidur-phase2 -b ext-profiling
+Preparing worktree (new branch 'ext-profiling')
+Updating files:  21% (50/229)Updating files:  22% (51/229)Updating files:  23% (53/229)Updating files:  24% (55/229)Updating files:  25% (58/229)Updating files:  26% (60/229)Updating files:  27% (62/229)Updating files:  28% (65/229)Updating files:  29% (67/229)Updating files:  30% (69/229)Updating files:  31% (71/229)Updating files:  32% (74/229)Updating files:  33% (76/229)Updating files:  34% (78/229)Updating files:  35% (81/229)Updating files:  36% (83/229)Updating files:  37% (85/229)Updating files:  38% (88/229)Updating files:  39% (90/229)Updating files:  40% (92/229)Updating files:  41% (94/229)Updating files:  42% (97/229)Updating files:  43% (99/229)Updating files:  44% (101/229)Updating files:  45% (104/229)Updating files:  46% (106/229)Updating files:  47% (108/229)Updating files:  48% (110/229)Updating files:  49% (113/229)Updating files:  50% (115/229)Updating files:  51% (117/229)Updating files:  52% (120/229)Updating files:  53% (122/229)Updating files:  54% (124/229)Updating files:  55% (126/229)Updating files:  56% (129/229)Updating files:  57% (131/229)Updating files:  58% (133/229)Updating files:  59% (136/229)Updating files:  60% (138/229)Updating files:  61% (140/229)Updating files:  62% (142/229)Updating files:  63% (145/229)Updating files:  64% (147/229)Updating files:  65% (149/229)Updating files:  66% (152/229)Updating files:  67% (154/229)Updating files:  68% (156/229)Updating files:  69% (159/229)Updating files:  70% (161/229)Updating files:  71% (163/229)Updating files:  72% (165/229)Updating files:  73% (168/229)Updating files:  74% (170/229)Updating files:  75% (172/229)Updating files:  76% (175/229)Updating files:  77% (177/229)Updating files:  78% (179/229)Updating files:  79% (181/229)Updating files:  80% (184/229)Updating files:  81% (186/229)Updating files:  82% (188/229)Updating files:  83% (191/229)Updating files:  84% (193/229)Updating files:  85% (195/229)Updating files:  86% (197/229)Updating files:  87% (200/229)Updating files:  88% (202/229)Updating files:  89% (204/229)Updating files:  90% (207/229)Updating files:  91% (209/229)Updating files:  92% (211/229)Updating files:  93% (213/229)Updating files:  94% (216/229)Updating files:  95% (218/229)Updating files:  96% (220/229)Updating files:  97% (223/229)Updating files:  98% (225/229)Updating files:  99% (227/229)Updating files: 100% (229/229)Updating files: 100% (229/229), done.
+HEAD is now at abae7f6 Pin GitHub Actions to full-length commit SHAs (#82)
+exit=0
+$ git -C ~/vidur worktree list
+/home/asad/vidur         abae7f6 [main]
+/home/asad/vidur-phase2  abae7f6 [ext-profiling]
+$ git -C ~/vidur status --short --branch
+## main...origin/main
+$ ls ~/vidur-phase2/docs ~/vidur-phase2/vidur/profiling ~/vidur-phase2/data/model_configs
+metrics.md
+profiling.md
+__init__.py
+attention
+collectives
+common
+cpu_overhead
+mlp
+utils
+ls: cannot access '/home/asad/vidur-phase2/data/model_configs': No such file or directory
