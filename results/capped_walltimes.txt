@@ -1,0 +1,12 @@
+capped4096_Llama-2-7b-hf_qps2_seed42 0 32.668657000
+capped4096_Llama-2-7b-hf_qps2_seed43 0 33.011514663
+capped4096_Llama-2-7b-hf_qps2_seed44 0 32.733574026
+capped4096_Llama-2-7b-hf_qps4_seed42 0 32.565393828
+capped4096_Llama-2-7b-hf_qps4_seed43 0 30.206720130
+capped4096_Llama-2-7b-hf_qps4_seed44 0 43.396065624
+capped4096_Llama-2-7b-hf_qps6.45_seed42 0 31.769480757
+capped4096_Llama-2-7b-hf_qps6.45_seed43 0 28.735863532
+capped4096_Llama-2-7b-hf_qps6.45_seed44 0 32.504416713
+capped4096_Llama-2-7b-hf_qps8_seed42 0 28.574061841
+capped4096_Llama-2-7b-hf_qps8_seed43 0 30.868988913
+capped4096_Llama-2-7b-hf_qps8_seed44 0 30.132184477
