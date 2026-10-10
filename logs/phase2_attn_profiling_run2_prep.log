@@ -1,0 +1,24 @@
+=== 2026-10-10T19:28:44+05:00 quiet check before fix 2
+$ ps top CPU
+    PID %CPU %MEM     ELAPSED COMMAND
+  23140  7.4  3.3    01:45:34 claude
+  35200  4.3  3.4    01:20:56 claude --continue
+    561  2.6  1.5    02:29:54 claude --continue
+     61  0.4  0.1    02:31:45 /lib/systemd/systemd-journald
+  64965  0.1  0.0       02:51 -bash
+$ ps vidur/vllm/ray/sampler
+none running
+$ uptime
+ 19:28:44 up  2:32,  1 user,  load average: 0.30, 0.38, 0.73
+$ free -h
+               total        used        free      shared  buff/cache   available
+Mem:           9.7Gi       1.3Gi       7.9Gi       1.0Mi       454Mi       8.2Gi
+Swap:          8.0Gi       519Mi       7.5Gi
+$ nvidia-smi --query-compute-apps=pid,used_memory --format=csv
+pid, used_gpu_memory [MiB]
+$ nvidia-smi memory.used, utilization x5 (idle baseline)
+368 MiB, 0 %
+368 MiB, 0 %
+368 MiB, 0 %
+368 MiB, 0 %
+368 MiB, 0 %
