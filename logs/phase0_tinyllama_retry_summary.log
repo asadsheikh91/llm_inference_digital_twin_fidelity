@@ -1,0 +1,26 @@
+=== 2026-10-10T17:36:13+05:00 stop server
+$ kill -INT 20464 (APIServer)
+server exited
+no EngineCore left
+$ kill 20391 (gpu sampler)
+$ nvidia-smi after stop
+430 MiB
+
+=== startup timeline (logs/phase0_tinyllama_retry_server.log)
+$ VLLM_USE_FLASHINFER_SAMPLER=0 vllm serve TinyLlama/TinyLlama-1.1B-Chat-v1.0 --max-model-len 2048 --gpu-memory-utilization 0.8 --port 8000  (2026-10-10T17:34:37+05:00)
+26:(EngineCore pid=20730) INFO 10-10 17:35:00 [default_loader.py:484] Loading weights took 1.83 seconds
+27:(EngineCore pid=20730) INFO 10-10 17:35:01 [model_runner.py:407] Model loading took 2.05 GiB memory and 5.846600 seconds
+28:(EngineCore pid=20730) INFO 10-10 17:35:01 [topk_topp_sampler.py:96] FlashInfer top-p/top-k sampling disabled via VLLM_USE_FLASHINFER_SAMPLER=0.
+37:(EngineCore pid=20730) INFO 10-10 17:35:14 [monitor.py:53] torch.compile took 11.68 s in total
+41:(EngineCore pid=20730) INFO 10-10 17:35:21 [model_runner.py:1087] Graph capturing finished in 5 secs, took 0.24 GiB
+42:(EngineCore pid=20730) INFO 10-10 17:35:21 [gpu_worker.py:692] Available KV cache memory: 2.16 GiB
+44:(EngineCore pid=20730) INFO 10-10 17:35:21 [kv_cache_utils.py:2464] GPU KV cache size: 103,088 tokens, Maximum concurrency for 2,048 tokens per request: 50.34x
+49:(EngineCore pid=20730) INFO 10-10 17:35:43 [model_runner.py:1087] Graph capturing finished in 7 secs, took 0.15 GiB
+61:(APIServer pid=20464) INFO 10-10 17:35:49 [entry.py:136] Starting vLLM server on http://0.0.0.0:8000
+91:INFO:     Application startup complete.
+
+=== GPU memory (logs/phase0_tinyllama_retry_gpumem.csv)
+idle baseline = samples before server launch timestamp
+baseline samples=8 min=430 max=430 MiB
+peak=5349 MiB at 2026-10-10T17:35:43.226
+peak minus baseline max=4919 MiB, minus baseline min=4919 MiB

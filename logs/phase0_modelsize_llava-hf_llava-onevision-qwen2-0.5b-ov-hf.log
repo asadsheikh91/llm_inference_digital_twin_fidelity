@@ -1,0 +1,20 @@
+$ curl -s https://huggingface.co/api/models/llava-hf/llava-onevision-qwen2-0.5b-ov-hf/tree/main  (2026-10-10T17:06:51+05:00)
+             0 onnx
+             0 video_processor
+          1519 .gitattributes
+          9582 README.md
+           122 added_tokens.json
+           826 chat_template.json
+          2591 config.json
+           126 generation_config.json
+        208818 llava_onevision_arch.png
+       1671853 merges.txt
+    1787445680 model.safetensors
+          1732 preprocessor_config.json
+           178 processor_config.json
+           367 special_tokens_map.json
+       7028579 tokenizer.json
+          1800 tokenizer_config.json
+           621 video_preprocessor_config.json
+       2776833 vocab.json
+TOTAL_BYTES 1799151227

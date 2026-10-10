@@ -1,0 +1,23 @@
+=== 2026-10-10T17:34:18+05:00 pre-retry checks
+$ ps -eo pid,cmd | grep -E 'vllm serve|EngineCore|gpu_mem_sampler' (excluding grep)
+(no lines above = none running)
+$ ss -ltnp | grep :8000
+port 8000 free
+$ nvidia-smi --query-gpu=utilization.gpu,memory.used,memory.total --format=csv (5 samples, 1 s apart)
+0 %, 430 MiB, 6144 MiB
+0 %, 430 MiB, 6144 MiB
+0 %, 430 MiB, 6144 MiB
+0 %, 430 MiB, 6144 MiB
+0 %, 430 MiB, 6144 MiB
+$ git -C ~/vidur rev-parse --is-shallow-repository
+false
+$ git -C ~/vidur rev-list --count HEAD; git -C ~/vidur log -1 --format='%H %cd'
+26
+abae7f63aa857300f5cdc6f5e0d27860cd24721b Mon Aug 24 18:16:50 2026 +0530
+$ cat logs/phase0_vidur_unshallow.log
+$ git fetch --unshallow  (2026-10-10T17:06:24+05:00)
+exit=0
+$ git rev-parse --is-shallow-repository
+false
+abae7f63aa857300f5cdc6f5e0d27860cd24721b Mon Aug 24 18:16:50 2026 +0530
+26

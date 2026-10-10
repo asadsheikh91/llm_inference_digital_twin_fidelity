@@ -1,0 +1,19 @@
+=== 2026-10-10T17:53:58+05:00 pre-run checks for 0.4
+no server or sampler running
+port 8000 free
+$ nvidia-smi memory.used x5
+0 MiB
+0 MiB
+0 MiB
+0 MiB
+0 MiB
+$ free -h
+               total        used        free      shared  buff/cache   available
+Mem:           9.7Gi       3.5Gi       5.4Gi       4.0Mi       823Mi       6.0Gi
+Swap:          8.0Gi       0.0Ki       8.0Gi
+$ grep -rl LlavaOnevision vllm/model_executor/models | head
+/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/model_executor/models/registry.py
+/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/model_executor/models/bee.py
+/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/model_executor/models/rvl.py
+$ sha256sum data/phase0/test_shapes.png
+34b7567b857403be56c4a1b2653a1725604ef3d64c0ad8288c3b26555c8bdcd9  data/phase0/test_shapes.png

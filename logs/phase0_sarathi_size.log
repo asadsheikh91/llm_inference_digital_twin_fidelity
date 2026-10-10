@@ -1,0 +1,216 @@
+$ curl -s https://api.github.com/repos/microsoft/sarathi-serve  (2026-10-10T17:36:40+05:00)
+{'full_name': 'microsoft/sarathi-serve', 'size': 2877, 'default_branch': 'main', 'pushed_at': '2026-01-08T05:10:57Z', 'archived': False}
+size field is in KiB per GitHub API
+$ curl -s https://api.github.com/repos/microsoft/sarathi-serve/branches/vidur
+vidur c94dbf438711a4670dbf7477175062e87748999d 2024-07-23T08:47:47Z
+$ df -h ~
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sdf       1007G   18G  938G   2% /
+=== README.md
+# Sarathi-Serve
+
+This is the official OSDI'24 artifact submission for paper #444, "Taming Throughput-Latency Tradeoff in LLM Inference with Sarathi-Serve”.
+
+## Setup
+
+### Setup CUDA
+
+Sarathi-Serve has been tested with CUDA 12.1 on A100 and A40 GPUs.
+
+### Clone repository
+
+```sh
+git clone git@github.com:microsoft/sarathi-serve.git
+```
+
+### Create mamba environment
+
+Setup mamba if you don't already have it,
+
+```sh
+wget https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh
+bash Mambaforge-Linux-x86_64.sh # follow the instructions from there
+```
+
+Create a Python 3.10 environment,
+
+```sh
+mamba create -p ./env python=3.10  
+```
+
+### Install Sarathi-Serve
+
+```sh
+pip install -e . --extra-index-url https://flashinfer.ai/whl/cu121/torch2.3/
+```
+
+## Reproducing Results
+
+Refer to readmes in individual folders corresponding to each figure in `osdi-experiments`.
+
+## Citation
+
+If you use our work, please consider citing our paper:
+
+```
+@article{agrawal2024taming,
+  title={Taming Throughput-Latency Tradeoff in LLM Inference with Sarathi-Serve},
+  author={Agrawal, Amey and Kedia, Nitin and Panwar, Ashish and Mohan, Jayashree and Kwatra, Nipun and Gulavani, Bhargav S and Tumanov, Alexey and Ramjee, Ramachandran},
+  journal={Proceedings of 18th USENIX Symposium on Operating Systems Design and Implementation, 2024, Santa Clara},
+  year={2024}
+}
+```
+
+## Acknowledgment
+
+This repository originally started as a fork of the [vLLM project](https://vllm-project.github.io/). Sarathi-Serve is a research prototype and does not have complete feature parity with open-source vLLM. We have only retained the most critical features and adopted the codebase for faster research iterations.
+=== requirements.txt
+ninja  # For faster builds.
+psutil
+ray >= 2.5.1
+pandas  # Required for Ray data.
+pyarrow  # Required for Ray data.
+sentencepiece  # Required for LLaMA tokenizer.
+numpy
+torch == 2.3
+transformers >= 4.37.0  # Required for Mistral.
+matplotlib
+plotly_express
+seaborn
+wandb
+kaleido
+ddsketch
+jupyterlab
+flashinfer >= 0.0.5
+pillow
+tiktoken
+grpcio
+uvicorn
+fastapi
+openai
+tqdm
+=== setup.py
+import io
+import os
+import re
+import subprocess
+from typing import List, Set
+
+from packaging.version import parse, Version
+import setuptools
+import torch
+from torch.utils.cpp_extension import BuildExtension, CUDAExtension, CUDA_HOME
+
+ROOT_DIR = os.path.dirname(__file__)
+
+# Compiler flags.
+CXX_FLAGS = ["-g", "-O2", "-std=c++17"]
+# TODO(woosuk): Should we use -O3?
+NVCC_FLAGS = ["-O2", "-std=c++17"]
+
+ABI = 1 if torch._C._GLIBCXX_USE_CXX11_ABI else 0
+CXX_FLAGS += [f"-D_GLIBCXX_USE_CXX11_ABI={ABI}"]
+NVCC_FLAGS += [f"-D_GLIBCXX_USE_CXX11_ABI={ABI}"]
+
+if CUDA_HOME is None:
+    raise RuntimeError(
+        "Cannot find CUDA_HOME. CUDA must be available to build the package.")
+
+
+def get_nvcc_cuda_version(cuda_dir: str) -> Version:
+    """Get the CUDA version from nvcc.
+
+    Adapted from https://github.com/NVIDIA/apex/blob/8b7a1ff183741dd8f9b87e7bafd04cfde99cea28/setup.py
+    """
+    nvcc_output = subprocess.check_output([cuda_dir + "/bin/nvcc", "-V"],
+                                          universal_newlines=True)
+    output = nvcc_output.split()
+    release_idx = output.index("release") + 1
+    nvcc_cuda_version = parse(output[release_idx].split(",")[0])
+    return nvcc_cuda_version
+
+
+# Collect the compute capabilities of all available GPUs.
+device_count = torch.cuda.device_count()
+compute_capabilities: Set[int] = set()
+for i in range(device_count):
+    major, minor = torch.cuda.get_device_capability(i)
+    if major < 7:
+        raise RuntimeError(
+            "GPUs with compute capability less than 7.0 are not supported.")
+    compute_capabilities.add(major * 10 + minor)
+
+# Validate the NVCC CUDA version.
+nvcc_cuda_version = get_nvcc_cuda_version(CUDA_HOME)
+if nvcc_cuda_version < Version("11.0"):
+    raise RuntimeError("CUDA 11.0 or higher is required to build the package.")
+if 86 in compute_capabilities and nvcc_cuda_version < Version("11.1"):
+    raise RuntimeError(
+        "CUDA 11.1 or higher is required for GPUs with compute capability 8.6."
+    )
+if 89 in compute_capabilities and nvcc_cuda_version < Version("11.8"):
+    # CUDA 11.8 is required to generate the code targeting compute capability 8.9.
+    # However, GPUs with compute capability 8.9 can also run the code generated by
+    # the previous versions of CUDA 11 and targeting compute capability 8.0.
+    # Therefore, if CUDA 11.8 is not available, we target compute capability 8.0
+    # instead of 8.9.
+    compute_capabilities.remove(89)
+    compute_capabilities.add(80)
+if 90 in compute_capabilities and nvcc_cuda_version < Version("11.8"):
+    raise RuntimeError(
+        "CUDA 11.8 or higher is required for GPUs with compute capability 9.0."
+    )
+
+# If no GPU is available, add all supported compute capabilities.
+if not compute_capabilities:
+    compute_capabilities = {70, 75, 80}
+    if nvcc_cuda_version >= Version("11.1"):
+        compute_capabilities.add(86)
+    if nvcc_cuda_version >= Version("11.8"):
+        compute_capabilities.add(89)
+        compute_capabilities.add(90)
+
+=== pyproject.toml
+[build-system]
+requires = [
+    "ninja",
+    "packaging",
+    "setuptools",
+    "torch == 2.3",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.isort]
+profile = "black"
+known_first_party = "sarathi"
+known_third_party = "wandb"
+=== environment.yml
+$ python3 wheelsize.py (PyPI JSON API, 2026-10-10T17:37:12+05:00)
+   779141888 torch-2.3.0-cp310-cp310-manylinux1_x86_64.whl
+             (unpinned, not sized) filelock
+             (unpinned, not sized) typing-extensions>=4.8.0
+             (unpinned, not sized) sympy
+             (unpinned, not sized) networkx
+             (unpinned, not sized) jinja2
+             (unpinned, not sized) fsspec
+    23671734 nvidia_cuda_nvrtc_cu12-12.1.105-py3-none-manylinux1_x86_64.whl
+      823596 nvidia_cuda_runtime_cu12-12.1.105-py3-none-manylinux1_x86_64.whl
+    14109015 nvidia_cuda_cupti_cu12-12.1.105-py3-none-manylinux1_x86_64.whl
+   731725872 nvidia_cudnn_cu12-8.9.2.26-py3-none-manylinux1_x86_64.whl
+   410594774 nvidia_cublas_cu12-12.1.3.1-py3-none-manylinux1_x86_64.whl
+   121635161 nvidia_cufft_cu12-11.0.2.54-py3-none-manylinux1_x86_64.whl
+    56467784 nvidia_curand_cu12-10.3.2.106-py3-none-manylinux1_x86_64.whl
+   124161928 nvidia_cusolver_cu12-11.4.5.107-py3-none-manylinux1_x86_64.whl
+   195958278 nvidia_cusparse_cu12-12.1.0.106-py3-none-manylinux1_x86_64.whl
+   176249402 nvidia_nccl_cu12-2.20.5-py3-none-manylinux2014_x86_64.whl
+       99138 nvidia_nvtx_cu12-12.1.105-py3-none-manylinux1_x86_64.whl
+   168055246 triton-2.3.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+             (unpinned, not sized) mkl<=2021.4.0,>=2021.1.1; platform_system == "Windows"
+TOTAL_BYTES torch 2.3.0 + pinned deps: 2802693816
+$ curl -s https://flashinfer.ai/whl/cu121/torch2.3/flashinfer/ | grep cp310
+flashinfer-ai/flashinfer/releases/download/v0.2.0.post1/flashinfer-0.2.0.post1+cu121torch2.3-cp310-cp310-linux_x86_64.whl
+flashinfer-ai/flashinfer/releases/download/v0.2.0.post2/flashinfer_python-0.2.0.post2+cu121torch2.3-cp310-cp310-linux_x86_64.whl
+flashinfer-ai/flashinfer/releases/download/v0.2.0/flashinfer-0.2.0+cu121torch2.3-cp310-cp310-linux_x86_64.whl
+$ curl -sIL https://github.com/flashinfer-ai/flashinfer/releases/download/v0.2.0.post1/flashinfer-0.2.0.post1+cu121torch2.3-cp310-cp310-linux_x86_64.whl | grep content-length
+content-length: 405796554

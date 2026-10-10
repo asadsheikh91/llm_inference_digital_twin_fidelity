@@ -1,0 +1,45 @@
+=== 2026-10-10T17:38:25+05:00 host / GPU facts (re-captured for 0.1)
+$ uname -r
+6.18.33.2-microsoft-standard-WSL2
+$ free -h
+               total        used        free      shared  buff/cache   available
+Mem:           9.7Gi       1.4Gi       2.6Gi       4.0Mi       5.8Gi       8.1Gi
+Swap:          8.0Gi       0.0Ki       8.0Gi
+$ df -h /
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sdf       1007G   18G  938G   2% /
+$ /usr/bin/python3 --version
+Python 3.10.12
+$ which nvcc; ls -d /usr/local/cuda*
+nvcc not on PATH
+ls: cannot access '/usr/local/cuda*': No such file or directory
+$ ls /usr/lib/wsl/lib | grep -E 'libcuda|libnvidia-ml'
+libcuda.so
+libcuda.so.1
+libcuda.so.1.1
+libcudadebugger.so.1
+libnvidia-ml.so.1
+$ nvidia-smi
+Sat Oct 10 17:38:26 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.108                Driver Version: 581.83         CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 3060 ...    On  |   00000000:01:00.0 Off |                  N/A |
+| N/A   37C    P8             15W /  115W |     430MiB /   6144MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+$ nvidia-smi --query-gpu=name,pci.bus_id,memory.total,memory.used,driver_version,power.limit --format=csv
+name, pci.bus_id, memory.total [MiB], memory.used [MiB], driver_version, power.limit [W]
+NVIDIA GeForce RTX 3060 Laptop GPU, 00000000:01:00.0, 6144 MiB, 430 MiB, 581.83, [N/A]

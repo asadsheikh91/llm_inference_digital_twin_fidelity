@@ -1,0 +1,31 @@
+=== 2026-10-10T18:04:46+05:00 stop server
+$ kill -INT 24014 (APIServer)
+server exited
+no EngineCore left
+$ kill 23964 (gpu sampler)
+$ nvidia-smi after stop
+0 MiB
+
+=== startup timeline (logs/phase0_llava_server.log)
+$ VLLM_USE_FLASHINFER_SAMPLER=0 vllm serve llava-hf/llava-onevision-qwen2-0.5b-ov-hf --max-model-len 4096 --gpu-memory-utilization 0.8 --port 8000  (2026-10-10T17:54:20+05:00)
+10:(APIServer pid=24014) INFO 10-10 17:54:53 [model.py:699] Resolved architecture: LlavaOnevisionForConditionalGeneration
+24:(EngineCore pid=25016) INFO 10-10 18:01:25 [weight_utils.py:523] Time spent downloading weights for llava-hf/llava-onevision-qwen2-0.5b-ov-hf: 276.493459 seconds
+31:(EngineCore pid=25016) INFO 10-10 18:01:28 [default_loader.py:484] Loading weights took 2.48 seconds
+32:(EngineCore pid=25016) INFO 10-10 18:01:41 [model_runner.py:407] Model loading took 1.68 GiB memory and 301.426885 seconds
+33:(EngineCore pid=25016) INFO 10-10 18:01:41 [topk_topp_sampler.py:96] FlashInfer top-p/top-k sampling disabled via VLLM_USE_FLASHINFER_SAMPLER=0.
+44:(EngineCore pid=25016) INFO 10-10 18:03:15 [monitor.py:53] torch.compile took 84.28 s in total
+48:(EngineCore pid=25016) INFO 10-10 18:03:22 [model_runner.py:1087] Graph capturing finished in 4 secs, took 0.26 GiB
+49:(EngineCore pid=25016) INFO 10-10 18:03:22 [gpu_worker.py:692] Available KV cache memory: 2.29 GiB
+51:(EngineCore pid=25016) INFO 10-10 18:03:22 [kv_cache_utils.py:2464] GPU KV cache size: 200,000 tokens, Maximum concurrency for 4,096 tokens per request: 48.83x
+56:(EngineCore pid=25016) INFO 10-10 18:03:42 [model_runner.py:1087] Graph capturing finished in 5 secs, took 0.18 GiB
+60:(EngineCore pid=25016) INFO 10-10 18:03:44 [core.py:373] init engine (profile, create kv cache, warmup model) took 123.05 s (compilation: 84.28 s)
+67:(APIServer pid=24014) INFO 10-10 18:03:59 [entry.py:136] Starting vLLM server on http://0.0.0.0:8000
+108:(APIServer pid=24014) WARNING 10-10 18:04:46 [utils.py:658] [shutdown] Process manager: force killing remaining processes count=1
+109:(APIServer pid=24014) WARNING 10-10 18:04:46 [utils.py:663] [shutdown] Process manager: force killing remaining process EngineCore pid 25016
+
+=== GPU memory (logs/phase0_llava_gpumem.csv)
+baseline samples=5 min=0 max=0 MiB
+peak=4969 MiB at 2026-10-10T18:04:33.838
+peak minus baseline max=4969 MiB
+$ max memory_used during request window 18:04:32 to 18:04:35
+4969 MiB

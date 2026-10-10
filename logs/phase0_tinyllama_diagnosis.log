@@ -1,0 +1,243 @@
+=== 2026-10-10T17:14:12+05:00 diagnosis start
+$ curl -sf localhost:8000/v1/models
+exit=7
+$ du -sb ~/.cache/huggingface (t0)
+1437010484	/home/asad/.cache/huggingface
+$ du -sb ~/.cache/huggingface (t0+10s, 2026-10-10T17:14:22+05:00)
+1498279322	/home/asad/.cache/huggingface
+$ find ~/.cache/huggingface -name '*.incomplete' -ls
+   180443 1460544 -rw-r--r--   1 asad     asad     1495592482 Oct 10 17:14 /home/asad/.cache/huggingface/hub/models--TinyLlama--TinyLlama-1.1B-Chat-v1.0/blobs/6e6001da2106d4757498752a021df6c2bdc332c650aae4bae6b0c004dcf14933.baad235f.incomplete
+$ find ~/.cache/huggingface/hub -type f -size +1M -ls
+   180411   1800 -rw-r--r--   1 asad     asad      1842767 Oct 10 17:07 /home/asad/.cache/huggingface/hub/models--TinyLlama--TinyLlama-1.1B-Chat-v1.0/blobs/a6e931b92caff4c79c5c56282f1e89569a0ae558
+   180443 1460544 -rw-r--r--   1 asad     asad     1495592482 Oct 10 17:14 /home/asad/.cache/huggingface/hub/models--TinyLlama--TinyLlama-1.1B-Chat-v1.0/blobs/6e6001da2106d4757498752a021df6c2bdc332c650aae4bae6b0c004dcf14933.baad235f.incomplete
+   180411   1800 -rw-r--r--   1 asad     asad      1842767 Oct 10 17:07 /home/asad/.cache/huggingface/hub/models--TinyLlama--TinyLlama-1.1B-Chat-v1.0/snapshots/fe8a4ea1ffedaf415f4da2f062534de366a451e6/tokenizer.json
+$ tail -40 logs/phase0_tinyllama_server.log
+$ vllm serve TinyLlama/TinyLlama-1.1B-Chat-v1.0 --max-model-len 2048 --gpu-memory-utilization 0.8 --port 8000  (2026-10-10T17:07:11+05:00)
+(APIServer pid=887) INFO 10-10 17:07:19 [api_utils.py:347] 
+(APIServer pid=887) INFO 10-10 17:07:19 [api_utils.py:347]        █     █     █▄   ▄█
+(APIServer pid=887) INFO 10-10 17:07:19 [api_utils.py:347]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.31.0
+(APIServer pid=887) INFO 10-10 17:07:19 [api_utils.py:347]   █▄█▀ █     █     █     █  model   TinyLlama/TinyLlama-1.1B-Chat-v1.0
+(APIServer pid=887) INFO 10-10 17:07:19 [api_utils.py:347]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
+(APIServer pid=887) INFO 10-10 17:07:19 [api_utils.py:347] 
+(APIServer pid=887) INFO 10-10 17:07:19 [api_utils.py:286] non-default args: {'model_tag': 'TinyLlama/TinyLlama-1.1B-Chat-v1.0', 'model': 'TinyLlama/TinyLlama-1.1B-Chat-v1.0', 'max_model_len': 2048, 'gpu_memory_utilization': 0.8}
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+(APIServer pid=887) INFO 10-10 17:07:29 [model.py:699] Resolved architecture: LlamaForCausalLM
+(APIServer pid=887) INFO 10-10 17:07:29 [model.py:2109] Using max model len 2048
+(APIServer pid=887) INFO 10-10 17:07:29 [kernel.py:408] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native'])
+(EngineCore pid=1552) INFO 10-10 17:07:48 [core.py:129] Initializing a V1 LLM engine (v0.31.0) with config: model='TinyLlama/TinyLlama-1.1B-Chat-v1.0', speculative_config=None, tokenizer='TinyLlama/TinyLlama-1.1B-Chat-v1.0', skip_tokenizer_init=False, tokenizer_mode=auto, revision=main, tokenizer_revision=main, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=2048, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=False, quantization=None, quantization_config=None, enforce_eager=False, aux_output_config=AuxOutputConfig(enable_return_routed_experts=False, max_bytes=None), kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, per_request_spec_decode_metrics='none', kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False, jit_monitor_mode='warn', jit_monitor_verbose=False), seed=0, served_model_name=TinyLlama/TinyLlama-1.1B-Chat-v1.0, enable_prefix_caching=True, enable_chunked_prefill=True, pooler_config=None, compilation_config={'mode': <CompilationMode.VLLM_COMPILE: 3>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['none'], 'ir_enable_torch_wrap': True, 'splitting_ops': ['vllm::unified_attention_with_output', 'vllm::unified_mla_attention_with_output', 'vllm::mamba_mixer2', 'vllm::mamba_mixer', 'vllm::short_conv', 'vllm::qwen4_exp_ple_short_conv', 'vllm::qwen4_exp_qsa_with_output', 'vllm::linear_attention', 'vllm::qwen_gdn_attention_core', 'vllm::qwen_gdn_attention_core_fused_norm_packed', 'vllm::gdn_attention_core_xpu', 'vllm::olmo_hybrid_gdn_full_forward', 'vllm::sparse_attn_indexer', 'vllm::rocm_aiter_sparse_attn_indexer', 'vllm::deepseek_v4_attention', 'vllm::hpc_rope_norm_forward', 'vllm::unified_kv_cache_update', 'vllm::unified_mla_kv_cache_update'], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_vision_items_per_batch': 0, 'encoder_cudagraph_max_frames_per_batch': None, 'compile_sizes': [], 'compile_ranges_endpoints': [2048], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.FULL_AND_PIECEWISE: (2, 1)>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 272, 288, 304, 320, 336, 352, 368, 384, 400, 416, 432, 448, 464, 480, 496, 512], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': False, 'fuse_act_quant': False, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False, 'enable_qk_norm_rope_fusion': False, 'fuse_rope_kvcache_cat_mla': False, 'fuse_act_padding': False, 'fuse_qk_norm_rope_kvcache': False}, 'max_cudagraph_capture_size': 512, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': False, 'static_all_moe_layers': []}, kernel_config=KernelConfig(ir_op_priority=IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native']), enable_flashinfer_autotune=True, enable_cutedsl_warmup=True, enable_jit_warmup=True, moe_backend='auto', sparse_indexer_topk_backend='auto', linear_backend='auto', linear_backend_per_quant=None)
+(EngineCore pid=1552) INFO 10-10 17:07:49 [parallel_state.py:1825] world_size=1 rank=0 local_rank=0 distributed_init_method=file:///tmp/vllm_dist_af3e6eb08e4b410aa8118a8f4bad45c0 backend=nccl
+(EngineCore pid=1552) INFO 10-10 17:07:49 [parallel_state.py:2269] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, ETP rank 0, EP rank N/A, EPLB rank N/A
+(EngineCore pid=1552) INFO 10-10 17:07:49 [gpu_worker.py:479] Using V2 Model Runner
+(EngineCore pid=1552) WARNING 10-10 17:07:49 [buffer_utils.py:47] Pinned memory is not available on this platform; falling back to device memory for UVA buffers.
+(EngineCore pid=1552) INFO 10-10 17:07:50 [model_runner.py:375] Loading model from scratch...
+(EngineCore pid=1552) INFO 10-10 17:07:51 [cuda.py:526] Using FLASH_ATTN attention backend out of potential backends: ['FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION'].
+(EngineCore pid=1552) INFO 10-10 17:07:51 [flash_attn.py:1167] Using FlashAttention version 2
+$ ps -o pid,ppid,stat,pcpu,pmem,rss,etime,wchan:32,cmd --forest -g $(ps -o sid= -p 887)
+    835     542 S     0.0  0.0  2096       07:31 do_wait                           |       \_ /bin/bash -c source /home/asad/.claude/shell-snapshots/snapshot-bash-1791633984765-z3x0dt.sh 2>/dev/null || true && shopt -u extglob 2>/dev/null || true && { \builtin unalias -- 'unsetenv'; \builtin unset -f -- 'unsetenv'; } >/dev/null 2>&1 || true && eval 'cd ~/llm_inference_digital_twin_fidelity && nohup scripts/gpu_mem_sampler.sh logs/phase0_tinyllama_gpumem.csv > /dev/null 2>&1 & sleep 3; cd ~/llm_inference_digital_twin_fidelity && CMD="vllm serve TinyLlama/TinyLlama-1.1B-Chat-v1.0 --max-model-len 2048 --gpu-memory-utilization 0.8 --port 8000"; { echo "\$ $CMD  ($(date -Is))"; } > logs/phase0_tinyllama_server.log; nohup ~/.venv-vllm/bin/$CMD >> logs/phase0_tinyllama_server.log 2>&1 & echo "server pid $!"' < /dev/null && pwd -P >| /tmp/claude-0892-cwd
+    887     542 Sl    2.4 10.2 1042032     07:28 poll_schedule_timeout.constprop.  |       \_ /home/asad/.venv-vllm/bin/python3 /home/asad/.venv-vllm/bin/vllm serve TinyLlama/TinyLlama-1.1B-Chat-v1.0 --max-model-len 2048 --gpu-memory-utilization 0.8 --port 8000
+   1551     887 S     0.0  0.1 11088       06:56 anon_pipe_read                    |           \_ /home/asad/.venv-vllm/bin/python3 -c from multiprocessing.resource_tracker import main;main(47)
+   1552     887 Sl    6.9 17.0 1734100     06:56 futex_do_wait                     |           \_ VLLM::EngineCore
+    216       1 Ss    0.0  0.1 19576       11:48 -                                /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
+    260       1 Ssl   0.0  0.2 22060       11:48 -                                /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+$ ps -p 1552 -o pid,ppid,stat,pcpu,rss,etime,nlwp,cmd
+    PID    PPID STAT %CPU   RSS     ELAPSED NLWP CMD
+   1552     887 Sl    6.9 1734100     06:56   74 VLLM::EngineCore
+$ cat /proc/1552/status | grep -E 'State|VmRSS|Threads'
+State:	S (sleeping)
+VmRSS:	 1734100 kB
+Threads:	74
+$ nvidia-smi --query-gpu=utilization.gpu,memory.used,memory.total --format=csv
+utilization.gpu [%], memory.used [MiB], memory.total [MiB]
+9 %, 2768 MiB, 6144 MiB
+$ tail -5 logs/phase0_tinyllama_gpumem.csv
+2026-10-10T17:14:19.935,2768,6144
+2026-10-10T17:14:20.469,2768,6144
+2026-10-10T17:14:21.005,2768,6144
+2026-10-10T17:14:21.543,2768,6144
+2026-10-10T17:14:22.090,2768,6144
+$ free -h
+               total        used        free      shared  buff/cache   available
+Mem:           9.7Gi       2.9Gi       396Mi        80Mi       6.4Gi       6.5Gi
+Swap:          8.0Gi          0B       8.0Gi
+
+=== 2026-10-10T17:14:41+05:00 py-spy
+$ ~/.venv-vllm/bin/pip install py-spy
+Installing collected packages: py-spy
+Successfully installed py-spy-0.4.2
+$ ~/.venv-vllm/bin/py-spy --version
+py-spy 0.4.2
+$ cat /proc/sys/kernel/yama/ptrace_scope
+1
+$ ~/.venv-vllm/bin/py-spy dump --pid 1552
+Permission Denied: Try running again with elevated permissions by going 'sudo env "PATH=$PATH" !!'
+exit=1
+
+=== 2026-10-10T17:15:08+05:00 OOM check
+$ dmesg | grep -iE 'oom|killed process|out of memory'
+exit=0
+$ journalctl -k --no-pager | grep -iE 'oom|killed process'
+
+=== 2026-10-10T17:15:08+05:00 download progress
+$ ls -l *.incomplete
+1583698606 /home/asad/.cache/huggingface/hub/models--TinyLlama--TinyLlama-1.1B-Chat-v1.0/blobs/6e6001da2106d4757498752a021df6c2bdc332c650aae4bae6b0c004dcf14933.baad235f.incomplete
+
+=== 2026-10-10T17:23:38+05:00 crash diagnosis
+$ grep -nE 'downloading weights|ERROR .*RuntimeError|^RuntimeError' logs/phase0_tinyllama_server.log
+21:(EngineCore pid=1552) INFO 10-10 17:16:35 [weight_utils.py:523] Time spent downloading weights for TinyLlama/TinyLlama-1.1B-Chat-v1.0: 543.267830 seconds
+28:(EngineCore pid=1552) INFO 10-10 17:16:41 [default_loader.py:484] Loading weights took 5.82 seconds
+47:(EngineCore pid=1552) INFO 10-10 17:17:16 [kernel_warmup.py:172] JIT kernel warmup starting.
+48:(EngineCore pid=1552) INFO 10-10 17:17:16 [kernel_warmup.py:185] JIT kernel warmup finished in 0.00s.
+49:(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433] EngineCore failed to start.
+119:(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433] RuntimeError: Could not find nvcc and default cuda_home='/usr/local/cuda' doesn't exist
+196:RuntimeError: Could not find nvcc and default cuda_home='/usr/local/cuda' doesn't exist
+243:RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}
+$ pgrep -af 'vllm serve|EngineCore'
+835 /bin/bash -c source /home/asad/.claude/shell-snapshots/snapshot-bash-1791633984765-z3x0dt.sh 2>/dev/null || true && shopt -u extglob 2>/dev/null || true && { \builtin unalias -- 'unsetenv'; \builtin unset -f -- 'unsetenv'; } >/dev/null 2>&1 || true && eval 'cd ~/llm_inference_digital_twin_fidelity && nohup scripts/gpu_mem_sampler.sh logs/phase0_tinyllama_gpumem.csv > /dev/null 2>&1 & sleep 3; cd ~/llm_inference_digital_twin_fidelity && CMD="vllm serve TinyLlama/TinyLlama-1.1B-Chat-v1.0 --max-model-len 2048 --gpu-memory-utilization 0.8 --port 8000"; { echo "\$ $CMD  ($(date -Is))"; } > logs/phase0_tinyllama_server.log; nohup ~/.venv-vllm/bin/$CMD >> logs/phase0_tinyllama_server.log 2>&1 & echo "server pid $!"' < /dev/null && pwd -P >| /tmp/claude-0892-cwd
+exit=0
+$ nvidia-smi --query-gpu=utilization.gpu,memory.used,memory.total --format=csv
+utilization.gpu [%], memory.used [MiB], memory.total [MiB]
+9 %, 476 MiB, 6144 MiB
+$ pgrep -af gpu_mem_sampler
+835 /bin/bash -c source /home/asad/.claude/shell-snapshots/snapshot-bash-1791633984765-z3x0dt.sh 2>/dev/null || true && shopt -u extglob 2>/dev/null || true && { \builtin unalias -- 'unsetenv'; \builtin unset -f -- 'unsetenv'; } >/dev/null 2>&1 || true && eval 'cd ~/llm_inference_digital_twin_fidelity && nohup scripts/gpu_mem_sampler.sh logs/phase0_tinyllama_gpumem.csv > /dev/null 2>&1 & sleep 3; cd ~/llm_inference_digital_twin_fidelity && CMD="vllm serve TinyLlama/TinyLlama-1.1B-Chat-v1.0 --max-model-len 2048 --gpu-memory-utilization 0.8 --port 8000"; { echo "\$ $CMD  ($(date -Is))"; } > logs/phase0_tinyllama_server.log; nohup ~/.venv-vllm/bin/$CMD >> logs/phase0_tinyllama_server.log 2>&1 & echo "server pid $!"' < /dev/null && pwd -P >| /tmp/claude-0892-cwd
+836 bash scripts/gpu_mem_sampler.sh logs/phase0_tinyllama_gpumem.csv
+$ peak memory_used_mib in logs/phase0_tinyllama_gpumem.csv
+peak 5286 MiB at 2026-10-10T17:17:19.667
+$ first and last sample
+2026-10-10T17:07:08.248,453,6144
+2026-10-10T17:23:38.586,476,6144
+
+=== nvcc / CUDA toolkit search
+$ which nvcc; echo CUDA_HOME=$CUDA_HOME; ls -d /usr/local/cuda*
+CUDA_HOME=<unset>
+ls: cannot access '/usr/local/cuda*': No such file or directory
+$ pip list | grep -iE 'nvidia|cuda'
+cuda-bindings                            13.4.3
+cuda-core                                1.2.1
+cuda-pathfinder                          1.8.3
+cuda-python                              13.4.1
+cuda-tile                                1.6.0
+cuda-toolkit                             13.0.3.0
+nvidia-cublas                            13.1.1.3
+nvidia-cuda-cccl                         13.3.4.3.1
+nvidia-cuda-crt                          13.4.92
+nvidia-cuda-cupti                        13.0.85
+nvidia-cuda-nvcc                         13.4.92
+nvidia-cuda-nvdisasm                     13.4.92
+nvidia-cuda-nvrtc                        13.0.88
+nvidia-cuda-runtime                      13.0.96
+nvidia-cudnn-cu13                        9.20.0.48
+nvidia-cudnn-frontend                    1.31.0
+nvidia-cufft                             12.0.0.61
+nvidia-cufile                            1.15.1.6
+nvidia-curand                            10.4.0.35
+nvidia-cusolver                          12.0.4.66
+nvidia-cusparse                          12.6.3.3
+nvidia-cusparselt-cu13                   0.8.1
+nvidia-cutlass-dsl                       4.7.1
+nvidia-cutlass-dsl-libs-base             4.7.1
+nvidia-cutlass-dsl-libs-core             4.7.1
+nvidia-cutlass-dsl-libs-cu12             4.7.1
+nvidia-cutlass-dsl-libs-cu13             4.7.1
+nvidia-ml-py                             13.615.71
+nvidia-nccl-cu13                         2.29.7
+nvidia-nvjitlink                         13.4.92
+nvidia-nvshmem-cu13                      3.4.5
+nvidia-nvtx                              13.0.85
+nvidia-nvvm                              13.4.92
+$ find ~/.venv-vllm -name 'nvcc*' -o -name 'ptxas' | head
+/home/asad/.venv-vllm/lib/python3.10/site-packages/nvidia/cu13/bin/ptxas
+/home/asad/.venv-vllm/lib/python3.10/site-packages/nvidia/cu13/bin/nvcc
+/home/asad/.venv-vllm/lib/python3.10/site-packages/nvidia/cu13/include/cuda_runtime.h
+/home/asad/.venv-vllm/lib/python3.10/site-packages/tokenspeed_triton/backends/nvidia/bin/ptxas
+/home/asad/.venv-vllm/lib/python3.10/site-packages/tokenspeed_triton/backends/nvidia/include/cuda_runtime.h
+/home/asad/.venv-vllm/lib/python3.10/site-packages/triton/backends/nvidia/bin/ptxas
+/home/asad/.venv-vllm/lib/python3.10/site-packages/triton/backends/nvidia/include/cuda_runtime.h
+$ sed -n '30,70p' flashinfer/jit/cpp_ext.py
+        except ValueError as e:
+            logger.warning(
+                "Could not parse %s with shlex: %s. Falling back to simple split.",
+                env_var_name,
+                e,
+            )
+            return env_flags.split()
+    return []
+
+
+def _get_glibcxx_abi_build_flags() -> List[str]:
+    glibcxx_abi_cflags = [
+        "-D_GLIBCXX_USE_CXX11_ABI=" + str(int(torch._C._GLIBCXX_USE_CXX11_ABI))
+    ]
+    return glibcxx_abi_cflags
+
+
+@functools.cache
+def get_cuda_path() -> str:
+    cuda_home = os.environ.get("CUDA_HOME") or os.environ.get("CUDA_PATH")
+    if cuda_home is not None:
+        return cuda_home
+    # get output of "which nvcc"
+    nvcc_path = subprocess.run(["which", "nvcc"], capture_output=True)
+    if nvcc_path.returncode == 0:
+        cuda_home = os.path.dirname(
+            os.path.dirname(nvcc_path.stdout.decode("utf-8").strip())
+        )
+    else:
+        cuda_home = "/usr/local/cuda"  # This default value is from: https://github.com/pytorch/pytorch/blob/ceb11a584d6b3fdc600358577d9bf2644f88def9/torch/utils/cpp_extension.py#L115
+        if not os.path.exists(cuda_home):
+            raise RuntimeError(
+                f"Could not find nvcc and default {cuda_home=} doesn't exist"
+            )
+    return cuda_home
+
+
+@functools.cache
+def get_cuda_version() -> Version:
+    # Try to query nvcc for CUDA version; if nvcc is unavailable, fall back to torch.version.cuda
+    try:
+$ ls ~/.cache/flashinfer
+/home/asad/.cache/flashinfer:
+0.7.0.post1
+
+/home/asad/.cache/flashinfer/0.7.0.post1:
+86
+$ pip list | grep -i flashinfer
+flashinfer-python                        0.7.0.post1
+
+=== 2026-10-10T17:25:24+05:00 stop GPU sampler
+$ ps -p 1552,887 (server processes)
+    PID STAT CMD
+exit=1 (1 = no such processes)
+$ kill 836  (gpu_mem_sampler.sh)
+19486
+$ ~/.venv-vllm/lib/python3.10/site-packages/nvidia/cu13/bin/nvcc --version
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2026 NVIDIA Corporation
+Built on Tue_Sep_01_08:45:21_PDT_2026
+Cuda compilation tools, release 13.4, V13.4.92
+Build cuda_13.4.r13.4/compiler.38855100_0
+$ grep CUDA_VERSION nvidia/cu13/include/cuda.h
+#define CUDA_VERSION 13000
+$ grep -n FLASHINFER_SAMPLER vllm/envs.py
+50:    VLLM_USE_FLASHINFER_SAMPLER: bool = True
+872:    "VLLM_USE_FLASHINFER_SAMPLER": lambda: (
+873:        bool(int(os.environ["VLLM_USE_FLASHINFER_SAMPLER"]))
+
+=== Timeline from logs/phase0_tinyllama_server.log
+server launched                  17:07:11 (line 1)
+weights download finished        17:16:35 (line 21, 'Time spent downloading weights ... 543.267830 seconds')
+weights loaded                   17:16:41 (line 28)
+CUDA graph capture finished      17:17:15 (line 43)
+KV cache allocated, 2.16 GiB     17:17:16 (line 45)
+EngineCore failed to start       17:17:20 (line 49)
+download finished -> crash: 17:16:35 -> 17:17:20 = 45 s
+
+=== Root cause
+Line 119, 17:17:20: RuntimeError: Could not find nvcc and default cuda_home='/usr/local/cuda' doesn't exist
+Raised in flashinfer/jit/cpp_ext.py get_cuda_path(), called while FlashInfer JIT-builds its sampling module
+(top_k_top_p_sampling_from_logits) during vLLM sampler warmup. CUDA_HOME unset, nvcc not on PATH, /usr/local/cuda absent.
+pip nvcc exists at ~/.venv-vllm/lib/python3.10/site-packages/nvidia/cu13/bin/nvcc but FlashInfer does not search there.
+$ ps -p 836; tail -1 gpumem.csv  (2026-10-10T17:25:33+05:00)
+    PID CMD
+pid 836 gone
+2026-10-10T17:25:23.606,484,6144
+(the 19486 printed above was the pgrep's own shell matching its pattern, not the sampler)
