@@ -8,7 +8,7 @@ Every number in this file comes from a log in `logs/`. The log is named next to 
 |------|---------|
 | 0.1 GPU visible in WSL | GO |
 | 0.2 vLLM serves TinyLlama-1.1B | GO (with deviation D1) |
-| 0.3 sarathi-serve installs and imports | NO-GO as of now: README install fails; fix 1 not executable (no pip nvcc for CUDA 12); awaiting decision |
+| 0.3 sarathi-serve installs and imports | GO for install and import (with deviation D2, fix 2a); serving a model not yet tested |
 | 0.4 vLLM serves LLaVA-OneVision-0.5B with an image | GO (with deviation D1) |
 | 0.5 Vidur cloned and installed | GO |
 
@@ -20,6 +20,12 @@ Every number in this file comes from a log in `logs/`. The log is named next to 
 - Reason: on the first attempt, vLLM's sampler warmup called FlashInfer's top-k/top-p sampling kernel. FlashInfer compiles that kernel on first use, which needs `nvcc`. No CUDA toolkit is installed in WSL: `CUDA_HOME` is unset, `nvcc` is not on PATH, and `/usr/local/cuda` does not exist. The engine failed with `RuntimeError: Could not find nvcc and default cuda_home='/usr/local/cuda' doesn't exist` (`logs/phase0_tinyllama_server.log` line 119, 17:17:20; analysis in `logs/phase0_tinyllama_diagnosis.log`).
 - Effect: top-k/top-p sampling ran through vLLM's PyTorch implementation instead of FlashInfer. The server log confirms this: `FlashInfer top-p/top-k sampling disabled via VLLM_USE_FLASHINFER_SAMPLER=0.` (`logs/phase0_tinyllama_retry_server.log` line 28).
 - Related: pip installed an `nvcc` inside the venv at `~/.venv-vllm/lib/python3.10/site-packages/nvidia/cu13/bin/nvcc`, release 13.4 (V13.4.92). The driver supports CUDA 13.0. FlashInfer does not search that path. Pointing `CUDA_HOME` at it, or installing a CUDA 13.0 toolkit in WSL, has not been tried (`logs/phase0_tinyllama_diagnosis.log`).
+
+### D2: sarathi-serve built against a conda CUDA 12.1 toolchain (0.3)
+
+- Setting: `CUDA_HOME=~/micromamba/envs/cuda-12.1` on the pip command line, for the build only. Not exported, not in any file.
+- Reason: sarathi-serve's `setup.py` compiles CUDA extensions and needs `nvcc`. WSL has no CUDA toolkit, and PyPI's `nvidia-cuda-nvcc-cu12` wheels (12.1 to 12.9) ship no `nvcc` binary (fix 1).
+- Effect: the kernels were compiled with nvcc 12.1.105, which matches torch 2.3.0's CUDA 12.1 build. The README's mamba env was replaced by `~/.venv-sarathi` per the project setup notes; micromamba is used only to provide the toolchain.
 
 ## Host (`logs/phase0_host_gpu.log`, `logs/phase0_vllm_env.log`)
 
@@ -101,7 +107,7 @@ GPU memory (`logs/phase0_tinyllama_retry_gpumem.csv`, summary in `logs/phase0_ti
 
 Shutdown: SIGINT to the API server. vLLM logged `force killing remaining process EngineCore pid 20730` (lines 103 and 104). GPU memory returned to 430 MiB.
 
-## 0.3 sarathi-serve installs and imports: NO-GO as of now (fix 1 approved but not executable; no build run under it)
+## 0.3 sarathi-serve installs and imports: GO for install and import (with deviation D2)
 
 Evidence: `logs/phase0_sarathi_size.log`, `logs/phase0_sarathi_install.log`
 
@@ -124,10 +130,27 @@ Evidence: `logs/phase0_sarathi_size.log`, `logs/phase0_sarathi_install.log`
   - Downloaded, but did not install, the newest wheel of every later cu12 minor: 12.2.140, 12.3.107, 12.4.131, 12.5.82, 12.6.85, 12.8.93, 12.9.86. Listed each wheel's `bin/` entries: every one has only `ptxas`.
   - Result: PyPI has no CUDA 12 `nvcc`, so fix 1 cannot be executed as a pip install. No sarathi-serve build was run.
   - The two nvidia packages above are still installed in `~/.venv-sarathi`. `import sarathi` still fails with `ModuleNotFoundError`.
-- Candidate fixes considered at the outset (both need a CUDA 12.x `nvcc`):
-  1. Install a pip `nvcc` 12.1 into `~/.venv-sarathi` and point `CUDA_HOME` at it, for this build only.
-  2. Install a CUDA 12.x toolkit in WSL. Needs sudo.
-- Not yet answered: whether sarathi-serve's CUDA kernels and its pinned flashinfer support this GPU (compute capability 8.6). The README says it was tested with CUDA 12.1 on A100 and A40 GPUs.
+- Fix 2a, approved: a CUDA 12.1 toolchain from NVIDIA's conda channel, installed with micromamba (no sudo), with `CUDA_HOME` set for the build only (`logs/phase0_sarathi_fix2.log`)
+  - micromamba 2.9.0-0 static binary at `~/micromamba/bin/micromamba` (18,292,808 bytes). sha256 `366cd9cd...fafb3e3` matches the published checksum.
+  - Dry run first:
+    - nvcc plus cudart only: 56,762,248 bytes. Not enough, because torch's `ATen/cuda/CUDAContextLight.h` includes `cusparse.h`, `cublas_v2.h`, `cublasLt.h` and `cusolverDn.h`.
+    - Full set: 894,307,537 bytes
+  - Installed into `~/micromamba/envs/cuda-12.1` (1.2G on disk) from `nvidia/label/cuda-12.1.1`:
+    - cuda-nvcc 12.1.105, cuda-cudart(-dev) 12.1.105, cuda-cccl 12.1.109
+    - libcublas(-dev) 12.1.3.1, libcusparse(-dev) 12.1.0.106, libcusolver(-dev) 11.4.5.107
+    - These versions match the CUDA 12.1 wheels torch 2.3.0 depends on.
+  - `nvcc --version` reports release 12.1, V12.1.105. The env has no `lib64`; torch 2.3 falls back to `CUDA_HOME/lib` (`torch/utils/cpp_extension.py` lines 1203 to 1209).
+  - Build command, the README's unchanged except for the env var: `CUDA_HOME=~/micromamba/envs/cuda-12.1 pip install -e . --extra-index-url https://flashinfer.ai/whl/cu121/torch2.3/`
+  - Result: exit 0, 18:23:17 to 18:35:13. `Building editable for sarathi` finished with status `done`. Built `sarathi/activation_ops`, `layernorm_ops` and `pos_encoding_ops` `.so` files.
+- Import test, run from `~` (`logs/phase0_sarathi_import.log`):
+  - torch 2.3.0+cu121, CUDA build 12.1, `torch.cuda.is_available()` True, device capability (8, 6)
+  - `import sarathi` OK (version 0.1.7). The three extension modules load. `from sarathi import LLMEngine` OK. `sarathi.model_executor.model_loader` imports OK.
+  - Kernel check: `layernorm_ops.rms_norm` ran on the GPU on a 4x2048 fp16 tensor. Max abs diff vs a PyTorch reference: 0.0.
+  - flashinfer 0.2.0.post1+cu121torch2.3 imports.
+- Caveats, not yet tested and not fixed:
+  - transformers resolved to 5.19.0, because `requirements.txt` says only `>= 4.37.0`. It prints `Disabling PyTorch because PyTorch >= 2.5 is required but found 2.3.0`. sarathi only imports config and tokenizer classes from transformers, and those import fine. Whether transformers 5.x configs behave the way this 2024 code expects will only show when a model is served.
+  - numpy resolved to 2.2.6 alongside torch 2.3.0
+  - The README says sarathi-serve was tested with CUDA 12.1 on A100 and A40 GPUs. Serving a model on this RTX 3060 (sm_86, 6 GB) has not been tried.
 
 ## 0.4 vLLM serves LLaVA-OneVision-0.5B with an image: GO (with deviation D1)
 
@@ -179,4 +202,5 @@ Evidence: `logs/phase0_vidur.log`, `logs/phase0_vidur_unshallow.log`, `logs/phas
 |------|--------|--------------|
 | `~/.venv-vidur` | 3.10.12 | see `docs/environment/vidur-freeze.txt` |
 | `~/.venv-vllm` | 3.10.12 | vllm 0.31.0, torch 2.13.0+cu130, transformers 5.17.0 (`logs/phase0_vllm_env.log`); py-spy 0.4.2 added for diagnosis |
-| `~/.venv-sarathi` | 3.10.12 | only nvidia-cuda-nvcc-cu12 and nvidia-cuda-runtime-cu12 12.1.105; sarathi not installed (`logs/phase0_sarathi_install.log`, `logs/phase0_sarathi_fix1.log`) |
+| `~/.venv-sarathi` | 3.10.12 | sarathi 0.1.7 (editable, `~/sarathi-serve`), torch 2.3.0+cu121, flashinfer 0.2.0.post1+cu121torch2.3, transformers 5.19.0, triton 2.3.0, ray 2.59.0, numpy 2.2.6 (`logs/phase0_sarathi_import.log`) |
+| `~/micromamba/envs/cuda-12.1` | n/a | CUDA 12.1 build toolchain for sarathi-serve (nvcc 12.1.105), used only via `CUDA_HOME` (`logs/phase0_sarathi_fix2.log`) |
