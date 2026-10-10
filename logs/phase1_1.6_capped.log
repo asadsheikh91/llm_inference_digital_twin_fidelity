@@ -1,0 +1,422 @@
+[2026-10-10T19:08:29+05:00] CAPPED START
+[2026-10-10T19:08:29+05:00] capped launching capped4096_Llama-2-7b-hf_qps2_seed42 (VIDUR_MAX_TOKENS=4096 VIDUR_TRAIN_THREADS=2)
+=== [2026-10-10T19:08:29+05:00] START run=capped4096_Llama-2-7b-hf_qps2_seed42 model=meta-llama/Llama-2-7b-hf qps=2 seed=42
+cwd=~/fidelity-phase1 WANDB_MODE=disabled PYTHONPATH=~/vidur
+CMD: nice -n 10 /usr/bin/time -v ~/.venv-vidur/bin/python -m vidur.main --seed 42 --replica_config_device a100 --replica_config_model_name meta-llama/Llama-2-7b-hf --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 42 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 42 --trace_request_length_generator_config_max_tokens 4096 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 42 --poisson_request_interval_generator_config_qps 2 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/\{NETWORK_DEVICE\}/\{MODEL\}/cpu_overheads.csv --random_forrest_execution_time_predictor_config_num_training_job_threads 2 --no-metrics_config_store_plots --metrics_config_output_dir ~/fidelity-phase1/results/runs/capped4096_Llama-2-7b-hf_qps2_seed42 --metrics_config_cache_dir ~/fidelity-phase1/cache
+INFO 10-10 19:08:33 trace_request_length_generator.py:78] Loaded request length trace file ~/vidur/data/processed_traces/splitwise_conv.csv with 19366 requests
+INFO 10-10 19:08:57 simulator.py:60] Starting simulation with cluster: Cluster({'id': 0, 'num_replicas': 1}) and 512 requests
+INFO 10-10 19:08:59 simulator.py:80] Simulation ended at: 250.04282022789513s
+INFO 10-10 19:08:59 simulator.py:83] Writing output
+INFO 10-10 19:09:00 simulator.py:86] Metrics written
+INFO 10-10 19:09:00 simulator.py:94] Chrome event trace written
+	Command being timed: "~/.venv-vidur/bin/python -m vidur.main --seed 42 --replica_config_device a100 --replica_config_model_name meta-llama/Llama-2-7b-hf --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 42 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 42 --trace_request_length_generator_config_max_tokens 4096 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 42 --poisson_request_interval_generator_config_qps 2 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/{NETWORK_DEVICE}/{MODEL}/cpu_overheads.csv --random_forrest_execution_time_predictor_config_num_training_job_threads 2 --no-metrics_config_store_plots --metrics_config_output_dir ~/fidelity-phase1/results/runs/capped4096_Llama-2-7b-hf_qps2_seed42 --metrics_config_cache_dir ~/fidelity-phase1/cache"
+	User time (seconds): 25.34
+	System time (seconds): 9.80
+	Percent of CPU this job got: 107%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:32.65
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 5618036
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 252
+	Minor (reclaiming a frame) page faults: 1503482
+	Voluntary context switches: 3090
+	Involuntary context switches: 325
+	Swaps: 0
+	File system inputs: 2997464
+	File system outputs: 9656
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+=== [2026-10-10T19:09:02+05:00] END run=capped4096_Llama-2-7b-hf_qps2_seed42 rc=0 wall_seconds_date=32.668657000
+[2026-10-10T19:09:02+05:00] capped finished capped4096_Llama-2-7b-hf_qps2_seed42 rc=0
+[2026-10-10T19:09:02+05:00] capped launching capped4096_Llama-2-7b-hf_qps2_seed43 (VIDUR_MAX_TOKENS=4096 VIDUR_TRAIN_THREADS=2)
+=== [2026-10-10T19:09:02+05:00] START run=capped4096_Llama-2-7b-hf_qps2_seed43 model=meta-llama/Llama-2-7b-hf qps=2 seed=43
+cwd=~/fidelity-phase1 WANDB_MODE=disabled PYTHONPATH=~/vidur
+CMD: nice -n 10 /usr/bin/time -v ~/.venv-vidur/bin/python -m vidur.main --seed 43 --replica_config_device a100 --replica_config_model_name meta-llama/Llama-2-7b-hf --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 43 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 43 --trace_request_length_generator_config_max_tokens 4096 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 43 --poisson_request_interval_generator_config_qps 2 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/\{NETWORK_DEVICE\}/\{MODEL\}/cpu_overheads.csv --random_forrest_execution_time_predictor_config_num_training_job_threads 2 --no-metrics_config_store_plots --metrics_config_output_dir ~/fidelity-phase1/results/runs/capped4096_Llama-2-7b-hf_qps2_seed43 --metrics_config_cache_dir ~/fidelity-phase1/cache
+INFO 10-10 19:09:05 trace_request_length_generator.py:78] Loaded request length trace file ~/vidur/data/processed_traces/splitwise_conv.csv with 19366 requests
+INFO 10-10 19:09:30 simulator.py:60] Starting simulation with cluster: Cluster({'id': 0, 'num_replicas': 1}) and 512 requests
+INFO 10-10 19:09:33 simulator.py:80] Simulation ended at: 241.4695304166045s
+INFO 10-10 19:09:33 simulator.py:83] Writing output
+INFO 10-10 19:09:33 simulator.py:86] Metrics written
+INFO 10-10 19:09:33 simulator.py:94] Chrome event trace written
+	Command being timed: "~/.venv-vidur/bin/python -m vidur.main --seed 43 --replica_config_device a100 --replica_config_model_name meta-llama/Llama-2-7b-hf --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 43 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 43 --trace_request_length_generator_config_max_tokens 4096 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 43 --poisson_request_interval_generator_config_qps 2 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/{NETWORK_DEVICE}/{MODEL}/cpu_overheads.csv --random_forrest_execution_time_predictor_config_num_training_job_threads 2 --no-metrics_config_store_plots --metrics_config_output_dir ~/fidelity-phase1/results/runs/capped4096_Llama-2-7b-hf_qps2_seed43 --metrics_config_cache_dir ~/fidelity-phase1/cache"
+	User time (seconds): 21.08
+	System time (seconds): 15.18
+	Percent of CPU this job got: 109%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:33.00
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 5618048
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 2
+	Minor (reclaiming a frame) page faults: 1501266
+	Voluntary context switches: 35
+	Involuntary context switches: 330
+	Swaps: 0
+	File system inputs: 2808
+	File system outputs: 9360
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+=== [2026-10-10T19:09:35+05:00] END run=capped4096_Llama-2-7b-hf_qps2_seed43 rc=0 wall_seconds_date=33.011514663
+[2026-10-10T19:09:35+05:00] capped finished capped4096_Llama-2-7b-hf_qps2_seed43 rc=0
+[2026-10-10T19:09:35+05:00] capped launching capped4096_Llama-2-7b-hf_qps2_seed44 (VIDUR_MAX_TOKENS=4096 VIDUR_TRAIN_THREADS=2)
+=== [2026-10-10T19:09:35+05:00] START run=capped4096_Llama-2-7b-hf_qps2_seed44 model=meta-llama/Llama-2-7b-hf qps=2 seed=44
+cwd=~/fidelity-phase1 WANDB_MODE=disabled PYTHONPATH=~/vidur
+CMD: nice -n 10 /usr/bin/time -v ~/.venv-vidur/bin/python -m vidur.main --seed 44 --replica_config_device a100 --replica_config_model_name meta-llama/Llama-2-7b-hf --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 44 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 44 --trace_request_length_generator_config_max_tokens 4096 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 44 --poisson_request_interval_generator_config_qps 2 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/\{NETWORK_DEVICE\}/\{MODEL\}/cpu_overheads.csv --random_forrest_execution_time_predictor_config_num_training_job_threads 2 --no-metrics_config_store_plots --metrics_config_output_dir ~/fidelity-phase1/results/runs/capped4096_Llama-2-7b-hf_qps2_seed44 --metrics_config_cache_dir ~/fidelity-phase1/cache
+INFO 10-10 19:09:38 trace_request_length_generator.py:78] Loaded request length trace file ~/vidur/data/processed_traces/splitwise_conv.csv with 19366 requests
+INFO 10-10 19:10:04 simulator.py:60] Starting simulation with cluster: Cluster({'id': 0, 'num_replicas': 1}) and 512 requests
+INFO 10-10 19:10:06 simulator.py:80] Simulation ended at: 231.91364007563448s
+INFO 10-10 19:10:06 simulator.py:83] Writing output
+INFO 10-10 19:10:06 simulator.py:86] Metrics written
+INFO 10-10 19:10:07 simulator.py:94] Chrome event trace written
+	Command being timed: "~/.venv-vidur/bin/python -m vidur.main --seed 44 --replica_config_device a100 --replica_config_model_name meta-llama/Llama-2-7b-hf --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 44 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 44 --trace_request_length_generator_config_max_tokens 4096 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 44 --poisson_request_interval_generator_config_qps 2 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/{NETWORK_DEVICE}/{MODEL}/cpu_overheads.csv --random_forrest_execution_time_predictor_config_num_training_job_threads 2 --no-metrics_config_store_plots --metrics_config_output_dir ~/fidelity-phase1/results/runs/capped4096_Llama-2-7b-hf_qps2_seed44 --metrics_config_cache_dir ~/fidelity-phase1/cache"
+	User time (seconds): 20.91
+	System time (seconds): 14.89
+	Percent of CPU this job got: 109%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:32.72
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 5617728
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 39
+	Minor (reclaiming a frame) page faults: 1500955
+	Voluntary context switches: 73
+	Involuntary context switches: 177
+	Swaps: 0
+	File system inputs: 29712
+	File system outputs: 9128
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+=== [2026-10-10T19:10:08+05:00] END run=capped4096_Llama-2-7b-hf_qps2_seed44 rc=0 wall_seconds_date=32.733574026
+[2026-10-10T19:10:08+05:00] capped finished capped4096_Llama-2-7b-hf_qps2_seed44 rc=0
+[2026-10-10T19:10:08+05:00] capped launching capped4096_Llama-2-7b-hf_qps4_seed42 (VIDUR_MAX_TOKENS=4096 VIDUR_TRAIN_THREADS=2)
+=== [2026-10-10T19:10:08+05:00] START run=capped4096_Llama-2-7b-hf_qps4_seed42 model=meta-llama/Llama-2-7b-hf qps=4 seed=42
+cwd=~/fidelity-phase1 WANDB_MODE=disabled PYTHONPATH=~/vidur
+CMD: nice -n 10 /usr/bin/time -v ~/.venv-vidur/bin/python -m vidur.main --seed 42 --replica_config_device a100 --replica_config_model_name meta-llama/Llama-2-7b-hf --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 42 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 42 --trace_request_length_generator_config_max_tokens 4096 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 42 --poisson_request_interval_generator_config_qps 4 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/\{NETWORK_DEVICE\}/\{MODEL\}/cpu_overheads.csv --random_forrest_execution_time_predictor_config_num_training_job_threads 2 --no-metrics_config_store_plots --metrics_config_output_dir ~/fidelity-phase1/results/runs/capped4096_Llama-2-7b-hf_qps4_seed42 --metrics_config_cache_dir ~/fidelity-phase1/cache
+INFO 10-10 19:10:10 trace_request_length_generator.py:78] Loaded request length trace file ~/vidur/data/processed_traces/splitwise_conv.csv with 19366 requests
+INFO 10-10 19:10:37 simulator.py:60] Starting simulation with cluster: Cluster({'id': 0, 'num_replicas': 1}) and 512 requests
+INFO 10-10 19:10:38 simulator.py:80] Simulation ended at: 131.57576287384043s
+INFO 10-10 19:10:38 simulator.py:83] Writing output
+INFO 10-10 19:10:38 simulator.py:86] Metrics written
+INFO 10-10 19:10:39 simulator.py:94] Chrome event trace written
+	Command being timed: "~/.venv-vidur/bin/python -m vidur.main --seed 42 --replica_config_device a100 --replica_config_model_name meta-llama/Llama-2-7b-hf --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 42 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 42 --trace_request_length_generator_config_max_tokens 4096 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 42 --poisson_request_interval_generator_config_qps 4 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/{NETWORK_DEVICE}/{MODEL}/cpu_overheads.csv --random_forrest_execution_time_predictor_config_num_training_job_threads 2 --no-metrics_config_store_plots --metrics_config_output_dir ~/fidelity-phase1/results/runs/capped4096_Llama-2-7b-hf_qps4_seed42 --metrics_config_cache_dir ~/fidelity-phase1/cache"
+	User time (seconds): 20.88
+	System time (seconds): 14.83
+	Percent of CPU this job got: 109%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:32.55
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 5618332
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 207
+	Minor (reclaiming a frame) page faults: 1502016
+	Voluntary context switches: 243
+	Involuntary context switches: 309
+	Swaps: 0
+	File system inputs: 118640
+	File system outputs: 5552
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+=== [2026-10-10T19:10:40+05:00] END run=capped4096_Llama-2-7b-hf_qps4_seed42 rc=0 wall_seconds_date=32.565393828
+[2026-10-10T19:10:40+05:00] capped finished capped4096_Llama-2-7b-hf_qps4_seed42 rc=0
+[2026-10-10T19:10:40+05:00] capped launching capped4096_Llama-2-7b-hf_qps4_seed43 (VIDUR_MAX_TOKENS=4096 VIDUR_TRAIN_THREADS=2)
+=== [2026-10-10T19:10:40+05:00] START run=capped4096_Llama-2-7b-hf_qps4_seed43 model=meta-llama/Llama-2-7b-hf qps=4 seed=43
+cwd=~/fidelity-phase1 WANDB_MODE=disabled PYTHONPATH=~/vidur
+CMD: nice -n 10 /usr/bin/time -v ~/.venv-vidur/bin/python -m vidur.main --seed 43 --replica_config_device a100 --replica_config_model_name meta-llama/Llama-2-7b-hf --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 43 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 43 --trace_request_length_generator_config_max_tokens 4096 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 43 --poisson_request_interval_generator_config_qps 4 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/\{NETWORK_DEVICE\}/\{MODEL\}/cpu_overheads.csv --random_forrest_execution_time_predictor_config_num_training_job_threads 2 --no-metrics_config_store_plots --metrics_config_output_dir ~/fidelity-phase1/results/runs/capped4096_Llama-2-7b-hf_qps4_seed43 --metrics_config_cache_dir ~/fidelity-phase1/cache
+INFO 10-10 19:10:43 trace_request_length_generator.py:78] Loaded request length trace file ~/vidur/data/processed_traces/splitwise_conv.csv with 19366 requests
+INFO 10-10 19:11:08 simulator.py:60] Starting simulation with cluster: Cluster({'id': 0, 'num_replicas': 1}) and 512 requests
+INFO 10-10 19:11:09 simulator.py:80] Simulation ended at: 126.10439506993839s
+INFO 10-10 19:11:09 simulator.py:83] Writing output
+INFO 10-10 19:11:09 simulator.py:86] Metrics written
+INFO 10-10 19:11:09 simulator.py:94] Chrome event trace written
+	Command being timed: "~/.venv-vidur/bin/python -m vidur.main --seed 43 --replica_config_device a100 --replica_config_model_name meta-llama/Llama-2-7b-hf --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 43 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 43 --trace_request_length_generator_config_max_tokens 4096 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 43 --poisson_request_interval_generator_config_qps 4 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/{NETWORK_DEVICE}/{MODEL}/cpu_overheads.csv --random_forrest_execution_time_predictor_config_num_training_job_threads 2 --no-metrics_config_store_plots --metrics_config_output_dir ~/fidelity-phase1/results/runs/capped4096_Llama-2-7b-hf_qps4_seed43 --metrics_config_cache_dir ~/fidelity-phase1/cache"
+	User time (seconds): 19.08
+	System time (seconds): 14.10
+	Percent of CPU this job got: 109%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:30.19
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 5618040
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 1502396
+	Voluntary context switches: 33
+	Involuntary context switches: 255
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 5368
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+=== [2026-10-10T19:11:11+05:00] END run=capped4096_Llama-2-7b-hf_qps4_seed43 rc=0 wall_seconds_date=30.206720130
+[2026-10-10T19:11:11+05:00] capped finished capped4096_Llama-2-7b-hf_qps4_seed43 rc=0
+[2026-10-10T19:11:11+05:00] capped launching capped4096_Llama-2-7b-hf_qps4_seed44 (VIDUR_MAX_TOKENS=4096 VIDUR_TRAIN_THREADS=2)
+=== [2026-10-10T19:11:11+05:00] START run=capped4096_Llama-2-7b-hf_qps4_seed44 model=meta-llama/Llama-2-7b-hf qps=4 seed=44
+cwd=~/fidelity-phase1 WANDB_MODE=disabled PYTHONPATH=~/vidur
+CMD: nice -n 10 /usr/bin/time -v ~/.venv-vidur/bin/python -m vidur.main --seed 44 --replica_config_device a100 --replica_config_model_name meta-llama/Llama-2-7b-hf --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 44 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 44 --trace_request_length_generator_config_max_tokens 4096 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 44 --poisson_request_interval_generator_config_qps 4 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/\{NETWORK_DEVICE\}/\{MODEL\}/cpu_overheads.csv --random_forrest_execution_time_predictor_config_num_training_job_threads 2 --no-metrics_config_store_plots --metrics_config_output_dir ~/fidelity-phase1/results/runs/capped4096_Llama-2-7b-hf_qps4_seed44 --metrics_config_cache_dir ~/fidelity-phase1/cache
+INFO 10-10 19:11:14 trace_request_length_generator.py:78] Loaded request length trace file ~/vidur/data/processed_traces/splitwise_conv.csv with 19366 requests
+INFO 10-10 19:11:51 simulator.py:60] Starting simulation with cluster: Cluster({'id': 0, 'num_replicas': 1}) and 512 requests
+INFO 10-10 19:11:52 simulator.py:80] Simulation ended at: 119.87273361581282s
+INFO 10-10 19:11:52 simulator.py:83] Writing output
+INFO 10-10 19:11:52 simulator.py:86] Metrics written
+INFO 10-10 19:11:52 simulator.py:94] Chrome event trace written
+	Command being timed: "~/.venv-vidur/bin/python -m vidur.main --seed 44 --replica_config_device a100 --replica_config_model_name meta-llama/Llama-2-7b-hf --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 44 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 44 --trace_request_length_generator_config_max_tokens 4096 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 44 --poisson_request_interval_generator_config_qps 4 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/{NETWORK_DEVICE}/{MODEL}/cpu_overheads.csv --random_forrest_execution_time_predictor_config_num_training_job_threads 2 --no-metrics_config_store_plots --metrics_config_output_dir ~/fidelity-phase1/results/runs/capped4096_Llama-2-7b-hf_qps4_seed44 --metrics_config_cache_dir ~/fidelity-phase1/cache"
+	User time (seconds): 23.85
+	System time (seconds): 21.73
+	Percent of CPU this job got: 105%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:43.38
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 5612312
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 1501245
+	Voluntary context switches: 39
+	Involuntary context switches: 641
+	Swaps: 0
+	File system inputs: 48
+	File system outputs: 5240
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+=== [2026-10-10T19:11:54+05:00] END run=capped4096_Llama-2-7b-hf_qps4_seed44 rc=0 wall_seconds_date=43.396065624
+[2026-10-10T19:11:54+05:00] capped finished capped4096_Llama-2-7b-hf_qps4_seed44 rc=0
+[2026-10-10T19:11:54+05:00] capped launching capped4096_Llama-2-7b-hf_qps6.45_seed42 (VIDUR_MAX_TOKENS=4096 VIDUR_TRAIN_THREADS=2)
+=== [2026-10-10T19:11:54+05:00] START run=capped4096_Llama-2-7b-hf_qps6.45_seed42 model=meta-llama/Llama-2-7b-hf qps=6.45 seed=42
+cwd=~/fidelity-phase1 WANDB_MODE=disabled PYTHONPATH=~/vidur
+CMD: nice -n 10 /usr/bin/time -v ~/.venv-vidur/bin/python -m vidur.main --seed 42 --replica_config_device a100 --replica_config_model_name meta-llama/Llama-2-7b-hf --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 42 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 42 --trace_request_length_generator_config_max_tokens 4096 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 42 --poisson_request_interval_generator_config_qps 6.45 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/\{NETWORK_DEVICE\}/\{MODEL\}/cpu_overheads.csv --random_forrest_execution_time_predictor_config_num_training_job_threads 2 --no-metrics_config_store_plots --metrics_config_output_dir ~/fidelity-phase1/results/runs/capped4096_Llama-2-7b-hf_qps6.45_seed42 --metrics_config_cache_dir ~/fidelity-phase1/cache
+INFO 10-10 19:11:57 trace_request_length_generator.py:78] Loaded request length trace file ~/vidur/data/processed_traces/splitwise_conv.csv with 19366 requests
+INFO 10-10 19:12:24 simulator.py:60] Starting simulation with cluster: Cluster({'id': 0, 'num_replicas': 1}) and 512 requests
+INFO 10-10 19:12:24 simulator.py:80] Simulation ended at: 103.69792205042133s
+INFO 10-10 19:12:24 simulator.py:83] Writing output
+INFO 10-10 19:12:24 simulator.py:86] Metrics written
+INFO 10-10 19:12:25 simulator.py:94] Chrome event trace written
+	Command being timed: "~/.venv-vidur/bin/python -m vidur.main --seed 42 --replica_config_device a100 --replica_config_model_name meta-llama/Llama-2-7b-hf --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 42 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 42 --trace_request_length_generator_config_max_tokens 4096 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 42 --poisson_request_interval_generator_config_qps 6.45 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/{NETWORK_DEVICE}/{MODEL}/cpu_overheads.csv --random_forrest_execution_time_predictor_config_num_training_job_threads 2 --no-metrics_config_store_plots --metrics_config_output_dir ~/fidelity-phase1/results/runs/capped4096_Llama-2-7b-hf_qps6.45_seed42 --metrics_config_cache_dir ~/fidelity-phase1/cache"
+	User time (seconds): 18.34
+	System time (seconds): 16.12
+	Percent of CPU this job got: 108%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:31.76
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 5617592
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 20
+	Minor (reclaiming a frame) page faults: 1501159
+	Voluntary context switches: 3002
+	Involuntary context switches: 440
+	Swaps: 0
+	File system inputs: 173880
+	File system outputs: 4560
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+=== [2026-10-10T19:12:26+05:00] END run=capped4096_Llama-2-7b-hf_qps6.45_seed42 rc=0 wall_seconds_date=31.769480757
+[2026-10-10T19:12:26+05:00] capped finished capped4096_Llama-2-7b-hf_qps6.45_seed42 rc=0
+[2026-10-10T19:12:26+05:00] capped launching capped4096_Llama-2-7b-hf_qps6.45_seed43 (VIDUR_MAX_TOKENS=4096 VIDUR_TRAIN_THREADS=2)
+=== [2026-10-10T19:12:26+05:00] START run=capped4096_Llama-2-7b-hf_qps6.45_seed43 model=meta-llama/Llama-2-7b-hf qps=6.45 seed=43
+cwd=~/fidelity-phase1 WANDB_MODE=disabled PYTHONPATH=~/vidur
+CMD: nice -n 10 /usr/bin/time -v ~/.venv-vidur/bin/python -m vidur.main --seed 43 --replica_config_device a100 --replica_config_model_name meta-llama/Llama-2-7b-hf --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 43 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 43 --trace_request_length_generator_config_max_tokens 4096 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 43 --poisson_request_interval_generator_config_qps 6.45 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/\{NETWORK_DEVICE\}/\{MODEL\}/cpu_overheads.csv --random_forrest_execution_time_predictor_config_num_training_job_threads 2 --no-metrics_config_store_plots --metrics_config_output_dir ~/fidelity-phase1/results/runs/capped4096_Llama-2-7b-hf_qps6.45_seed43 --metrics_config_cache_dir ~/fidelity-phase1/cache
+INFO 10-10 19:12:28 trace_request_length_generator.py:78] Loaded request length trace file ~/vidur/data/processed_traces/splitwise_conv.csv with 19366 requests
+INFO 10-10 19:12:52 simulator.py:60] Starting simulation with cluster: Cluster({'id': 0, 'num_replicas': 1}) and 512 requests
+INFO 10-10 19:12:53 simulator.py:80] Simulation ended at: 105.8874267199234s
+INFO 10-10 19:12:53 simulator.py:83] Writing output
+INFO 10-10 19:12:53 simulator.py:86] Metrics written
+INFO 10-10 19:12:53 simulator.py:94] Chrome event trace written
+	Command being timed: "~/.venv-vidur/bin/python -m vidur.main --seed 43 --replica_config_device a100 --replica_config_model_name meta-llama/Llama-2-7b-hf --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 43 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 43 --trace_request_length_generator_config_max_tokens 4096 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 43 --poisson_request_interval_generator_config_qps 6.45 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/{NETWORK_DEVICE}/{MODEL}/cpu_overheads.csv --random_forrest_execution_time_predictor_config_num_training_job_threads 2 --no-metrics_config_store_plots --metrics_config_output_dir ~/fidelity-phase1/results/runs/capped4096_Llama-2-7b-hf_qps6.45_seed43 --metrics_config_cache_dir ~/fidelity-phase1/cache"
+	User time (seconds): 18.07
+	System time (seconds): 13.97
+	Percent of CPU this job got: 111%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:28.72
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 5617340
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 1501788
+	Voluntary context switches: 33
+	Involuntary context switches: 262
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 4640
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+=== [2026-10-10T19:12:55+05:00] END run=capped4096_Llama-2-7b-hf_qps6.45_seed43 rc=0 wall_seconds_date=28.735863532
+[2026-10-10T19:12:55+05:00] capped finished capped4096_Llama-2-7b-hf_qps6.45_seed43 rc=0
+[2026-10-10T19:12:55+05:00] capped launching capped4096_Llama-2-7b-hf_qps6.45_seed44 (VIDUR_MAX_TOKENS=4096 VIDUR_TRAIN_THREADS=2)
+=== [2026-10-10T19:12:55+05:00] START run=capped4096_Llama-2-7b-hf_qps6.45_seed44 model=meta-llama/Llama-2-7b-hf qps=6.45 seed=44
+cwd=~/fidelity-phase1 WANDB_MODE=disabled PYTHONPATH=~/vidur
+CMD: nice -n 10 /usr/bin/time -v ~/.venv-vidur/bin/python -m vidur.main --seed 44 --replica_config_device a100 --replica_config_model_name meta-llama/Llama-2-7b-hf --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 44 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 44 --trace_request_length_generator_config_max_tokens 4096 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 44 --poisson_request_interval_generator_config_qps 6.45 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/\{NETWORK_DEVICE\}/\{MODEL\}/cpu_overheads.csv --random_forrest_execution_time_predictor_config_num_training_job_threads 2 --no-metrics_config_store_plots --metrics_config_output_dir ~/fidelity-phase1/results/runs/capped4096_Llama-2-7b-hf_qps6.45_seed44 --metrics_config_cache_dir ~/fidelity-phase1/cache
+INFO 10-10 19:12:57 trace_request_length_generator.py:78] Loaded request length trace file ~/vidur/data/processed_traces/splitwise_conv.csv with 19366 requests
+INFO 10-10 19:13:25 simulator.py:60] Starting simulation with cluster: Cluster({'id': 0, 'num_replicas': 1}) and 512 requests
+INFO 10-10 19:13:26 simulator.py:80] Simulation ended at: 96.47421443615526s
+INFO 10-10 19:13:26 simulator.py:83] Writing output
+INFO 10-10 19:13:26 simulator.py:86] Metrics written
+INFO 10-10 19:13:26 simulator.py:94] Chrome event trace written
+	Command being timed: "~/.venv-vidur/bin/python -m vidur.main --seed 44 --replica_config_device a100 --replica_config_model_name meta-llama/Llama-2-7b-hf --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 44 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 44 --trace_request_length_generator_config_max_tokens 4096 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 44 --poisson_request_interval_generator_config_qps 6.45 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/{NETWORK_DEVICE}/{MODEL}/cpu_overheads.csv --random_forrest_execution_time_predictor_config_num_training_job_threads 2 --no-metrics_config_store_plots --metrics_config_output_dir ~/fidelity-phase1/results/runs/capped4096_Llama-2-7b-hf_qps6.45_seed44 --metrics_config_cache_dir ~/fidelity-phase1/cache"
+	User time (seconds): 19.52
+	System time (seconds): 16.19
+	Percent of CPU this job got: 109%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:32.49
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 5618244
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 1498539
+	Voluntary context switches: 36
+	Involuntary context switches: 811
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 4408
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+=== [2026-10-10T19:13:27+05:00] END run=capped4096_Llama-2-7b-hf_qps6.45_seed44 rc=0 wall_seconds_date=32.504416713
+[2026-10-10T19:13:27+05:00] capped finished capped4096_Llama-2-7b-hf_qps6.45_seed44 rc=0
+[2026-10-10T19:13:27+05:00] capped launching capped4096_Llama-2-7b-hf_qps8_seed42 (VIDUR_MAX_TOKENS=4096 VIDUR_TRAIN_THREADS=2)
+=== [2026-10-10T19:13:27+05:00] START run=capped4096_Llama-2-7b-hf_qps8_seed42 model=meta-llama/Llama-2-7b-hf qps=8 seed=42
+cwd=~/fidelity-phase1 WANDB_MODE=disabled PYTHONPATH=~/vidur
+CMD: nice -n 10 /usr/bin/time -v ~/.venv-vidur/bin/python -m vidur.main --seed 42 --replica_config_device a100 --replica_config_model_name meta-llama/Llama-2-7b-hf --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 42 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 42 --trace_request_length_generator_config_max_tokens 4096 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 42 --poisson_request_interval_generator_config_qps 8 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/\{NETWORK_DEVICE\}/\{MODEL\}/cpu_overheads.csv --random_forrest_execution_time_predictor_config_num_training_job_threads 2 --no-metrics_config_store_plots --metrics_config_output_dir ~/fidelity-phase1/results/runs/capped4096_Llama-2-7b-hf_qps8_seed42 --metrics_config_cache_dir ~/fidelity-phase1/cache
+INFO 10-10 19:13:30 trace_request_length_generator.py:78] Loaded request length trace file ~/vidur/data/processed_traces/splitwise_conv.csv with 19366 requests
+INFO 10-10 19:13:54 simulator.py:60] Starting simulation with cluster: Cluster({'id': 0, 'num_replicas': 1}) and 512 requests
+INFO 10-10 19:13:54 simulator.py:80] Simulation ended at: 102.89535099076026s
+INFO 10-10 19:13:54 simulator.py:83] Writing output
+INFO 10-10 19:13:55 simulator.py:86] Metrics written
+INFO 10-10 19:13:55 simulator.py:94] Chrome event trace written
+	Command being timed: "~/.venv-vidur/bin/python -m vidur.main --seed 42 --replica_config_device a100 --replica_config_model_name meta-llama/Llama-2-7b-hf --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 42 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 42 --trace_request_length_generator_config_max_tokens 4096 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 42 --poisson_request_interval_generator_config_qps 8 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/{NETWORK_DEVICE}/{MODEL}/cpu_overheads.csv --random_forrest_execution_time_predictor_config_num_training_job_threads 2 --no-metrics_config_store_plots --metrics_config_output_dir ~/fidelity-phase1/results/runs/capped4096_Llama-2-7b-hf_qps8_seed42 --metrics_config_cache_dir ~/fidelity-phase1/cache"
+	User time (seconds): 18.31
+	System time (seconds): 13.67
+	Percent of CPU this job got: 111%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:28.56
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 5618220
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 1500100
+	Voluntary context switches: 37
+	Involuntary context switches: 172
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 4536
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+=== [2026-10-10T19:13:56+05:00] END run=capped4096_Llama-2-7b-hf_qps8_seed42 rc=0 wall_seconds_date=28.574061841
+[2026-10-10T19:13:56+05:00] capped finished capped4096_Llama-2-7b-hf_qps8_seed42 rc=0
+[2026-10-10T19:13:56+05:00] capped launching capped4096_Llama-2-7b-hf_qps8_seed43 (VIDUR_MAX_TOKENS=4096 VIDUR_TRAIN_THREADS=2)
+=== [2026-10-10T19:13:56+05:00] START run=capped4096_Llama-2-7b-hf_qps8_seed43 model=meta-llama/Llama-2-7b-hf qps=8 seed=43
+cwd=~/fidelity-phase1 WANDB_MODE=disabled PYTHONPATH=~/vidur
+CMD: nice -n 10 /usr/bin/time -v ~/.venv-vidur/bin/python -m vidur.main --seed 43 --replica_config_device a100 --replica_config_model_name meta-llama/Llama-2-7b-hf --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 43 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 43 --trace_request_length_generator_config_max_tokens 4096 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 43 --poisson_request_interval_generator_config_qps 8 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/\{NETWORK_DEVICE\}/\{MODEL\}/cpu_overheads.csv --random_forrest_execution_time_predictor_config_num_training_job_threads 2 --no-metrics_config_store_plots --metrics_config_output_dir ~/fidelity-phase1/results/runs/capped4096_Llama-2-7b-hf_qps8_seed43 --metrics_config_cache_dir ~/fidelity-phase1/cache
+INFO 10-10 19:13:58 trace_request_length_generator.py:78] Loaded request length trace file ~/vidur/data/processed_traces/splitwise_conv.csv with 19366 requests
+INFO 10-10 19:14:24 simulator.py:60] Starting simulation with cluster: Cluster({'id': 0, 'num_replicas': 1}) and 512 requests
+INFO 10-10 19:14:25 simulator.py:80] Simulation ended at: 104.2396437320958s
+INFO 10-10 19:14:25 simulator.py:83] Writing output
+INFO 10-10 19:14:25 simulator.py:86] Metrics written
+INFO 10-10 19:14:25 simulator.py:94] Chrome event trace written
+	Command being timed: "~/.venv-vidur/bin/python -m vidur.main --seed 43 --replica_config_device a100 --replica_config_model_name meta-llama/Llama-2-7b-hf --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 43 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 43 --trace_request_length_generator_config_max_tokens 4096 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 43 --poisson_request_interval_generator_config_qps 8 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/{NETWORK_DEVICE}/{MODEL}/cpu_overheads.csv --random_forrest_execution_time_predictor_config_num_training_job_threads 2 --no-metrics_config_store_plots --metrics_config_output_dir ~/fidelity-phase1/results/runs/capped4096_Llama-2-7b-hf_qps8_seed43 --metrics_config_cache_dir ~/fidelity-phase1/cache"
+	User time (seconds): 20.03
+	System time (seconds): 14.11
+	Percent of CPU this job got: 110%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:30.86
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 5617860
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 1502982
+	Voluntary context switches: 37
+	Involuntary context switches: 166
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 4584
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+=== [2026-10-10T19:14:27+05:00] END run=capped4096_Llama-2-7b-hf_qps8_seed43 rc=0 wall_seconds_date=30.868988913
+[2026-10-10T19:14:27+05:00] capped finished capped4096_Llama-2-7b-hf_qps8_seed43 rc=0
+[2026-10-10T19:14:27+05:00] capped launching capped4096_Llama-2-7b-hf_qps8_seed44 (VIDUR_MAX_TOKENS=4096 VIDUR_TRAIN_THREADS=2)
+=== [2026-10-10T19:14:27+05:00] START run=capped4096_Llama-2-7b-hf_qps8_seed44 model=meta-llama/Llama-2-7b-hf qps=8 seed=44
+cwd=~/fidelity-phase1 WANDB_MODE=disabled PYTHONPATH=~/vidur
+CMD: nice -n 10 /usr/bin/time -v ~/.venv-vidur/bin/python -m vidur.main --seed 44 --replica_config_device a100 --replica_config_model_name meta-llama/Llama-2-7b-hf --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 44 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 44 --trace_request_length_generator_config_max_tokens 4096 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 44 --poisson_request_interval_generator_config_qps 8 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/\{NETWORK_DEVICE\}/\{MODEL\}/cpu_overheads.csv --random_forrest_execution_time_predictor_config_num_training_job_threads 2 --no-metrics_config_store_plots --metrics_config_output_dir ~/fidelity-phase1/results/runs/capped4096_Llama-2-7b-hf_qps8_seed44 --metrics_config_cache_dir ~/fidelity-phase1/cache
+INFO 10-10 19:14:29 trace_request_length_generator.py:78] Loaded request length trace file ~/vidur/data/processed_traces/splitwise_conv.csv with 19366 requests
+INFO 10-10 19:14:54 simulator.py:60] Starting simulation with cluster: Cluster({'id': 0, 'num_replicas': 1}) and 512 requests
+INFO 10-10 19:14:54 simulator.py:80] Simulation ended at: 95.47249502531199s
+INFO 10-10 19:14:54 simulator.py:83] Writing output
+INFO 10-10 19:14:55 simulator.py:86] Metrics written
+INFO 10-10 19:14:55 simulator.py:94] Chrome event trace written
+	Command being timed: "~/.venv-vidur/bin/python -m vidur.main --seed 44 --replica_config_device a100 --replica_config_model_name meta-llama/Llama-2-7b-hf --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 44 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 44 --trace_request_length_generator_config_max_tokens 4096 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 44 --poisson_request_interval_generator_config_qps 8 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/{NETWORK_DEVICE}/{MODEL}/cpu_overheads.csv --random_forrest_execution_time_predictor_config_num_training_job_threads 2 --no-metrics_config_store_plots --metrics_config_output_dir ~/fidelity-phase1/results/runs/capped4096_Llama-2-7b-hf_qps8_seed44 --metrics_config_cache_dir ~/fidelity-phase1/cache"
+	User time (seconds): 18.17
+	System time (seconds): 14.63
+	Percent of CPU this job got: 108%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:30.12
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 5618344
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 1501333
+	Voluntary context switches: 33
+	Involuntary context switches: 354
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 4368
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+=== [2026-10-10T19:14:57+05:00] END run=capped4096_Llama-2-7b-hf_qps8_seed44 rc=0 wall_seconds_date=30.132184477
+[2026-10-10T19:14:57+05:00] capped finished capped4096_Llama-2-7b-hf_qps8_seed44 rc=0
+[2026-10-10T19:14:57+05:00] CAPPED DONE

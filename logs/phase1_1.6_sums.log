@@ -1,0 +1,4 @@
+[2026-10-10T19:18:02+05:00] sum of wall_seconds in results/sweep_walltimes.txt: 1900.49
+[2026-10-10T19:18:02+05:00] sum of wall_seconds in results/capped_walltimes.txt: 387.167
+[2026-10-10T19:18:02+05:00] sum of size_bytes in results/predictor_cache_manifest.csv: 2339608995
+[2026-10-10T19:18:11+05:00] zero-byte files in results/predictor_cache_manifest.csv: 36

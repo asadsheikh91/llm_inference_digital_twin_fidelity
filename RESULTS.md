@@ -52,7 +52,7 @@ Source: `logs/phase1_env.log` (includes full `pip freeze` of `~/.venv-vidur`).
 | Vidur | `~/vidur`, branch main, commit `abae7f63aa857300f5cdc6f5e0d27860cd24721b`, remote https://github.com/microsoft/vidur.git, working tree clean (empty `git status --porcelain`) |
 | Libraries | numpy 2.2.6, pandas 2.3.3, scikit-learn 1.7.2, scipy 1.15.3, joblib 1.6.0, plotly 7.1.0, plotly-express 0.4.1, kaleido 1.5.0, wandb 0.30.0, ddsketch 3.0.1, fasteners 0.20, matplotlib 3.10.9, seaborn 0.13.2 |
 | Vidur install | Not pip-installed into `~/.venv-vidur`; run with `PYTHONPATH=~/vidur` |
-| Env vars | `WANDB_MODE=disabled`, `PYTHONPATH=/home/asad/vidur` |
+| Env vars | `WANDB_MODE=disabled`, `PYTHONPATH=~/vidur` |
 
 No package in `~/.venv-vidur` was changed. A separate throwaway venv in the session scratchpad was
 created only to hold `pypdf==4.3.1` for reading the paper PDF (task 1.4).
