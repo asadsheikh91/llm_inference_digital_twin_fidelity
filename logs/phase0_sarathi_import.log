@@ -3,18 +3,18 @@ $ ~/.venv-sarathi/bin/pip list | grep -iE '^(sarathi|torch|flashinfer|transforme
 flashinfer                               0.2.0.post1+cu121torch2.3
 numpy                                    2.2.6
 ray                                      2.59.0
-sarathi                                  0.1.7                     /home/asad/sarathi-serve
+sarathi                                  0.1.7                     ~/sarathi-serve
 torch                                    2.3.0
 transformers                             5.19.0
 triton                                   2.3.0
 $ cuobjdump --list-elf sarathi/layernorm_ops*.so (embedded GPU archs)
-/bin/bash: line 28: /home/asad/micromamba/envs/cuda-12.1/bin/cuobjdump: No such file or directory
+/bin/bash: line 28: ~/micromamba/envs/cuda-12.1/bin/cuobjdump: No such file or directory
 $ python -c "import torch, sarathi; import sarathi.layernorm_ops ...; rms_norm vs torch reference"
 [transformers] Disabling PyTorch because PyTorch >= 2.5 is required but found 2.3.0
 [transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
 torch 2.3.0+cu121 cuda build 12.1 is_available True
 device NVIDIA GeForce RTX 3060 Laptop GPU capability (8, 6)
-import sarathi OK, file: /home/asad/sarathi-serve/sarathi/__init__.py version: 0.1.7
+import sarathi OK, file: ~/sarathi-serve/sarathi/__init__.py version: 0.1.7
 extension modules loaded: layernorm_ops, activation_ops, pos_encoding_ops
 rms_norm kernel ran on GPU; max abs diff vs torch reference: 0.0
 exit=0

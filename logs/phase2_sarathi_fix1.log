@@ -26,7 +26,7 @@ index febb7b5..7ad339c 100644
  
  
 $ python -c 'import sarathi.engine.async_llm_engine'
-import OK /home/asad/sarathi-serve/sarathi/engine/async_llm_engine.py
+import OK ~/sarathi-serve/sarathi/engine/async_llm_engine.py
 $ git -C ~/sarathi-serve log --oneline -2 local-fixes; git rev-parse vidur origin/vidur
 03233cb Fix step_async for pipeline_parallel_size == 1
 c94dbf4 Merged PR 1908: Fix performance regression in pipeline parallel benchmark (#28)

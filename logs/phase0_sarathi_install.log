@@ -3,18 +3,18 @@ $ df -h ~
 Filesystem      Size  Used Avail Use% Mounted on
 /dev/sdf       1007G   18G  938G   2% /
 $ git clone -b vidur https://github.com/microsoft/sarathi-serve.git ~/sarathi-serve
-Cloning into '/home/asad/sarathi-serve'...
+Cloning into '~/sarathi-serve'...
 exit=0
 $ git -C ~/sarathi-serve log -1 --format='%H %cd'
 c94dbf438711a4670dbf7477175062e87748999d Tue Jul 23 04:47:47 2024 -0400
 $ python3.10 -m venv ~/.venv-sarathi && pip install --upgrade pip
 Python 3.10.12
-pip 26.2.1 from /home/asad/.venv-sarathi/lib/python3.10/site-packages/pip (python 3.10)
+pip 26.2.1 from ~/.venv-sarathi/lib/python3.10/site-packages/pip (python 3.10)
 
 === 2026-10-10T17:38:06+05:00 README install (attempt 0, as written)
 $ cd ~/sarathi-serve && pip install -e . --extra-index-url https://flashinfer.ai/whl/cu121/torch2.3/
 Looking in indexes: https://pypi.org/simple, https://flashinfer.ai/whl/cu121/torch2.3/
-Obtaining file:///home/asad/sarathi-serve
+Obtaining file://~/sarathi-serve
   Installing build dependencies: started
   Installing build dependencies: still running...
   Installing build dependencies: still running...
@@ -34,11 +34,11 @@ Obtaining file:///home/asad/sarathi-serve
   │ exit code: 1
   ╰─> [17 lines of output]
       Traceback (most recent call last):
-        File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 389, in <module>
+        File "~/.venv-sarathi/lib/python3.10/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 389, in <module>
           main()
-        File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 373, in main
+        File "~/.venv-sarathi/lib/python3.10/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 373, in main
           json_out["return_val"] = hook(**hook_input["kwargs"])
-        File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 157, in get_requires_for_build_editable
+        File "~/.venv-sarathi/lib/python3.10/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 157, in get_requires_for_build_editable
           return hook(config_settings)
         File "/tmp/pip-build-env-l4hpk2c2/overlay/lib/python3.10/site-packages/setuptools/build_meta.py", line 481, in get_requires_for_build_editable
           return self.get_requires_for_build_wheel(config_settings)
@@ -53,7 +53,7 @@ Obtaining file:///home/asad/sarathi-serve
       [end of output]
   
   note: This error originates from a subprocess, and is likely not a problem with pip.
-ERROR: Failed to build 'file:///home/asad/sarathi-serve' when getting requirements to build editable
+ERROR: Failed to build 'file://~/sarathi-serve' when getting requirements to build editable
 exit=1
 === 2026-10-10T17:53:20+05:00 end
 

@@ -13,7 +13,7 @@ index b991420..d96bca7 100644
          self._model_config = model_config
          self._parallel_config = parallel_config
 $ ps vidur.main (contention)
-  61395  106 /home/asad/.venv-vidur/bin/python -m vidur.main --seed 42 --replica_config_device a100 --replica_config_mod
+  61395  106 ~/.venv-vidur/bin/python -m vidur.main --seed 42 --replica_config_device a100 --replica_config_mod
 331 MiB
 === start 2026-10-10T19:10:37+05:00
 $ cd ~/vidur-phase2 && /usr/bin/time -v python -m vidur.profiling.attention.main --models TinyLlama/TinyLlama-1.1B-Chat-v1.0 --num_gpus 1 --num_tensor_parallel_workers 1 --max_seq_len 64 --max_model_len 64 --min_batch_size 1 --max_batch_size 1
@@ -22,15 +22,15 @@ Traceback (most recent call last):
     return _run_code(code, main_globals, None,
   File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
     exec(code, run_globals)
-  File "/home/asad/vidur-phase2/vidur/profiling/attention/main.py", line 240, in <module>
+  File "~/vidur-phase2/vidur/profiling/attention/main.py", line 240, in <module>
     main()
-  File "/home/asad/vidur-phase2/vidur/profiling/attention/main.py", line 196, in main
+  File "~/vidur-phase2/vidur/profiling/attention/main.py", line 196, in main
     max_num_blocks = get_max_num_blocks(
-  File "/home/asad/vidur-phase2/vidur/profiling/utils/__init__.py", line 167, in get_max_num_blocks
+  File "~/vidur-phase2/vidur/profiling/utils/__init__.py", line 167, in get_max_num_blocks
     assert model_config.num_layers % max_pipeline_parallel_size == 0
 AssertionError
 Command exited with non-zero status 1
-	Command being timed: "/home/asad/.venv-sarathi/bin/python -m vidur.profiling.attention.main --models TinyLlama/TinyLlama-1.1B-Chat-v1.0 --num_gpus 1 --num_tensor_parallel_workers 1 --max_seq_len 64 --max_model_len 64 --min_batch_size 1 --max_batch_size 1"
+	Command being timed: "~/.venv-sarathi/bin/python -m vidur.profiling.attention.main --models TinyLlama/TinyLlama-1.1B-Chat-v1.0 --num_gpus 1 --num_tensor_parallel_workers 1 --max_seq_len 64 --max_model_len 64 --min_batch_size 1 --max_batch_size 1"
 	User time (seconds): 6.79
 	System time (seconds): 3.02
 	Percent of CPU this job got: 111%

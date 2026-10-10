@@ -1,6 +1,6 @@
 === 2026-10-10T18:52:19+05:00 state of ~/vidur before worktree
 $ git -C ~/vidur worktree list
-/home/asad/vidur  abae7f6 [main]
+~/vidur  abae7f6 [main]
 $ git -C ~/vidur status
 On branch main
 Your branch is up to date with 'origin/main'.
@@ -12,9 +12,9 @@ $ git -C ~/vidur branch -a
   remotes/origin/main
 $ git -C ~/vidur stash list
 $ ps (vidur processes)
-  54673       00:28 bash /home/asad/fidelity-phase1/scripts/run_vidur.sh meta-llama/Meta-Llama-3-8B 4 43 sweep_Meta-Llama-3-8B_qps4_seed43 1.2_sweep
-  54678       00:28 /usr/bin/time -v /home/asad/.venv-vidur/bin/python -m vidur.main --seed 43 --replica_config_device a100 --replica_config_model_name meta-llama/Meta-Llama-3-8B --cluster_config_num_
-  54679       00:28 /home/asad/.venv-vidur/bin/python -m vidur.main --seed 43 --replica_config_device a100 --replica_config_model_name meta-llama/Meta-Llama-3-8B --cluster_config_num_replicas 1 --repl
+  54673       00:28 bash ~/fidelity-phase1/scripts/run_vidur.sh meta-llama/Meta-Llama-3-8B 4 43 sweep_Meta-Llama-3-8B_qps4_seed43 1.2_sweep
+  54678       00:28 /usr/bin/time -v ~/.venv-vidur/bin/python -m vidur.main --seed 43 --replica_config_device a100 --replica_config_model_name meta-llama/Meta-Llama-3-8B --cluster_config_num_
+  54679       00:28 ~/.venv-vidur/bin/python -m vidur.main --seed 43 --replica_config_device a100 --replica_config_model_name meta-llama/Meta-Llama-3-8B --cluster_config_num_replicas 1 --repl
 
 === 2026-10-10T18:52:28+05:00 create worktree
 $ git -C ~/vidur worktree add ~/vidur-phase2 -b ext-profiling
@@ -23,8 +23,8 @@ Updating files:  21% (50/229)Updating files:  22% (51/229)Updating files:  23%
 HEAD is now at abae7f6 Pin GitHub Actions to full-length commit SHAs (#82)
 exit=0
 $ git -C ~/vidur worktree list
-/home/asad/vidur         abae7f6 [main]
-/home/asad/vidur-phase2  abae7f6 [ext-profiling]
+~/vidur         abae7f6 [main]
+~/vidur-phase2  abae7f6 [ext-profiling]
 $ git -C ~/vidur status --short --branch
 ## main...origin/main
 $ ls ~/vidur-phase2/docs ~/vidur-phase2/vidur/profiling ~/vidur-phase2/data/model_configs
@@ -37,4 +37,4 @@ common
 cpu_overhead
 mlp
 utils
-ls: cannot access '/home/asad/vidur-phase2/data/model_configs': No such file or directory
+ls: cannot access '~/vidur-phase2/data/model_configs': No such file or directory

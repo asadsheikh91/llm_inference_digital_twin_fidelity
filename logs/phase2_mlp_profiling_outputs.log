@@ -1,12 +1,12 @@
 === 2026-10-10T18:56:06+05:00 outputs
 $ find ~/vidur-phase2/profiling_outputs -type f -printf '%s %p\n'
-209 /home/asad/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-55-37/config.yaml
-321536 /home/asad/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-55-37/profiler_traces/profiler_trace_7f6c4235.json
-340290 /home/asad/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-55-37/profiler_traces/profiler_trace_b7749f73.json
-341666 /home/asad/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-55-37/profiler_traces/profiler_trace_ba14ce43.json
-342791 /home/asad/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-55-37/profiler_traces/profiler_trace_65e1154f.json
-224 /home/asad/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-55-37/TinyLlama/TinyLlama-1.1B-Chat-v1.0/mlp.csv
-$ cat /home/asad/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-55-37/config.yaml
+209 ~/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-55-37/config.yaml
+321536 ~/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-55-37/profiler_traces/profiler_trace_7f6c4235.json
+340290 ~/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-55-37/profiler_traces/profiler_trace_b7749f73.json
+341666 ~/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-55-37/profiler_traces/profiler_trace_ba14ce43.json
+342791 ~/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-55-37/profiler_traces/profiler_trace_65e1154f.json
+224 ~/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-55-37/TinyLlama/TinyLlama-1.1B-Chat-v1.0/mlp.csv
+$ cat ~/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-55-37/config.yaml
 disable_ray: false
 max_tokens: 8
 models:
@@ -16,9 +16,9 @@ num_tensor_parallel_workers:
 - 1
 output_dir: profiling_outputs/mlp/2026-10-10_18-55-37
 profile_method: record_function
-$ wc -l /home/asad/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-55-37/TinyLlama/TinyLlama-1.1B-Chat-v1.0/mlp.csv
-5 /home/asad/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-55-37/TinyLlama/TinyLlama-1.1B-Chat-v1.0/mlp.csv
-$ head -1 /home/asad/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-55-37/TinyLlama/TinyLlama-1.1B-Chat-v1.0/mlp.csv | tr ',' '\n' | nl
+$ wc -l ~/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-55-37/TinyLlama/TinyLlama-1.1B-Chat-v1.0/mlp.csv
+5 ~/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-55-37/TinyLlama/TinyLlama-1.1B-Chat-v1.0/mlp.csv
+$ head -1 ~/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-55-37/TinyLlama/TinyLlama-1.1B-Chat-v1.0/mlp.csv | tr ',' '\n' | nl
      1	n_head
      2	n_kv_head
      3	n_embd
@@ -27,7 +27,7 @@ $ head -1 /home/asad/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-55-37/Tiny
      6	use_gated_mlp
      7	num_tokens
      8	num_tensor_parallel_workers
-$ cat /home/asad/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-55-37/TinyLlama/TinyLlama-1.1B-Chat-v1.0/mlp.csv (raw)
+$ cat ~/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-55-37/TinyLlama/TinyLlama-1.1B-Chat-v1.0/mlp.csv (raw)
 n_head,n_kv_head,n_embd,n_expanded_embd,vocab_size,use_gated_mlp,num_tokens,num_tensor_parallel_workers
 32,4,2048,5632,32000,True,8,1
 32,4,2048,5632,32000,True,4,1

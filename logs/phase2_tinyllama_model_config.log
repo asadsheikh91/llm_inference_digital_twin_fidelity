@@ -1,5 +1,5 @@
 === 2026-10-10T18:52:56+05:00 TinyLlama config.json (local HF cache, no download)
-$ cat /home/asad/.cache/huggingface/hub/models--TinyLlama--TinyLlama-1.1B-Chat-v1.0/snapshots/fe8a4ea1ffedaf415f4da2f062534de366a451e6/config.json
+$ cat ~/.cache/huggingface/hub/models--TinyLlama--TinyLlama-1.1B-Chat-v1.0/snapshots/fe8a4ea1ffedaf415f4da2f062534de366a451e6/config.json
 {
   "architectures": [
     "LlamaForCausalLM"

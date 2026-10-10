@@ -34,31 +34,31 @@ INFO:     127.0.0.1:40358 - "GET /v1/models HTTP/1.1" 200 OK
 INFO:     127.0.0.1:40374 - "GET /v1/models HTTP/1.1" 200 OK
 ERROR 10-10 20:16:45 async_llm_engine.py:197] Engine background task failed
 ERROR 10-10 20:16:45 async_llm_engine.py:197] Traceback (most recent call last):
-ERROR 10-10 20:16:45 async_llm_engine.py:197]   File "/home/asad/sarathi-serve/sarathi/engine/async_llm_engine.py", line 186, in _log_task_completion
+ERROR 10-10 20:16:45 async_llm_engine.py:197]   File "~/sarathi-serve/sarathi/engine/async_llm_engine.py", line 186, in _log_task_completion
 ERROR 10-10 20:16:45 async_llm_engine.py:197]     return_value = task.result()
-ERROR 10-10 20:16:45 async_llm_engine.py:197]   File "/home/asad/sarathi-serve/sarathi/engine/async_llm_engine.py", line 360, in run_engine_loop
+ERROR 10-10 20:16:45 async_llm_engine.py:197]   File "~/sarathi-serve/sarathi/engine/async_llm_engine.py", line 360, in run_engine_loop
 ERROR 10-10 20:16:45 async_llm_engine.py:197]     await asyncio.wait_for(self.engine_step(), ENGINE_ITERATION_TIMEOUT_S)
 ERROR 10-10 20:16:45 async_llm_engine.py:197]   File "/usr/lib/python3.10/asyncio/tasks.py", line 445, in wait_for
 ERROR 10-10 20:16:45 async_llm_engine.py:197]     return fut.result()
-ERROR 10-10 20:16:45 async_llm_engine.py:197]   File "/home/asad/sarathi-serve/sarathi/engine/async_llm_engine.py", line 341, in engine_step
+ERROR 10-10 20:16:45 async_llm_engine.py:197]   File "~/sarathi-serve/sarathi/engine/async_llm_engine.py", line 341, in engine_step
 ERROR 10-10 20:16:45 async_llm_engine.py:197]     request_outputs = await self.engine.step_async()
-ERROR 10-10 20:16:45 async_llm_engine.py:197]   File "/home/asad/sarathi-serve/sarathi/engine/async_llm_engine.py", line 233, in step_async
+ERROR 10-10 20:16:45 async_llm_engine.py:197]   File "~/sarathi-serve/sarathi/engine/async_llm_engine.py", line 233, in step_async
 ERROR 10-10 20:16:45 async_llm_engine.py:197]     return await asyncio.get_event_loop().run_in_executor(
 ERROR 10-10 20:16:45 async_llm_engine.py:197]   File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
 ERROR 10-10 20:16:45 async_llm_engine.py:197]     result = self.fn(*self.args, **self.kwargs)
 ERROR 10-10 20:16:45 async_llm_engine.py:197] TypeError: BaseLLMEngine.step() takes 1 positional argument but 2 were given
-Exception in callback _log_task_completion(error_callback=<bound method...77880e4f8340>>)(<Task finishe... were given')>) at /home/asad/sarathi-serve/sarathi/engine/async_llm_engine.py:175
-handle: <Handle _log_task_completion(error_callback=<bound method...77880e4f8340>>)(<Task finishe... were given')>) at /home/asad/sarathi-serve/sarathi/engine/async_llm_engine.py:175>
+Exception in callback _log_task_completion(error_callback=<bound method...77880e4f8340>>)(<Task finishe... were given')>) at ~/sarathi-serve/sarathi/engine/async_llm_engine.py:175
+handle: <Handle _log_task_completion(error_callback=<bound method...77880e4f8340>>)(<Task finishe... were given')>) at ~/sarathi-serve/sarathi/engine/async_llm_engine.py:175>
 Traceback (most recent call last):
-  File "/home/asad/sarathi-serve/sarathi/engine/async_llm_engine.py", line 186, in _log_task_completion
+  File "~/sarathi-serve/sarathi/engine/async_llm_engine.py", line 186, in _log_task_completion
     return_value = task.result()
-  File "/home/asad/sarathi-serve/sarathi/engine/async_llm_engine.py", line 360, in run_engine_loop
+  File "~/sarathi-serve/sarathi/engine/async_llm_engine.py", line 360, in run_engine_loop
     await asyncio.wait_for(self.engine_step(), ENGINE_ITERATION_TIMEOUT_S)
   File "/usr/lib/python3.10/asyncio/tasks.py", line 445, in wait_for
     return fut.result()
-  File "/home/asad/sarathi-serve/sarathi/engine/async_llm_engine.py", line 341, in engine_step
+  File "~/sarathi-serve/sarathi/engine/async_llm_engine.py", line 341, in engine_step
     request_outputs = await self.engine.step_async()
-  File "/home/asad/sarathi-serve/sarathi/engine/async_llm_engine.py", line 233, in step_async
+  File "~/sarathi-serve/sarathi/engine/async_llm_engine.py", line 233, in step_async
     return await asyncio.get_event_loop().run_in_executor(
   File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
     result = self.fn(*self.args, **self.kwargs)
@@ -69,81 +69,81 @@ The above exception was the direct cause of the following exception:
 Traceback (most recent call last):
   File "/usr/lib/python3.10/asyncio/events.py", line 80, in _run
     self._context.run(self._callback, *self._args)
-  File "/home/asad/sarathi-serve/sarathi/engine/async_llm_engine.py", line 199, in _log_task_completion
+  File "~/sarathi-serve/sarathi/engine/async_llm_engine.py", line 199, in _log_task_completion
     raise RuntimeError(
 RuntimeError: Task finished unexpectedly. This should never happen! Please open an issue on Github. See stack trace above for theactual cause.
 INFO:     127.0.0.1:38080 - "POST /v1/completions HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
-  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/uvicorn/protocols/http/h11_impl.py", line 411, in run_asgi
+  File "~/.venv-sarathi/lib/python3.10/site-packages/uvicorn/protocols/http/h11_impl.py", line 411, in run_asgi
     result = await app(  # type: ignore[func-returns-value]
-  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+  File "~/.venv-sarathi/lib/python3.10/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
     return await self.app(scope, receive, send)
-  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/fastapi/applications.py", line 1216, in __call__
+  File "~/.venv-sarathi/lib/python3.10/site-packages/fastapi/applications.py", line 1216, in __call__
     await super().__call__(scope, receive, send)
-  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/starlette/applications.py", line 96, in __call__
+  File "~/.venv-sarathi/lib/python3.10/site-packages/starlette/applications.py", line 96, in __call__
     await self.middleware_stack(scope, receive, send)
-  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/starlette/middleware/errors.py", line 186, in __call__
+  File "~/.venv-sarathi/lib/python3.10/site-packages/starlette/middleware/errors.py", line 186, in __call__
     raise exc
-  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/starlette/middleware/errors.py", line 164, in __call__
+  File "~/.venv-sarathi/lib/python3.10/site-packages/starlette/middleware/errors.py", line 164, in __call__
     await self.app(scope, receive, _send)
-  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/fastapi/telemetry/_asgi.py", line 151, in __call__
+  File "~/.venv-sarathi/lib/python3.10/site-packages/fastapi/telemetry/_asgi.py", line 151, in __call__
     await self.app(scope, receive, send)
-  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+  File "~/.venv-sarathi/lib/python3.10/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
-  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+  File "~/.venv-sarathi/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
     raise exc
-  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+  File "~/.venv-sarathi/lib/python3.10/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
     await app(scope, receive, sender)
-  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+  File "~/.venv-sarathi/lib/python3.10/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
     await self.app(scope, receive, send)
-  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/starlette/routing.py", line 676, in __call__
+  File "~/.venv-sarathi/lib/python3.10/site-packages/starlette/routing.py", line 676, in __call__
     await self.middleware_stack(scope, receive, send)
-  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/fastapi/routing.py", line 2786, in app
+  File "~/.venv-sarathi/lib/python3.10/site-packages/fastapi/routing.py", line 2786, in app
     await route.handle(scope, receive, send)
-  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/fastapi/routing.py", line 1310, in handle
+  File "~/.venv-sarathi/lib/python3.10/site-packages/fastapi/routing.py", line 1310, in handle
     await super().handle(scope, receive, send)
-  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/starlette/routing.py", line 282, in handle
+  File "~/.venv-sarathi/lib/python3.10/site-packages/starlette/routing.py", line 282, in handle
     await self.app(scope, receive, send)
-  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/fastapi/routing.py", line 165, in app
+  File "~/.venv-sarathi/lib/python3.10/site-packages/fastapi/routing.py", line 165, in app
     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
-  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+  File "~/.venv-sarathi/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
     raise exc
-  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+  File "~/.venv-sarathi/lib/python3.10/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
     await app(scope, receive, sender)
-  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/fastapi/routing.py", line 151, in app
+  File "~/.venv-sarathi/lib/python3.10/site-packages/fastapi/routing.py", line 151, in app
     response = await f(request)
-  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/fastapi/routing.py", line 727, in app
+  File "~/.venv-sarathi/lib/python3.10/site-packages/fastapi/routing.py", line 727, in app
     raw_response = await run_endpoint_function(
-  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/fastapi/routing.py", line 360, in run_endpoint_function
+  File "~/.venv-sarathi/lib/python3.10/site-packages/fastapi/routing.py", line 360, in run_endpoint_function
     return await dependant.call(**values)
-  File "/home/asad/sarathi-serve/sarathi/entrypoints/openai/api_server.py", line 60, in create_completion
+  File "~/sarathi-serve/sarathi/entrypoints/openai/api_server.py", line 60, in create_completion
     generator = await openai_serving_completion.create_completion(request, raw_request)
-  File "/home/asad/sarathi-serve/sarathi/entrypoints/openai/serving_completion.py", line 120, in create_completion
+  File "~/sarathi-serve/sarathi/entrypoints/openai/serving_completion.py", line 120, in create_completion
     async for i, res in result_generator:
-  File "/home/asad/sarathi-serve/sarathi/utils/__init__.py", line 121, in consumer
+  File "~/sarathi-serve/sarathi/utils/__init__.py", line 121, in consumer
     raise e
-  File "/home/asad/sarathi-serve/sarathi/utils/__init__.py", line 112, in consumer
+  File "~/sarathi-serve/sarathi/utils/__init__.py", line 112, in consumer
     raise item
-  File "/home/asad/sarathi-serve/sarathi/utils/__init__.py", line 96, in producer
+  File "~/sarathi-serve/sarathi/utils/__init__.py", line 96, in producer
     async for item in iterator:
-  File "/home/asad/sarathi-serve/sarathi/engine/async_llm_engine.py", line 456, in generate
+  File "~/sarathi-serve/sarathi/engine/async_llm_engine.py", line 456, in generate
     async for output in self._process_request(
-  File "/home/asad/sarathi-serve/sarathi/engine/async_llm_engine.py", line 482, in _process_request
+  File "~/sarathi-serve/sarathi/engine/async_llm_engine.py", line 482, in _process_request
     raise e
-  File "/home/asad/sarathi-serve/sarathi/engine/async_llm_engine.py", line 478, in _process_request
+  File "~/sarathi-serve/sarathi/engine/async_llm_engine.py", line 478, in _process_request
     async for request_output in stream:
-  File "/home/asad/sarathi-serve/sarathi/engine/async_llm_engine.py", line 56, in __anext__
+  File "~/sarathi-serve/sarathi/engine/async_llm_engine.py", line 56, in __anext__
     raise result
-  File "/home/asad/sarathi-serve/sarathi/engine/async_llm_engine.py", line 186, in _log_task_completion
+  File "~/sarathi-serve/sarathi/engine/async_llm_engine.py", line 186, in _log_task_completion
     return_value = task.result()
-  File "/home/asad/sarathi-serve/sarathi/engine/async_llm_engine.py", line 360, in run_engine_loop
+  File "~/sarathi-serve/sarathi/engine/async_llm_engine.py", line 360, in run_engine_loop
     await asyncio.wait_for(self.engine_step(), ENGINE_ITERATION_TIMEOUT_S)
   File "/usr/lib/python3.10/asyncio/tasks.py", line 445, in wait_for
     return fut.result()
-  File "/home/asad/sarathi-serve/sarathi/engine/async_llm_engine.py", line 341, in engine_step
+  File "~/sarathi-serve/sarathi/engine/async_llm_engine.py", line 341, in engine_step
     request_outputs = await self.engine.step_async()
-  File "/home/asad/sarathi-serve/sarathi/engine/async_llm_engine.py", line 233, in step_async
+  File "~/sarathi-serve/sarathi/engine/async_llm_engine.py", line 233, in step_async
     return await asyncio.get_event_loop().run_in_executor(
   File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
     result = self.fn(*self.args, **self.kwargs)

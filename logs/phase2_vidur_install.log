@@ -26,7 +26,7 @@ vidur.profiling.common.model_config: ModuleNotFoundError: No module named 'vidur
 
 === 2026-10-10T18:53:34+05:00 note: the checks above ran from ~, where the directory ~/vidur (another checkout) shadows the package as a namespace package. Rerun from ~/vidur-phase2.
 $ cd ~/vidur-phase2 && python -c 'import vidur; print(vidur.__file__, vidur.__path__)'
-None ['/home/asad/vidur-phase2/vidur']
+None ['~/vidur-phase2/vidur']
 vidur.profiling.common.model_config: OK
 vidur.profiling.mlp.mlp_wrapper: OK
 vidur.profiling.mlp.main: OK
@@ -42,7 +42,7 @@ transformers==4.42.4
 
 $ cd ~/vidur-phase2 && python vidur/profiling/mlp/main.py --help
 Traceback (most recent call last):
-  File "/home/asad/vidur-phase2/vidur/profiling/mlp/main.py", line 12, in <module>
+  File "~/vidur-phase2/vidur/profiling/mlp/main.py", line 12, in <module>
     from vidur.profiling.common.model_config import ModelConfig
 ModuleNotFoundError: No module named 'vidur'
 exit=1
@@ -76,8 +76,8 @@ $ grep -n 'def get_num_tokens_to_profile' -A25 vidur/profiling/utils/__init__.py
 
 === 2026-10-10T18:54:27+05:00 why the editable install does not expose vidur
 $ ls ~/vidur-phase2/vidur/__init__.py ~/vidur-phase2/vidur/profiling/__init__.py
-ls: cannot access '/home/asad/vidur-phase2/vidur/__init__.py': No such file or directory
-/home/asad/vidur-phase2/vidur/profiling/__init__.py
+ls: cannot access '~/vidur-phase2/vidur/__init__.py': No such file or directory
+~/vidur-phase2/vidur/profiling/__init__.py
 $ python -c 'from setuptools import find_packages; print(find_packages(where="~/vidur-phase2", include=["vidur","vidur.*"]))'
 []
 $ ls site-packages | grep -i vidur; cat the editable finder mapping
@@ -119,4 +119,4 @@ options:
                         (default: record_function)
 exit=0
 $ ls ~/vidur-phase2/profiling_outputs/mlp (created by parse_args even for --help?)
-ls: cannot access '/home/asad/vidur-phase2/profiling_outputs/mlp': No such file or directory
+ls: cannot access '~/vidur-phase2/profiling_outputs/mlp': No such file or directory

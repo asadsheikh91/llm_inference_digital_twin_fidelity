@@ -44,20 +44,20 @@ Using cached sympy-1.14.0-py3-none-any.whl (6.3 MB)
 Using cached mpmath-1.3.0-py3-none-any.whl (536 kB)
 Successfully installed MarkupSafe-3.0.4 filelock-4.1.0 fsspec-2026.9.0 jinja2-3.1.6 mpmath-1.3.0 networkx-3.4.2 nvidia-cublas-cu12-12.1.3.1 nvidia-cuda-cupti-cu
 $ grep -n '#include' torch/include/ATen/cuda/CUDAContext.h ATen/cuda/CUDAContextLight.h
-/home/asad/.venv-sarathi/lib/python3.10/site-packages/torch/include/ATen/cuda/CUDAContext.h:3:#include <ATen/cuda/CUDAContextLight.h>
-/home/asad/.venv-sarathi/lib/python3.10/site-packages/torch/include/ATen/cuda/CUDAContext.h:6:#include <ATen/Context.h>
-/home/asad/.venv-sarathi/lib/python3.10/site-packages/torch/include/ATen/cuda/CUDAContext.h:7:#include <c10/cuda/CUDAStream.h>
-/home/asad/.venv-sarathi/lib/python3.10/site-packages/torch/include/ATen/cuda/CUDAContext.h:8:#include <c10/util/Logging.h>
-/home/asad/.venv-sarathi/lib/python3.10/site-packages/torch/include/ATen/cuda/CUDAContext.h:9:#include <ATen/cuda/Exceptions.h>
-/home/asad/.venv-sarathi/lib/python3.10/site-packages/torch/include/ATen/cuda/CUDAContextLight.h:4:#include <cstdint>
-/home/asad/.venv-sarathi/lib/python3.10/site-packages/torch/include/ATen/cuda/CUDAContextLight.h:6:#include <cuda_runtime_api.h>
-/home/asad/.venv-sarathi/lib/python3.10/site-packages/torch/include/ATen/cuda/CUDAContextLight.h:7:#include <cusparse.h>
-/home/asad/.venv-sarathi/lib/python3.10/site-packages/torch/include/ATen/cuda/CUDAContextLight.h:8:#include <cublas_v2.h>
-/home/asad/.venv-sarathi/lib/python3.10/site-packages/torch/include/ATen/cuda/CUDAContextLight.h:13:#include <cublasLt.h>
-/home/asad/.venv-sarathi/lib/python3.10/site-packages/torch/include/ATen/cuda/CUDAContextLight.h:17:#include <cusolverDn.h>
-/home/asad/.venv-sarathi/lib/python3.10/site-packages/torch/include/ATen/cuda/CUDAContextLight.h:21:#include <hipsolver/hipsolver.h>
-/home/asad/.venv-sarathi/lib/python3.10/site-packages/torch/include/ATen/cuda/CUDAContextLight.h:24:#include <c10/core/Allocator.h>
-/home/asad/.venv-sarathi/lib/python3.10/site-packages/torch/include/ATen/cuda/CUDAContextLight.h:25:#include <c10/cuda/CUDAFunctions.h>
+~/.venv-sarathi/lib/python3.10/site-packages/torch/include/ATen/cuda/CUDAContext.h:3:#include <ATen/cuda/CUDAContextLight.h>
+~/.venv-sarathi/lib/python3.10/site-packages/torch/include/ATen/cuda/CUDAContext.h:6:#include <ATen/Context.h>
+~/.venv-sarathi/lib/python3.10/site-packages/torch/include/ATen/cuda/CUDAContext.h:7:#include <c10/cuda/CUDAStream.h>
+~/.venv-sarathi/lib/python3.10/site-packages/torch/include/ATen/cuda/CUDAContext.h:8:#include <c10/util/Logging.h>
+~/.venv-sarathi/lib/python3.10/site-packages/torch/include/ATen/cuda/CUDAContext.h:9:#include <ATen/cuda/Exceptions.h>
+~/.venv-sarathi/lib/python3.10/site-packages/torch/include/ATen/cuda/CUDAContextLight.h:4:#include <cstdint>
+~/.venv-sarathi/lib/python3.10/site-packages/torch/include/ATen/cuda/CUDAContextLight.h:6:#include <cuda_runtime_api.h>
+~/.venv-sarathi/lib/python3.10/site-packages/torch/include/ATen/cuda/CUDAContextLight.h:7:#include <cusparse.h>
+~/.venv-sarathi/lib/python3.10/site-packages/torch/include/ATen/cuda/CUDAContextLight.h:8:#include <cublas_v2.h>
+~/.venv-sarathi/lib/python3.10/site-packages/torch/include/ATen/cuda/CUDAContextLight.h:13:#include <cublasLt.h>
+~/.venv-sarathi/lib/python3.10/site-packages/torch/include/ATen/cuda/CUDAContextLight.h:17:#include <cusolverDn.h>
+~/.venv-sarathi/lib/python3.10/site-packages/torch/include/ATen/cuda/CUDAContextLight.h:21:#include <hipsolver/hipsolver.h>
+~/.venv-sarathi/lib/python3.10/site-packages/torch/include/ATen/cuda/CUDAContextLight.h:24:#include <c10/core/Allocator.h>
+~/.venv-sarathi/lib/python3.10/site-packages/torch/include/ATen/cuda/CUDAContextLight.h:25:#include <c10/cuda/CUDAFunctions.h>
 $ GitHub API: mamba-org/micromamba-releases latest
 tag 2.9.0-0 published 2026-08-07T18:44:16Z
 18292808 micromamba-linux-64 https://github.com/mamba-org/micromamba-releases/releases/download/2.9.0-0/micromamba-linux-64
@@ -69,7 +69,7 @@ exit=0
 $ expected sha256
 366cd9cd8be14df1ab8ed50352a82111082a36686b2d389fdb79a92c3fafb3e3
 $ sha256sum ~/micromamba/bin/micromamba
-366cd9cd8be14df1ab8ed50352a82111082a36686b2d389fdb79a92c3fafb3e3  /home/asad/micromamba/bin/micromamba
+366cd9cd8be14df1ab8ed50352a82111082a36686b2d389fdb79a92c3fafb3e3  ~/micromamba/bin/micromamba
 
 === 2026-10-10T18:17:35+05:00 dry runs (MAMBA_ROOT_PREFIX=~/micromamba)
 2.9.0
@@ -93,30 +93,30 @@ $ micromamba create -p ~/micromamba/envs/cuda-12.1 --override-channels -c nvidia
    TOTAL_BYTES 894307537
 
 === 2026-10-10T18:17:49+05:00 install CUDA 12.1 toolchain env
-$ micromamba create -y -p /home/asad/micromamba/envs/cuda-12.1 --override-channels -c nvidia/label/cuda-12.1.1 cuda-nvcc cuda-cudart-dev libcublas-dev libcusparse-dev libcusolver-dev
+$ micromamba create -y -p ~/micromamba/envs/cuda-12.1 --override-channels -c nvidia/label/cuda-12.1.1 cuda-nvcc cuda-cudart-dev libcublas-dev libcusparse-dev libcusolver-dev
 exit=0
-$ /home/asad/micromamba/envs/cuda-12.1/bin/nvcc --version
+$ ~/micromamba/envs/cuda-12.1/bin/nvcc --version
 nvcc: NVIDIA (R) Cuda compiler driver
 Copyright (c) 2005-2023 NVIDIA Corporation
 Built on Mon_Apr__3_17:16:06_PDT_2023
 Cuda compilation tools, release 12.1, V12.1.105
 Build cuda_12.1.r12.1/compiler.32688072_0
 $ ls headers needed by ATen/cuda/CUDAContextLight.h
-/home/asad/micromamba/envs/cuda-12.1/include/cuda_runtime_api.h
-/home/asad/micromamba/envs/cuda-12.1/include/cusparse.h
-/home/asad/micromamba/envs/cuda-12.1/include/cublas_v2.h
-/home/asad/micromamba/envs/cuda-12.1/include/cublasLt.h
-/home/asad/micromamba/envs/cuda-12.1/include/cusolverDn.h
-$ ls /home/asad/micromamba/envs/cuda-12.1/lib64 /home/asad/micromamba/envs/cuda-12.1/lib | grep -E 'libcudart.so|libcublas.so'
-ls: cannot access '/home/asad/micromamba/envs/cuda-12.1/lib64': No such file or directory
+~/micromamba/envs/cuda-12.1/include/cuda_runtime_api.h
+~/micromamba/envs/cuda-12.1/include/cusparse.h
+~/micromamba/envs/cuda-12.1/include/cublas_v2.h
+~/micromamba/envs/cuda-12.1/include/cublasLt.h
+~/micromamba/envs/cuda-12.1/include/cusolverDn.h
+$ ls ~/micromamba/envs/cuda-12.1/lib64 ~/micromamba/envs/cuda-12.1/lib | grep -E 'libcudart.so|libcublas.so'
+ls: cannot access '~/micromamba/envs/cuda-12.1/lib64': No such file or directory
 libcublas.so
 libcublas.so.12
 libcublas.so.12.1.3.1
 libcudart.so
 libcudart.so.12
 libcudart.so.12.1.105
-$ du -sh /home/asad/micromamba/envs/cuda-12.1
-1.2G	/home/asad/micromamba/envs/cuda-12.1
+$ du -sh ~/micromamba/envs/cuda-12.1
+1.2G	~/micromamba/envs/cuda-12.1
 
 $ grep -n -A6 "lib_dir = 'lib64'" torch/utils/cpp_extension.py
 1203:            lib_dir = 'lib64'
@@ -130,7 +130,7 @@ $ grep -n -A6 "lib_dir = 'lib64'" torch/utils/cpp_extension.py
 === 2026-10-10T18:23:17+05:00 README install with fix 2a
 $ cd ~/sarathi-serve && CUDA_HOME=~/micromamba/envs/cuda-12.1 pip install -e . --extra-index-url https://flashinfer.ai/whl/cu121/torch2.3/
 Looking in indexes: https://pypi.org/simple, https://flashinfer.ai/whl/cu121/torch2.3/
-Obtaining file:///home/asad/sarathi-serve
+Obtaining file://~/sarathi-serve
   Installing build dependencies: started
   Installing build dependencies: still running...
   Installing build dependencies: finished with status 'done'
@@ -154,7 +154,7 @@ Collecting sentencepiece (from sarathi==0.1.7)
   Using cached sentencepiece-0.2.2-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (33 kB)
 Collecting numpy (from sarathi==0.1.7)
   Using cached numpy-2.2.6-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
-Requirement already satisfied: torch==2.3 in /home/asad/.venv-sarathi/lib/python3.10/site-packages (from sarathi==0.1.7) (2.3.0)
+Requirement already satisfied: torch==2.3 in ~/.venv-sarathi/lib/python3.10/site-packages (from sarathi==0.1.7) (2.3.0)
 Collecting transformers>=4.37.0 (from sarathi==0.1.7)
   Downloading transformers-5.19.0-py3-none-any.whl.metadata (32 kB)
 Collecting matplotlib (from sarathi==0.1.7)
@@ -187,25 +187,25 @@ Collecting openai (from sarathi==0.1.7)
   Using cached openai-3.28.0-py3-none-any.whl.metadata (44 kB)
 Collecting tqdm (from sarathi==0.1.7)
   Using cached tqdm-4.70.1-py3-none-any.whl.metadata (57 kB)
-Requirement already satisfied: filelock in /home/asad/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (4.1.0)
-Requirement already satisfied: typing-extensions>=4.8.0 in /home/asad/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (4.16.0)
-Requirement already satisfied: sympy in /home/asad/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (1.14.0)
-Requirement already satisfied: networkx in /home/asad/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (3.4.2)
-Requirement already satisfied: jinja2 in /home/asad/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (3.1.6)
-Requirement already satisfied: fsspec in /home/asad/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (2026.9.0)
-Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.1.105 in /home/asad/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (12.1.105)
-Requirement already satisfied: nvidia-cuda-runtime-cu12==12.1.105 in /home/asad/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (12.1.105)
-Requirement already satisfied: nvidia-cuda-cupti-cu12==12.1.105 in /home/asad/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (12.1.105)
-Requirement already satisfied: nvidia-cudnn-cu12==8.9.2.26 in /home/asad/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (8.9.2.26)
-Requirement already satisfied: nvidia-cublas-cu12==12.1.3.1 in /home/asad/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (12.1.3.1)
-Requirement already satisfied: nvidia-cufft-cu12==11.0.2.54 in /home/asad/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (11.0.2.54)
-Requirement already satisfied: nvidia-curand-cu12==10.3.2.106 in /home/asad/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (10.3.2.106)
-Requirement already satisfied: nvidia-cusolver-cu12==11.4.5.107 in /home/asad/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (11.4.5.107)
-Requirement already satisfied: nvidia-cusparse-cu12==12.1.0.106 in /home/asad/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (12.1.0.106)
-Requirement already satisfied: nvidia-nccl-cu12==2.20.5 in /home/asad/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (2.20.5)
-Requirement already satisfied: nvidia-nvtx-cu12==12.1.105 in /home/asad/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (12.1.105)
-Requirement already satisfied: triton==2.3.0 in /home/asad/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (2.3.0)
-Requirement already satisfied: nvidia-nvjitlink-cu12 in /home/asad/.venv-sarathi/lib/python3.10/site-packages (from nvidia-cusolver-cu12==11.4.5.107->torch==2.3->sarathi==0.1.7) (12.9.86)
+Requirement already satisfied: filelock in ~/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (4.1.0)
+Requirement already satisfied: typing-extensions>=4.8.0 in ~/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (4.16.0)
+Requirement already satisfied: sympy in ~/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (1.14.0)
+Requirement already satisfied: networkx in ~/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (3.4.2)
+Requirement already satisfied: jinja2 in ~/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (3.1.6)
+Requirement already satisfied: fsspec in ~/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (2026.9.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.1.105 in ~/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (12.1.105)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.1.105 in ~/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (12.1.105)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.1.105 in ~/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (12.1.105)
+Requirement already satisfied: nvidia-cudnn-cu12==8.9.2.26 in ~/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (8.9.2.26)
+Requirement already satisfied: nvidia-cublas-cu12==12.1.3.1 in ~/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (12.1.3.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.0.2.54 in ~/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (11.0.2.54)
+Requirement already satisfied: nvidia-curand-cu12==10.3.2.106 in ~/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (10.3.2.106)
+Requirement already satisfied: nvidia-cusolver-cu12==11.4.5.107 in ~/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (11.4.5.107)
+Requirement already satisfied: nvidia-cusparse-cu12==12.1.0.106 in ~/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (12.1.0.106)
+Requirement already satisfied: nvidia-nccl-cu12==2.20.5 in ~/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (2.20.5)
+Requirement already satisfied: nvidia-nvtx-cu12==12.1.105 in ~/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (12.1.105)
+Requirement already satisfied: triton==2.3.0 in ~/.venv-sarathi/lib/python3.10/site-packages (from torch==2.3->sarathi==0.1.7) (2.3.0)
+Requirement already satisfied: nvidia-nvjitlink-cu12 in ~/.venv-sarathi/lib/python3.10/site-packages (from nvidia-cusolver-cu12==11.4.5.107->torch==2.3->sarathi==0.1.7) (12.9.86)
 Collecting click>=7.0 (from ray>=2.5.1->sarathi==0.1.7)
   Using cached click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
 Collecting jsonschema (from ray>=2.5.1->sarathi==0.1.7)
@@ -264,7 +264,7 @@ Collecting annotated-types>=0.6.0 (from pydantic>=2.9.0->fastapi->sarathi==0.1.7
   Using cached annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
 Collecting pydantic-core==2.50.0 (from pydantic>=2.9.0->fastapi->sarathi==0.1.7)
   Using cached pydantic_core-2.50.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.5 kB)
-Requirement already satisfied: MarkupSafe>=2.0 in /home/asad/.venv-sarathi/lib/python3.10/site-packages (from jinja2->torch==2.3->sarathi==0.1.7) (3.0.4)
+Requirement already satisfied: MarkupSafe>=2.0 in ~/.venv-sarathi/lib/python3.10/site-packages (from jinja2->torch==2.3->sarathi==0.1.7) (3.0.4)
 Collecting attrs>=22.2.0 (from jsonschema->ray>=2.5.1->sarathi==0.1.7)
   Using cached attrs-26.1.0-py3-none-any.whl.metadata (8.8 kB)
 Collecting jsonschema-specifications>=2023.03.6 (from jsonschema->ray>=2.5.1->sarathi==0.1.7)
@@ -459,7 +459,7 @@ Collecting asttokens>=2.1.0 (from stack_data->ipython>=7.23.1->ipykernel!=6.30.0
   Downloading asttokens-3.0.2-py3-none-any.whl.metadata (5.7 kB)
 Collecting pure-eval (from stack_data->ipython>=7.23.1->ipykernel!=6.30.0,>=6.5.0->jupyterlab->sarathi==0.1.7)
   Downloading pure_eval-0.2.4-py3-none-any.whl.metadata (6.4 kB)
-Requirement already satisfied: mpmath<1.4,>=1.1.0 in /home/asad/.venv-sarathi/lib/python3.10/site-packages (from sympy->torch==2.3->sarathi==0.1.7) (1.3.0)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in ~/.venv-sarathi/lib/python3.10/site-packages (from sympy->torch==2.3->sarathi==0.1.7) (1.3.0)
 Collecting shellingham>=1.3.0 (from typer->transformers>=4.37.0->sarathi==0.1.7)
   Using cached shellingham-1.5.4-py2.py3-none-any.whl.metadata (3.5 kB)
 Collecting rich>=13.8.0 (from typer->transformers>=4.37.0->sarathi==0.1.7)

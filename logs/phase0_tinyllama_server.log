@@ -30,12 +30,12 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
 (EngineCore pid=1552) INFO 10-10 17:16:44 [topk_topp_sampler.py:124] Using FlashInfer for top-p & top-k sampling.
 (EngineCore pid=1552) INFO 10-10 17:16:44 [torch_utils.py:286] Reducing Torch threads from 8 to 1 for serving. Set OMP_NUM_THREADS in the external environment to override.
 (EngineCore pid=1552) INFO 10-10 17:16:44 [utils.py:343] Using LBNHC KV cache layout.
-(EngineCore pid=1552) INFO 10-10 17:16:52 [backends.py:1090] Using cache directory: /home/asad/.cache/vllm/torch_compile_cache/cef18d2249/rank_0_0/backbone for vLLM's torch.compile
+(EngineCore pid=1552) INFO 10-10 17:16:52 [backends.py:1090] Using cache directory: ~/.cache/vllm/torch_compile_cache/cef18d2249/rank_0_0/backbone for vLLM's torch.compile
 (EngineCore pid=1552) INFO 10-10 17:16:52 [backends.py:1151] Dynamo bytecode transform time: 4.06 s
 [rank0]:W1010 17:16:53.552000 1552 torch/_inductor/utils.py:1953] Not enough SMs to use max_autotune_gemm mode
 (EngineCore pid=1552) INFO 10-10 17:16:59 [backends.py:391] Compiling a graph for compile range (1, 2048) takes 7.39 s
 (EngineCore pid=1552) INFO 10-10 17:17:02 [backends.py:916] collected artifacts: 23 entries, 3 artifacts, 4835042 bytes total
-(EngineCore pid=1552) INFO 10-10 17:17:02 [decorators.py:717] saved AOT compiled function to /home/asad/.cache/vllm/torch_compile_cache/torch_aot_compile/85cf622635cdddf699a5d66075c020f1c8adf2423e07bbd29306a8039993fb17/rank_0_0/model
+(EngineCore pid=1552) INFO 10-10 17:17:02 [decorators.py:717] saved AOT compiled function to ~/.cache/vllm/torch_compile_cache/torch_aot_compile/85cf622635cdddf699a5d66075c020f1c8adf2423e07bbd29306a8039993fb17/rank_0_0/model
 (EngineCore pid=1552) INFO 10-10 17:17:02 [monitor.py:53] torch.compile took 14.32 s in total
 (EngineCore pid=1552) INFO 10-10 17:17:02 [monitor.py:81] Initial profiling/warmup run took 1.31 s
 Capturing CUDA graphs (PIECEWISE):   0%|          | 0/51 [00:00<?, ?it/s]Capturing CUDA graphs (PIECEWISE):   2%|▏         | 1/51 [00:00<00:27,  1.84it/s]Capturing CUDA graphs (PIECEWISE):   4%|▍         | 2/51 [00:00<00:16,  3.01it/s]Capturing CUDA graphs (PIECEWISE):   6%|▌         | 3/51 [00:00<00:12,  3.74it/s]Capturing CUDA graphs (PIECEWISE):   8%|▊         | 4/51 [00:01<00:10,  4.28it/s]Capturing CUDA graphs (PIECEWISE):  10%|▉         | 5/51 [00:01<00:09,  4.73it/s]Capturing CUDA graphs (PIECEWISE):  12%|█▏        | 6/51 [00:01<00:09,  4.94it/s]Capturing CUDA graphs (PIECEWISE):  14%|█▎        | 7/51 [00:01<00:08,  5.03it/s]Capturing CUDA graphs (PIECEWISE):  16%|█▌        | 8/51 [00:01<00:08,  5.18it/s]Capturing CUDA graphs (PIECEWISE):  18%|█▊        | 9/51 [00:02<00:07,  5.33it/s]Capturing CUDA graphs (PIECEWISE):  20%|█▉        | 10/51 [00:02<00:08,  5.02it/s]Capturing CUDA graphs (PIECEWISE):  22%|██▏       | 11/51 [00:02<00:07,  5.08it/s]Capturing CUDA graphs (PIECEWISE):  24%|██▎       | 12/51 [00:02<00:07,  5.12it/s]Capturing CUDA graphs (PIECEWISE):  25%|██▌       | 13/51 [00:02<00:07,  5.27it/s]Capturing CUDA graphs (PIECEWISE):  27%|██▋       | 14/51 [00:02<00:06,  5.42it/s]Capturing CUDA graphs (PIECEWISE):  29%|██▉       | 15/51 [00:03<00:06,  5.56it/s]Capturing CUDA graphs (PIECEWISE):  31%|███▏      | 16/51 [00:03<00:06,  5.62it/s]Capturing CUDA graphs (PIECEWISE):  33%|███▎      | 17/51 [00:03<00:05,  5.75it/s]Capturing CUDA graphs (PIECEWISE):  35%|███▌      | 18/51 [00:03<00:05,  6.49it/s]Capturing CUDA graphs (PIECEWISE):  37%|███▋      | 19/51 [00:03<00:04,  6.68it/s]Capturing CUDA graphs (PIECEWISE):  39%|███▉      | 20/51 [00:03<00:04,  6.36it/s]Capturing CUDA graphs (PIECEWISE):  41%|████      | 21/51 [00:04<00:04,  6.43it/s]Capturing CUDA graphs (PIECEWISE):  43%|████▎     | 22/51 [00:04<00:04,  6.62it/s]Capturing CUDA graphs (PIECEWISE):  45%|████▌     | 23/51 [00:04<00:04,  6.99it/s]Capturing CUDA graphs (PIECEWISE):  47%|████▋     | 24/51 [00:04<00:03,  7.08it/s]Capturing CUDA graphs (PIECEWISE):  49%|████▉     | 25/51 [00:04<00:03,  6.82it/s]Capturing CUDA graphs (PIECEWISE):  51%|█████     | 26/51 [00:04<00:03,  6.97it/s]Capturing CUDA graphs (PIECEWISE):  53%|█████▎    | 27/51 [00:04<00:03,  7.53it/s]Capturing CUDA graphs (PIECEWISE):  55%|█████▍    | 28/51 [00:05<00:03,  7.13it/s]Capturing CUDA graphs (PIECEWISE):  57%|█████▋    | 29/51 [00:05<00:03,  5.82it/s]Capturing CUDA graphs (PIECEWISE):  59%|█████▉    | 30/51 [00:05<00:03,  5.69it/s]Capturing CUDA graphs (PIECEWISE):  61%|██████    | 31/51 [00:05<00:03,  5.59it/s]Capturing CUDA graphs (PIECEWISE):  63%|██████▎   | 32/51 [00:06<00:05,  3.49it/s]Capturing CUDA graphs (PIECEWISE):  65%|██████▍   | 33/51 [00:06<00:04,  4.20it/s]Capturing CUDA graphs (PIECEWISE):  67%|██████▋   | 34/51 [00:06<00:03,  4.43it/s]Capturing CUDA graphs (PIECEWISE):  69%|██████▊   | 35/51 [00:06<00:03,  4.50it/s]Capturing CUDA graphs (PIECEWISE):  71%|███████   | 36/51 [00:06<00:02,  5.10it/s]Capturing CUDA graphs (PIECEWISE):  73%|███████▎  | 37/51 [00:06<00:02,  5.35it/s]Capturing CUDA graphs (PIECEWISE):  75%|███████▍  | 38/51 [00:07<00:02,  5.70it/s]Capturing CUDA graphs (PIECEWISE):  76%|███████▋  | 39/51 [00:07<00:02,  5.58it/s]Capturing CUDA graphs (PIECEWISE):  78%|███████▊  | 40/51 [00:07<00:01,  5.67it/s]Capturing CUDA graphs (PIECEWISE):  80%|████████  | 41/51 [00:07<00:01,  6.24it/s]Capturing CUDA graphs (PIECEWISE):  82%|████████▏ | 42/51 [00:07<00:01,  6.21it/s]Capturing CUDA graphs (PIECEWISE):  84%|████████▍ | 43/51 [00:07<00:01,  6.33it/s]Capturing CUDA graphs (PIECEWISE):  86%|████████▋ | 44/51 [00:08<00:01,  6.40it/s]Capturing CUDA graphs (PIECEWISE):  88%|████████▊ | 45/51 [00:08<00:00,  6.95it/s]Capturing CUDA graphs (PIECEWISE):  90%|█████████ | 46/51 [00:08<00:00,  6.47it/s]Capturing CUDA graphs (PIECEWISE):  92%|█████████▏| 47/51 [00:08<00:00,  6.43it/s]Capturing CUDA graphs (PIECEWISE):  94%|█████████▍| 48/51 [00:08<00:00,  6.87it/s]Capturing CUDA graphs (PIECEWISE):  96%|█████████▌| 49/51 [00:08<00:00,  7.20it/s]Capturing CUDA graphs (PIECEWISE): 100%|██████████| 51/51 [00:09<00:00,  4.78it/s]Capturing CUDA graphs (PIECEWISE): 100%|██████████| 51/51 [00:09<00:00,  5.44it/s]
@@ -48,73 +48,73 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
 (EngineCore pid=1552) INFO 10-10 17:17:16 [kernel_warmup.py:185] JIT kernel warmup finished in 0.00s.
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433] EngineCore failed to start.
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433] Traceback (most recent call last):
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 1395, in run_engine_core
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 1395, in run_engine_core
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     engine_core = EngineCoreProc(*args, engine_index=dp_rank, **kwargs)
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/tracing/otel.py", line 175, in sync_wrapper
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/vllm/tracing/otel.py", line 175, in sync_wrapper
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     return func(*args, **kwargs)
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 1151, in __init__
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 1151, in __init__
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     super().__init__(
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 151, in __init__
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 151, in __init__
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     kv_cache_config = self._initialize_kv_caches(vllm_config)
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/tracing/otel.py", line 175, in sync_wrapper
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/vllm/tracing/otel.py", line 175, in sync_wrapper
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     return func(*args, **kwargs)
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 357, in _initialize_kv_caches
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 357, in _initialize_kv_caches
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     self.model_executor.compile_or_warm_up_model()
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/executor/abstract.py", line 128, in compile_or_warm_up_model
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/executor/abstract.py", line 128, in compile_or_warm_up_model
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     compilation_times: list[CompilationTimes] = self.collective_rpc(
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/executor/uniproc_executor.py", line 103, in collective_rpc
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/executor/uniproc_executor.py", line 103, in collective_rpc
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     result = run_method(self.driver_worker, method, args, kwargs)
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/serial_utils.py", line 508, in run_method
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/serial_utils.py", line 508, in run_method
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     return func(*args, **kwargs)
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/tracing/otel.py", line 175, in sync_wrapper
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/vllm/tracing/otel.py", line 175, in sync_wrapper
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     return func(*args, **kwargs)
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu_worker.py", line 876, in compile_or_warm_up_model
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu_worker.py", line 876, in compile_or_warm_up_model
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     warmup_kernels(
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     return func(*args, **kwargs)
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/warmup.py", line 235, in warmup_kernels
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/warmup.py", line 235, in warmup_kernels
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     _warmup_kernels(model_runner, worker_execute_model, worker_sample_tokens)
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/warmup.py", line 373, in _warmup_kernels
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/warmup.py", line 373, in _warmup_kernels
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     worker_sample_tokens(grammar_output)
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     return func(*args, **kwargs)
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu_worker.py", line 1217, in sample_tokens
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu_worker.py", line 1217, in sample_tokens
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     return self.model_runner.sample_tokens(grammar_output)
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     return func(*args, **kwargs)
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/eplb_utils.py", line 27, in wrapper
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/eplb_utils.py", line 27, in wrapper
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     result = fn(self, *args, **kwargs)
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/model_runner.py", line 2096, in sample_tokens
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/model_runner.py", line 2096, in sample_tokens
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     sampler_output, num_sampled, num_rejected = self.sample(
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/model_runner.py", line 1600, in sample
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/model_runner.py", line 1600, in sample
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     sampler_output = self.sampler(logits, input_batch)
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/sample/sampler.py", line 154, in __call__
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/sample/sampler.py", line 154, in __call__
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     sampled, processed_logits = self.sample(
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/sample/sampler.py", line 314, in sample
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/sample/sampler.py", line 314, in sample
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     return self._sample_random(
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/sample/sampler.py", line 336, in _sample_random
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/sample/sampler.py", line 336, in _sample_random
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     sampled = flashinfer_sample(processed_logits, top_k, top_p).to(
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/sample/ops/topk_topp_sampler.py", line 602, in flashinfer_sample
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/sample/ops/topk_topp_sampler.py", line 602, in flashinfer_sample
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     next_token_ids = flashinfer.sampling.top_k_top_p_sampling_from_logits(
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/flashinfer/api_logging.py", line 2348, in _auto_dump_wrapper
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/flashinfer/api_logging.py", line 2348, in _auto_dump_wrapper
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     return _inner(*args, **kwargs)
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/flashinfer/sampling.py", line 1547, in top_k_top_p_sampling_from_logits
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/flashinfer/sampling.py", line 1547, in top_k_top_p_sampling_from_logits
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     masked_logits = top_k_mask_logits(logits, top_k)
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/flashinfer/api_logging.py", line 2348, in _auto_dump_wrapper
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/flashinfer/api_logging.py", line 2348, in _auto_dump_wrapper
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     return _inner(*args, **kwargs)
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/flashinfer/sampling.py", line 1974, in top_k_mask_logits
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/flashinfer/sampling.py", line 1974, in top_k_mask_logits
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     return get_sampling_module().top_k_mask_logits(
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/flashinfer/sampling.py", line 68, in get_sampling_module
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/flashinfer/sampling.py", line 68, in get_sampling_module
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     module = gen_sampling_module().build_and_load()
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/flashinfer/jit/core.py", line 335, in build_and_load
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/flashinfer/jit/core.py", line 335, in build_and_load
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     self.build()
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/flashinfer/jit/core.py", line 562, in build
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/flashinfer/jit/core.py", line 562, in build
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     self.write_ninja()
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/flashinfer/jit/core.py", line 490, in write_ninja
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/flashinfer/jit/core.py", line 490, in write_ninja
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     content = generate_ninja_build_for_op(
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/flashinfer/jit/cpp_ext.py", line 250, in generate_ninja_build_for_op
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/flashinfer/jit/cpp_ext.py", line 250, in generate_ninja_build_for_op
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     cuda_home = get_cuda_path()
-(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "/home/asad/.venv-vllm/lib/python3.10/site-packages/flashinfer/jit/cpp_ext.py", line 61, in get_cuda_path
+(EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]   File "~/.venv-vllm/lib/python3.10/site-packages/flashinfer/jit/cpp_ext.py", line 61, in get_cuda_path
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433]     raise RuntimeError(
 (EngineCore pid=1552) ERROR 10-10 17:17:20 [core.py:1433] RuntimeError: Could not find nvcc and default cuda_home='/usr/local/cuda' doesn't exist
 Process EngineCore:
@@ -123,121 +123,121 @@ Traceback (most recent call last):
     self.run()
   File "/usr/lib/python3.10/multiprocessing/process.py", line 108, in run
     self._target(*self._args, **self._kwargs)
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 1437, in run_engine_core
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 1437, in run_engine_core
     raise e
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 1395, in run_engine_core
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 1395, in run_engine_core
     engine_core = EngineCoreProc(*args, engine_index=dp_rank, **kwargs)
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/tracing/otel.py", line 175, in sync_wrapper
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/tracing/otel.py", line 175, in sync_wrapper
     return func(*args, **kwargs)
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 1151, in __init__
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 1151, in __init__
     super().__init__(
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 151, in __init__
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 151, in __init__
     kv_cache_config = self._initialize_kv_caches(vllm_config)
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/tracing/otel.py", line 175, in sync_wrapper
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/tracing/otel.py", line 175, in sync_wrapper
     return func(*args, **kwargs)
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 357, in _initialize_kv_caches
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 357, in _initialize_kv_caches
     self.model_executor.compile_or_warm_up_model()
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/executor/abstract.py", line 128, in compile_or_warm_up_model
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/executor/abstract.py", line 128, in compile_or_warm_up_model
     compilation_times: list[CompilationTimes] = self.collective_rpc(
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/executor/uniproc_executor.py", line 103, in collective_rpc
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/executor/uniproc_executor.py", line 103, in collective_rpc
     result = run_method(self.driver_worker, method, args, kwargs)
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/serial_utils.py", line 508, in run_method
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/serial_utils.py", line 508, in run_method
     return func(*args, **kwargs)
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/tracing/otel.py", line 175, in sync_wrapper
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/tracing/otel.py", line 175, in sync_wrapper
     return func(*args, **kwargs)
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu_worker.py", line 876, in compile_or_warm_up_model
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu_worker.py", line 876, in compile_or_warm_up_model
     warmup_kernels(
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+  File "~/.venv-vllm/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
     return func(*args, **kwargs)
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/warmup.py", line 235, in warmup_kernels
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/warmup.py", line 235, in warmup_kernels
     _warmup_kernels(model_runner, worker_execute_model, worker_sample_tokens)
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/warmup.py", line 373, in _warmup_kernels
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/warmup.py", line 373, in _warmup_kernels
     worker_sample_tokens(grammar_output)
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+  File "~/.venv-vllm/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
     return func(*args, **kwargs)
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu_worker.py", line 1217, in sample_tokens
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu_worker.py", line 1217, in sample_tokens
     return self.model_runner.sample_tokens(grammar_output)
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+  File "~/.venv-vllm/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
     return func(*args, **kwargs)
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/eplb_utils.py", line 27, in wrapper
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/eplb_utils.py", line 27, in wrapper
     result = fn(self, *args, **kwargs)
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/model_runner.py", line 2096, in sample_tokens
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/model_runner.py", line 2096, in sample_tokens
     sampler_output, num_sampled, num_rejected = self.sample(
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/model_runner.py", line 1600, in sample
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/model_runner.py", line 1600, in sample
     sampler_output = self.sampler(logits, input_batch)
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/sample/sampler.py", line 154, in __call__
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/sample/sampler.py", line 154, in __call__
     sampled, processed_logits = self.sample(
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/sample/sampler.py", line 314, in sample
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/sample/sampler.py", line 314, in sample
     return self._sample_random(
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/sample/sampler.py", line 336, in _sample_random
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/worker/gpu/sample/sampler.py", line 336, in _sample_random
     sampled = flashinfer_sample(processed_logits, top_k, top_p).to(
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/sample/ops/topk_topp_sampler.py", line 602, in flashinfer_sample
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/sample/ops/topk_topp_sampler.py", line 602, in flashinfer_sample
     next_token_ids = flashinfer.sampling.top_k_top_p_sampling_from_logits(
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/flashinfer/api_logging.py", line 2348, in _auto_dump_wrapper
+  File "~/.venv-vllm/lib/python3.10/site-packages/flashinfer/api_logging.py", line 2348, in _auto_dump_wrapper
     return _inner(*args, **kwargs)
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/flashinfer/sampling.py", line 1547, in top_k_top_p_sampling_from_logits
+  File "~/.venv-vllm/lib/python3.10/site-packages/flashinfer/sampling.py", line 1547, in top_k_top_p_sampling_from_logits
     masked_logits = top_k_mask_logits(logits, top_k)
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/flashinfer/api_logging.py", line 2348, in _auto_dump_wrapper
+  File "~/.venv-vllm/lib/python3.10/site-packages/flashinfer/api_logging.py", line 2348, in _auto_dump_wrapper
     return _inner(*args, **kwargs)
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/flashinfer/sampling.py", line 1974, in top_k_mask_logits
+  File "~/.venv-vllm/lib/python3.10/site-packages/flashinfer/sampling.py", line 1974, in top_k_mask_logits
     return get_sampling_module().top_k_mask_logits(
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/flashinfer/sampling.py", line 68, in get_sampling_module
+  File "~/.venv-vllm/lib/python3.10/site-packages/flashinfer/sampling.py", line 68, in get_sampling_module
     module = gen_sampling_module().build_and_load()
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/flashinfer/jit/core.py", line 335, in build_and_load
+  File "~/.venv-vllm/lib/python3.10/site-packages/flashinfer/jit/core.py", line 335, in build_and_load
     self.build()
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/flashinfer/jit/core.py", line 562, in build
+  File "~/.venv-vllm/lib/python3.10/site-packages/flashinfer/jit/core.py", line 562, in build
     self.write_ninja()
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/flashinfer/jit/core.py", line 490, in write_ninja
+  File "~/.venv-vllm/lib/python3.10/site-packages/flashinfer/jit/core.py", line 490, in write_ninja
     content = generate_ninja_build_for_op(
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/flashinfer/jit/cpp_ext.py", line 250, in generate_ninja_build_for_op
+  File "~/.venv-vllm/lib/python3.10/site-packages/flashinfer/jit/cpp_ext.py", line 250, in generate_ninja_build_for_op
     cuda_home = get_cuda_path()
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/flashinfer/jit/cpp_ext.py", line 61, in get_cuda_path
+  File "~/.venv-vllm/lib/python3.10/site-packages/flashinfer/jit/cpp_ext.py", line 61, in get_cuda_path
     raise RuntimeError(
 RuntimeError: Could not find nvcc and default cuda_home='/usr/local/cuda' doesn't exist
 [rank0]:[W1010 17:17:22.984889502 ProcessGroupNCCL.cpp:1624] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
 (APIServer pid=887) INFO 10-10 17:17:26 [utils.py:638] [shutdown] Process manager: send sigterm to process EngineCore
 Traceback (most recent call last):
-  File "/home/asad/.venv-vllm/bin/vllm", line 6, in <module>
+  File "~/.venv-vllm/bin/vllm", line 6, in <module>
     sys.exit(main())
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/entrypoints/cli/main.py", line 118, in main
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/entrypoints/cli/main.py", line 118, in main
     args.dispatch_function(args)
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/entrypoints/cli/serve.py", line 154, in cmd
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/entrypoints/cli/serve.py", line 154, in cmd
     uvloop.run(run_server(args))
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/uvloop/__init__.py", line 69, in run
+  File "~/.venv-vllm/lib/python3.10/site-packages/uvloop/__init__.py", line 69, in run
     return loop.run_until_complete(wrapper())
   File "uvloop/loop.pyx", line 1515, in uvloop.loop.Loop.run_until_complete
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/uvloop/__init__.py", line 48, in wrapper
+  File "~/.venv-vllm/lib/python3.10/site-packages/uvloop/__init__.py", line 48, in wrapper
     return await main
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/entrypoints/launchers/api_server/entry.py", line 172, in run_server
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/entrypoints/launchers/api_server/entry.py", line 172, in run_server
     await run_server_worker(listen_address, sock, args, **uvicorn_kwargs)
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/entrypoints/launchers/api_server/entry.py", line 185, in run_server_worker
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/entrypoints/launchers/api_server/entry.py", line 185, in run_server_worker
     async with build_async_engine_client(
   File "/usr/lib/python3.10/contextlib.py", line 199, in __aenter__
     return await anext(self.gen)
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/entrypoints/launchers/api_server/entry.py", line 58, in build_async_engine_client
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/entrypoints/launchers/api_server/entry.py", line 58, in build_async_engine_client
     async with build_async_engine_client_from_engine_args(
   File "/usr/lib/python3.10/contextlib.py", line 199, in __aenter__
     return await anext(self.gen)
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/entrypoints/launchers/api_server/entry.py", line 92, in build_async_engine_client_from_engine_args
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/entrypoints/launchers/api_server/entry.py", line 92, in build_async_engine_client_from_engine_args
     async_llm = AsyncLLM.from_vllm_config(
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/async_llm.py", line 248, in from_vllm_config
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/async_llm.py", line 248, in from_vllm_config
     return cls(
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/async_llm.py", line 180, in __init__
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/async_llm.py", line 180, in __init__
     self.engine_core = EngineCoreClient.make_async_mp_client(
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/tracing/otel.py", line 175, in sync_wrapper
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/tracing/otel.py", line 175, in sync_wrapper
     return func(*args, **kwargs)
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/core_client.py", line 167, in make_async_mp_client
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/core_client.py", line 167, in make_async_mp_client
     return AsyncMPClient(
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/tracing/otel.py", line 175, in sync_wrapper
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/tracing/otel.py", line 175, in sync_wrapper
     return func(*args, **kwargs)
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/core_client.py", line 1100, in __init__
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/core_client.py", line 1100, in __init__
     super().__init__(
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/core_client.py", line 674, in __init__
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/core_client.py", line 674, in __init__
     with launch_core_engines(
   File "/usr/lib/python3.10/contextlib.py", line 142, in __exit__
     next(self.gen)
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/utils.py", line 1268, in launch_core_engines
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/utils.py", line 1268, in launch_core_engines
     wait_for_engine_startup(
-  File "/home/asad/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/utils.py", line 1348, in wait_for_engine_startup
+  File "~/.venv-vllm/lib/python3.10/site-packages/vllm/v1/engine/utils.py", line 1348, in wait_for_engine_startup
     raise RuntimeError(
 RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}

@@ -3,8 +3,8 @@ $ ls ~/vidur-phase2/data/profiling/compute/
 a100
 a40
 h100
-$ wc -l /home/asad/vidur-phase2/data/profiling/compute/a100/meta-llama/Llama-2-7b-hf/mlp.csv; head -c 300 /home/asad/vidur-phase2/data/profiling/compute/a100/meta-llama/Llama-2-7b-hf/mlp.csv
-1045 /home/asad/vidur-phase2/data/profiling/compute/a100/meta-llama/Llama-2-7b-hf/mlp.csv
+$ wc -l ~/vidur-phase2/data/profiling/compute/a100/meta-llama/Llama-2-7b-hf/mlp.csv; head -c 300 ~/vidur-phase2/data/profiling/compute/a100/meta-llama/Llama-2-7b-hf/mlp.csv
+1045 ~/vidur-phase2/data/profiling/compute/a100/meta-llama/Llama-2-7b-hf/mlp.csv
 time_stats.emb.min,time_stats.emb.max,time_stats.emb.mean,time_stats.emb.median,time_stats.emb.std,time_stats.input_layernorm.min,time_stats.input_layernorm.max,time_stats.input_layernorm.mean,time_stats.input_layernorm.median,time_stats.input_layernorm.std,time_stats.attn_pre_proj.min,time_stats.at
 shipped columns: 58 ours: 58
 only in shipped: []

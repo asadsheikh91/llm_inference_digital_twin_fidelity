@@ -1,10 +1,10 @@
 === start 2026-10-10T18:55:30+05:00
 $ cd ~/vidur-phase2 && /usr/bin/time -v python -m vidur.profiling.mlp.main --models TinyLlama/TinyLlama-1.1B-Chat-v1.0 --num_gpus 1 --num_tensor_parallel_workers 1 --max_tokens 8
   0%|          | 0/4 [00:00<?, ?it/s]2026-10-10 18:55:37,106	WARNING authentication_token_setup.py:85 -- Token authentication is enabled for this Ray cluster. Set RAY_AUTH_MODE=disabled to opt out. For more information, see https://docs.ray.io/en/latest/ray-security/token-auth.html
-2026-10-10 18:55:37,108	INFO authentication_token_setup.py:50 -- Generated new authentication token and saved to /home/asad/.ray/auth_token
+2026-10-10 18:55:37,108	INFO authentication_token_setup.py:50 -- Generated new authentication token and saved to ~/.ray/auth_token
 2026-10-10 18:55:42,759	INFO worker.py:2033 -- Started a local Ray instance.
  25%|██▌       | 1/4 [00:17<00:51, 17.10s/it] 50%|█████     | 2/4 [00:17<00:14,  7.21s/it] 75%|███████▌  | 3/4 [00:17<00:03,  3.98s/it]100%|██████████| 4/4 [00:17<00:00,  2.48s/it]100%|██████████| 4/4 [00:17<00:00,  4.29s/it]
-	Command being timed: "/home/asad/.venv-sarathi/bin/python -m vidur.profiling.mlp.main --models TinyLlama/TinyLlama-1.1B-Chat-v1.0 --num_gpus 1 --num_tensor_parallel_workers 1 --max_tokens 8"
+	Command being timed: "~/.venv-sarathi/bin/python -m vidur.profiling.mlp.main --models TinyLlama/TinyLlama-1.1B-Chat-v1.0 --num_gpus 1 --num_tensor_parallel_workers 1 --max_tokens 8"
 	User time (seconds): 11.64
 	System time (seconds): 3.57
 	Percent of CPU this job got: 58%

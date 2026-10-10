@@ -4,6 +4,6 @@ numpy 1.26.4 transformers 4.42.4 transformers sees torch: True
 device NVIDIA GeForce RTX 3060 Laptop GPU capability (8, 6)
 flashinfer 0.1.1+cu121torch2.3
 append_paged_kv_cache (append_key: torch.Tensor, append_value: torch.Tensor, append_indptr: torch.Tensor, paged_kv_cache: torch.Tensor, kv_indices: torch.Tensor, kv_indptr: torch.Tensor, kv_last_page_len: torch.Tensor, kv_layout: str = 'NHD')
-import sarathi OK /home/asad/sarathi-serve/sarathi/__init__.py ; extensions, LLMEngine, model_loader, flashinfer_attention_wrapper OK
+import sarathi OK ~/sarathi-serve/sarathi/__init__.py ; extensions, LLMEngine, model_loader, flashinfer_attention_wrapper OK
 rms_norm kernel ran on GPU; max abs diff vs torch reference: 0.0
 exit=0

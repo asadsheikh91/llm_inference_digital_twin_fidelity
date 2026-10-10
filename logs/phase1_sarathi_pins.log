@@ -1,7 +1,7 @@
 === 2026-10-10T18:45:20+05:00 step 1: version hints in ~/sarathi-serve (branch vidur, commit c94dbf4, Tue Jul 23 04:47:47 2024 -0400)
 $ grep -rnE 'transformers|numpy' --include=*.txt --include=*.toml --include=*.cfg --include=*.yml --include=*.yaml --include=Dockerfile* --include=*.sh ~/sarathi-serve
-/home/asad/sarathi-serve/requirements.txt:7:numpy
-/home/asad/sarathi-serve/requirements.txt:9:transformers >= 4.37.0  # Required for Mistral.
+~/sarathi-serve/requirements.txt:7:numpy
+~/sarathi-serve/requirements.txt:9:transformers >= 4.37.0  # Required for Mistral.
 $ git -C ~/sarathi-serve log -S'transformers' --format='%h %cd %s' -- requirements.txt
 19b403a Sat Nov 4 19:02:21 2023 -0400 Initial commit  (#1)
 $ grep -n 'transformers\|numpy' ~/sarathi-serve/setup.py

@@ -1,8 +1,8 @@
 === 2026-10-10T18:57:17+05:00 outputs of cuda_event run
-$ find /home/asad/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-56-51/ -type f -printf '%s %p\n'
-204 /home/asad/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-56-51/config.yaml
-5712 /home/asad/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-56-51/TinyLlama/TinyLlama-1.1B-Chat-v1.0/mlp.csv
-$ cat /home/asad/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-56-51/config.yaml
+$ find ~/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-56-51/ -type f -printf '%s %p\n'
+204 ~/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-56-51/config.yaml
+5712 ~/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-56-51/TinyLlama/TinyLlama-1.1B-Chat-v1.0/mlp.csv
+$ cat ~/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-56-51/config.yaml
 disable_ray: false
 max_tokens: 8
 models:
@@ -12,9 +12,9 @@ num_tensor_parallel_workers:
 - 1
 output_dir: profiling_outputs/mlp/2026-10-10_18-56-51
 profile_method: cuda_event
-$ wc -l /home/asad/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-56-51/TinyLlama/TinyLlama-1.1B-Chat-v1.0/mlp.csv
-5 /home/asad/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-56-51/TinyLlama/TinyLlama-1.1B-Chat-v1.0/mlp.csv
-$ head -1 /home/asad/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-56-51/TinyLlama/TinyLlama-1.1B-Chat-v1.0/mlp.csv | tr ',' '\n' | nl
+$ wc -l ~/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-56-51/TinyLlama/TinyLlama-1.1B-Chat-v1.0/mlp.csv
+5 ~/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-56-51/TinyLlama/TinyLlama-1.1B-Chat-v1.0/mlp.csv
+$ head -1 ~/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-56-51/TinyLlama/TinyLlama-1.1B-Chat-v1.0/mlp.csv | tr ',' '\n' | nl
      1	time_stats.emb.min
      2	time_stats.emb.max
      3	time_stats.emb.mean
@@ -73,7 +73,7 @@ $ head -1 /home/asad/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-56-51/Tiny
     56	use_gated_mlp
     57	num_tokens
     58	num_tensor_parallel_workers
-$ cat /home/asad/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-56-51/TinyLlama/TinyLlama-1.1B-Chat-v1.0/mlp.csv (raw)
+$ cat ~/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-56-51/TinyLlama/TinyLlama-1.1B-Chat-v1.0/mlp.csv (raw)
 time_stats.emb.min,time_stats.emb.max,time_stats.emb.mean,time_stats.emb.median,time_stats.emb.std,time_stats.input_layernorm.min,time_stats.input_layernorm.max,time_stats.input_layernorm.mean,time_stats.input_layernorm.median,time_stats.input_layernorm.std,time_stats.attn_pre_proj.min,time_stats.attn_pre_proj.max,time_stats.attn_pre_proj.mean,time_stats.attn_pre_proj.median,time_stats.attn_pre_proj.std,time_stats.attn_rope.min,time_stats.attn_rope.max,time_stats.attn_rope.mean,time_stats.attn_rope.median,time_stats.attn_rope.std,time_stats.attn_post_proj.min,time_stats.attn_post_proj.max,time_stats.attn_post_proj.mean,time_stats.attn_post_proj.median,time_stats.attn_post_proj.std,time_stats.post_attention_layernorm.min,time_stats.post_attention_layernorm.max,time_stats.post_attention_layernorm.mean,time_stats.post_attention_layernorm.median,time_stats.post_attention_layernorm.std,time_stats.mlp_up_proj.min,time_stats.mlp_up_proj.max,time_stats.mlp_up_proj.mean,time_stats.mlp_up_proj.median,time_stats.mlp_up_proj.std,time_stats.mlp_act.min,time_stats.mlp_act.max,time_stats.mlp_act.mean,time_stats.mlp_act.median,time_stats.mlp_act.std,time_stats.mlp_down_proj.min,time_stats.mlp_down_proj.max,time_stats.mlp_down_proj.mean,time_stats.mlp_down_proj.median,time_stats.mlp_down_proj.std,time_stats.add.min,time_stats.add.max,time_stats.add.mean,time_stats.add.median,time_stats.add.std,n_head,n_kv_head,n_embd,n_expanded_embd,vocab_size,use_gated_mlp,num_tokens,num_tensor_parallel_workers
 0.008191999979317188,0.22630399465560913,0.03142960008699447,0.011264000087976456,0.04281157254063439,0.006144000217318535,0.09932799637317657,0.047816000320017336,0.04044799879193306,0.027591032152165407,0.05427199974656105,0.14047999680042267,0.08949920013546944,0.08755199983716011,0.026645427834413305,0.006144000217318535,0.08396799862384796,0.026352000306360424,0.01945600053295493,0.02404209979202241,0.05222399905323982,0.15334400534629822,0.08512320127338172,0.08294399827718735,0.028890059741686396,0.006144000217318535,0.16793599724769592,0.04846239953767508,0.03481600061058998,0.043639603391868,0.18534399569034576,0.4055039882659912,0.2178463988006115,0.2067519947886467,0.04642632461269301,0.0071680000983178616,0.008191999979317188,0.008140799985267223,0.008191999979317188,0.00022317559997368704,0.11673600226640701,1.8831360340118408,0.21166080348193644,0.11776000261306763,0.3841927572334215,0.005119999870657921,0.08089599758386612,0.010142399836331606,0.005119999870657921,0.016892627911995063,32,4,2048,5632,32000,True,8,1
 0.006144000217318535,0.09094399958848953,0.012720800039824098,0.008191999979317188,0.014499181862704696,0.009216000325977802,0.07475200295448303,0.04495360013097525,0.043007999658584595,0.017152841000208856,0.05427199974656105,0.13619199395179749,0.07653439939022064,0.07577600330114365,0.021651533109204344,0.006144000217318535,0.03379200026392937,0.01710400020238012,0.016383999958634377,0.009537264392872682,0.055296000093221664,0.1228799968957901,0.0799519995227456,0.08089599758386612,0.01718494540759943,0.006144000217318535,0.05632000043988228,0.02907680026255548,0.03174399957060814,0.014164771384828499,0.187391996383667,0.21401600539684296,0.2050447978079319,0.20577599853277206,0.0064510235136783665,0.008191999979317188,0.009216000325977802,0.008294400013983249,0.008191999979317188,0.00030720010399818424,0.1157120019197464,0.11776000261306763,0.11658240221440792,0.11673600226640701,0.0008111608259158992,0.004095999989658594,0.006144000217318535,0.0051199998939409855,0.005119999870657921,0.0003238172683974468,32,4,2048,5632,32000,True,4,1
@@ -84,7 +84,7 @@ $ leftover ray / GPU
 no ray
 317 MiB
 
-=== excerpt (values copied verbatim from /home/asad/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-56-51/TinyLlama/TinyLlama-1.1B-Chat-v1.0/mlp.csv, units ms per CudaTimer)
+=== excerpt (values copied verbatim from ~/vidur-phase2/profiling_outputs/mlp/2026-10-10_18-56-51/TinyLlama/TinyLlama-1.1B-Chat-v1.0/mlp.csv, units ms per CudaTimer)
 num_tokens,mlp_up_proj.mean,mlp_up_proj.median,mlp_act.mean,mlp_act.median,mlp_down_proj.mean,mlp_down_proj.median,attn_pre_proj.mean,attn_pre_proj.median,attn_post_proj.mean,attn_post_proj.median
 8,0.2178463988006115,0.2067519947886467,0.008140799985267223,0.008191999979317188,0.21166080348193644,0.11776000261306763,0.08949920013546944,0.08755199983716011,0.08512320127338172,0.08294399827718735
 4,0.2050447978079319,0.20577599853277206,0.008294400013983249,0.008191999979317188,0.11658240221440792,0.11673600226640701,0.07653439939022064,0.07577600330114365,0.0799519995227456,0.08089599758386612

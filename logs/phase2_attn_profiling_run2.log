@@ -1,24 +1,24 @@
 === 2026-10-10T19:29:29+05:00 attempt 2 = fix 2 of 2 (last): venv bin on PATH (as activation does) + CUDA_HOME=~/micromamba/envs/cuda-12.1, command line only
 $ ls ~/.cache/flashinfer ~/.cache/torch_extensions 2>&1
-ls: cannot access '/home/asad/.cache/torch_extensions': No such file or directory
-/home/asad/.cache/flashinfer:
+ls: cannot access '~/.cache/torch_extensions': No such file or directory
+~/.cache/flashinfer:
 0.7.0.post1
 86
 
-/home/asad/.cache/flashinfer/0.7.0.post1:
+~/.cache/flashinfer/0.7.0.post1:
 86
 
-/home/asad/.cache/flashinfer/0.7.0.post1/86:
+~/.cache/flashinfer/0.7.0.post1/86:
 cached_ops
 === start 2026-10-10T19:29:29+05:00
 $ cd ~/vidur-phase2 && PATH=~/.venv-sarathi/bin:$PATH CUDA_HOME=~/micromamba/envs/cuda-12.1 /usr/bin/time -v python -m vidur.profiling.attention.main --models TinyLlama/TinyLlama-1.1B-Chat-v1.0 --num_gpus 1 --num_tensor_parallel_workers 1 --max_seq_len 64 --max_model_len 64 --min_batch_size 1 --max_batch_size 1
   0%|          | 0/3 [00:00<?, ?it/s]2026-10-10 19:29:36,151	WARNING authentication_token_setup.py:85 -- Token authentication is enabled for this Ray cluster. Set RAY_AUTH_MODE=disabled to opt out. For more information, see https://docs.ray.io/en/latest/ray-security/token-auth.html
 2026-10-10 19:29:40,522	INFO worker.py:2033 -- Started a local Ray instance.
 [36m(AttentionWrapper pid=66753)[0m 2026-10-10 19:29:49,721 - INFO - flashinfer.jit: Loading JIT ops: batch_prefill_with_kv_cache_dtype_q_f16_dtype_kv_f16_dtype_o_f16_dtype_idx_i32_head_dim_64_posenc_0_use_swa_False_use_logits_cap_False_f16qk_False
-[36m(AttentionWrapper pid=66753)[0m /home/asad/.venv-sarathi/lib/python3.10/site-packages/torch/utils/cpp_extension.py:1967: UserWarning: TORCH_CUDA_ARCH_LIST is not set, all archs for visible cards are included for compilation. 
+[36m(AttentionWrapper pid=66753)[0m ~/.venv-sarathi/lib/python3.10/site-packages/torch/utils/cpp_extension.py:1967: UserWarning: TORCH_CUDA_ARCH_LIST is not set, all archs for visible cards are included for compilation. 
 [36m(AttentionWrapper pid=66753)[0m If this is not desired, please set os.environ['TORCH_CUDA_ARCH_LIST'].
 [36m(AttentionWrapper pid=66753)[0m   warnings.warn(
-[36m(AttentionWrapper pid=66753)[0m /home/asad/.venv-sarathi/lib/python3.10/site-packages/torch/utils/cpp_extension.py:1967: UserWarning: TORCH_CUDA_ARCH_LIST is not set, all archs for visible cards are included for compilation. 
+[36m(AttentionWrapper pid=66753)[0m ~/.venv-sarathi/lib/python3.10/site-packages/torch/utils/cpp_extension.py:1967: UserWarning: TORCH_CUDA_ARCH_LIST is not set, all archs for visible cards are included for compilation. 
 [36m(AttentionWrapper pid=66753)[0m If this is not desired, please set os.environ['TORCH_CUDA_ARCH_LIST'].
 [36m(AttentionWrapper pid=66753)[0m   warnings.warn(
 Traceback (most recent call last):
@@ -26,32 +26,32 @@ Traceback (most recent call last):
     return _run_code(code, main_globals, None,
   File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
     exec(code, run_globals)
-  File "/home/asad/vidur-phase2/vidur/profiling/attention/main.py", line 240, in <module>
+  File "~/vidur-phase2/vidur/profiling/attention/main.py", line 240, in <module>
     main()
-  File "/home/asad/vidur-phase2/vidur/profiling/attention/main.py", line 223, in main
+  File "~/vidur-phase2/vidur/profiling/attention/main.py", line 223, in main
     profile_model(
-  File "/home/asad/vidur-phase2/vidur/profiling/attention/main.py", line 157, in profile_model
+  File "~/vidur-phase2/vidur/profiling/attention/main.py", line 157, in profile_model
     results = ray.get(promises)
-  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 22, in auto_init_wrapper
+  File "~/.venv-sarathi/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 22, in auto_init_wrapper
     return fn(*args, **kwargs)
-  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 134, in wrapper
+  File "~/.venv-sarathi/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 134, in wrapper
     return func(*args, **kwargs)
-  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/ray/_private/worker.py", line 3004, in get
+  File "~/.venv-sarathi/lib/python3.10/site-packages/ray/_private/worker.py", line 3004, in get
     values, debugger_breakpoint = worker.get_objects(
-  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/ray/_private/worker.py", line 1053, in get_objects
+  File "~/.venv-sarathi/lib/python3.10/site-packages/ray/_private/worker.py", line 1053, in get_objects
     raise value.as_instanceof_cause()
 ray.exceptions.RayTaskError(TypeError): [36mray::AttentionWrapper.profile()[39m (pid=66753, ip=192.168.152.45, actor_id=f9884f49281c6c4612c9995801000000, repr=<vidur.profiling.attention.attention_wrapper.AttentionWrapper object at 0x71363f774b80>)
-  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+  File "~/.venv-sarathi/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
     return func(*args, **kwargs)
-  File "/home/asad/vidur-phase2/vidur/profiling/attention/attention_wrapper.py", line 131, in profile
+  File "~/vidur-phase2/vidur/profiling/attention/attention_wrapper.py", line 131, in profile
     get_attention_wrapper().forward(query, key, value, kv_cache)
-  File "/home/asad/sarathi-serve/sarathi/model_executor/attention/flashinfer_attention_wrapper.py", line 224, in forward
+  File "~/sarathi-serve/sarathi/model_executor/attention/flashinfer_attention_wrapper.py", line 224, in forward
     append_paged_kv_cache(
 TypeError: append_paged_kv_cache() missing 1 required positional argument: 'kv_last_page_len'
 [36m(AttentionWrapper pid=66753)[0m 2026-10-10 19:30:09,598 - INFO - flashinfer.jit: Finished loading JIT ops: batch_prefill_with_kv_cache_dtype_q_f16_dtype_kv_f16_dtype_o_f16_dtype_idx_i32_head_dim_64_posenc_0_use_swa_False_use_logits_cap_False_f16qk_False
   0%|          | 0/3 [00:37<?, ?it/s]
 Command exited with non-zero status 1
-	Command being timed: "/home/asad/.venv-sarathi/bin/python -m vidur.profiling.attention.main --models TinyLlama/TinyLlama-1.1B-Chat-v1.0 --num_gpus 1 --num_tensor_parallel_workers 1 --max_seq_len 64 --max_model_len 64 --min_batch_size 1 --max_batch_size 1"
+	Command being timed: "~/.venv-sarathi/bin/python -m vidur.profiling.attention.main --models TinyLlama/TinyLlama-1.1B-Chat-v1.0 --num_gpus 1 --num_tensor_parallel_workers 1 --max_seq_len 64 --max_model_len 64 --min_batch_size 1 --max_batch_size 1"
 	User time (seconds): 13.26
 	System time (seconds): 4.75
 	Percent of CPU this job got: 39%
@@ -80,9 +80,9 @@ exit=1
 === 2026-10-10T19:30:44+05:00 post-failure analysis (read-only)
 $ grep -n 'flashinfer.jit\|warnings.warn' -B1 (JIT and warnings)
 17:[36m(AttentionWrapper pid=66753)[0m 2026-10-10 19:29:49,721 - INFO - flashinfer.jit: Loading JIT ops: batch_prefill_with_kv_cache_dtype_q_f16_dtype_kv_f16_dtype_o_f16_dtype_idx_i32_head_dim_64_posenc_0_use_swa_False_use_logits_cap_False_f16qk_False
-18:[36m(AttentionWrapper pid=66753)[0m /home/asad/.venv-sarathi/lib/python3.10/site-packages/torch/utils/cpp_extension.py:1967: UserWarning: TORCH_CUDA_ARCH_LIST is not set, all archs for visible cards are included for compilation. 
+18:[36m(AttentionWrapper pid=66753)[0m ~/.venv-sarathi/lib/python3.10/site-packages/torch/utils/cpp_extension.py:1967: UserWarning: TORCH_CUDA_ARCH_LIST is not set, all archs for visible cards are included for compilation. 
 20:[36m(AttentionWrapper pid=66753)[0m   warnings.warn(
-21:[36m(AttentionWrapper pid=66753)[0m /home/asad/.venv-sarathi/lib/python3.10/site-packages/torch/utils/cpp_extension.py:1967: UserWarning: TORCH_CUDA_ARCH_LIST is not set, all archs for visible cards are included for compilation. 
+21:[36m(AttentionWrapper pid=66753)[0m ~/.venv-sarathi/lib/python3.10/site-packages/torch/utils/cpp_extension.py:1967: UserWarning: TORCH_CUDA_ARCH_LIST is not set, all archs for visible cards are included for compilation. 
 23:[36m(AttentionWrapper pid=66753)[0m   warnings.warn(
 51:[36m(AttentionWrapper pid=66753)[0m 2026-10-10 19:30:09,598 - INFO - flashinfer.jit: Finished loading JIT ops: batch_prefill_with_kv_cache_dtype_q_f16_dtype_kv_f16_dtype_o_f16_dtype_idx_i32_head_dim_64_posenc_0_use_swa_False_use_logits_cap_False_f16qk_False
 81:$ grep -n 'flashinfer.jit\|warnings.warn' -B1 (JIT and warnings)
@@ -114,18 +114,18 @@ $ flashinfer signature: python -c 'inspect.signature(flashinfer.append_paged_kv_
 $ sarathi requirement for flashinfer
 17:flashinfer >= 0.0.5
 $ JIT cache
-/home/asad/.cache/flashinfer:
+~/.cache/flashinfer:
 0.7.0.post1
 86
 
-/home/asad/.cache/flashinfer/0.7.0.post1:
+~/.cache/flashinfer/0.7.0.post1:
 86
 
-/home/asad/.cache/flashinfer/0.7.0.post1/86:
+~/.cache/flashinfer/0.7.0.post1/86:
 cached_ops
 flashinfer_jit.log
 
-/home/asad/.cache/flashinfer/0.7.0.post1/86/cached_ops:
+~/.cache/flashinfer/0.7.0.post1/86/cached_ops:
 $ RAM log (logs/phase2_attn_profiling_run2_mem.csv)
 timestamp,mem_free_kib,mem_available_kib,swap_free_kib
 2026-10-10T19:29:20+05:00,8482364,8613112,7856636
@@ -155,4 +155,4 @@ flashinfer-0.2.0+cu121torch2.3-cp310-cp310-linux_x86_64.whl
 flashinfer-0.2.0.post1+cu121torch2.3-cp310-cp310-linux_x86_64.whl
 flashinfer_python-0.2.0.post2+cu121torch2.3-cp310-cp310-linux_x86_64.whl
 $ JIT build location for 0.2.0.post1
-/home/asad/.cache/flashinfer/86/cached_ops/batch_prefill_with_kv_cache_dtype_q_f16_dtype_kv_f16_dtype_o_f16_dtype_idx_i32_head_dim_64_posenc_0_use_swa_False_use_logits_cap_False_f16qk_False
+~/.cache/flashinfer/86/cached_ops/batch_prefill_with_kv_cache_dtype_q_f16_dtype_kv_f16_dtype_o_f16_dtype_idx_i32_head_dim_64_posenc_0_use_swa_False_use_logits_cap_False_f16qk_False

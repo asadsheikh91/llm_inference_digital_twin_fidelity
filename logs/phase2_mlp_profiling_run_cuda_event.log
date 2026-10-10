@@ -6,7 +6,7 @@ $ cd ~/vidur-phase2 && /usr/bin/time -v python -m vidur.profiling.mlp.main --mod
   0%|          | 0/4 [00:00<?, ?it/s]2026-10-10 18:56:51,761	WARNING authentication_token_setup.py:85 -- Token authentication is enabled for this Ray cluster. Set RAY_AUTH_MODE=disabled to opt out. For more information, see https://docs.ray.io/en/latest/ray-security/token-auth.html
 2026-10-10 18:56:55,999	INFO worker.py:2033 -- Started a local Ray instance.
  25%|██▌       | 1/4 [00:14<00:42, 14.27s/it]100%|██████████| 4/4 [00:14<00:00,  3.59s/it]
-	Command being timed: "/home/asad/.venv-sarathi/bin/python -m vidur.profiling.mlp.main --models TinyLlama/TinyLlama-1.1B-Chat-v1.0 --num_gpus 1 --num_tensor_parallel_workers 1 --max_tokens 8 --profile_method cuda_event"
+	Command being timed: "~/.venv-sarathi/bin/python -m vidur.profiling.mlp.main --models TinyLlama/TinyLlama-1.1B-Chat-v1.0 --num_gpus 1 --num_tensor_parallel_workers 1 --max_tokens 8 --profile_method cuda_event"
 	User time (seconds): 9.99
 	System time (seconds): 2.68
 	Percent of CPU this job got: 61%

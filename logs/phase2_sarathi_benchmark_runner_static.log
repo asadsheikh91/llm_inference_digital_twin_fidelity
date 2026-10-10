@@ -11,8 +11,8 @@ main.py
 request_generator
 utils
 $ grep -n '__main__' sarathi/benchmark
-/home/asad/sarathi-serve/sarathi/benchmark/main.py:35:if __name__ == "__main__":
-/home/asad/sarathi-serve/sarathi/benchmark/capacity_search/main.py:59:if __name__ == "__main__":
+~/sarathi-serve/sarathi/benchmark/main.py:35:if __name__ == "__main__":
+~/sarathi-serve/sarathi/benchmark/capacity_search/main.py:59:if __name__ == "__main__":
 $ engine use in benchmark_runner.py (no HTTP)
 9:from sarathi import LLMEngine, SamplingParams
 59:        self.llm_engine = LLMEngine.from_system_config(system_config)
@@ -76,7 +76,7 @@ class RequestLengthGeneratorType(Enum):
     FIXED = "FIXED"
 
 $ default trace paths exist in clone?
-ls: cannot access '/home/asad/sarathi-serve/data/processed_traces': No such file or directory
+ls: cannot access '~/sarathi-serve/data/processed_traces': No such file or directory
 $ ls ~/vidur/data/processed_traces (read-only)
 arxiv_summarization_stats_llama2_tokenizer_filtered_v2.csv
 splitwise_code.csv

@@ -2,15 +2,15 @@
 $ curl -sf localhost:8000/v1/models
 exit=7
 $ du -sb ~/.cache/huggingface (t0)
-1437010484	/home/asad/.cache/huggingface
+1437010484	~/.cache/huggingface
 $ du -sb ~/.cache/huggingface (t0+10s, 2026-10-10T17:14:22+05:00)
-1498279322	/home/asad/.cache/huggingface
+1498279322	~/.cache/huggingface
 $ find ~/.cache/huggingface -name '*.incomplete' -ls
-   180443 1460544 -rw-r--r--   1 asad     asad     1495592482 Oct 10 17:14 /home/asad/.cache/huggingface/hub/models--TinyLlama--TinyLlama-1.1B-Chat-v1.0/blobs/6e6001da2106d4757498752a021df6c2bdc332c650aae4bae6b0c004dcf14933.baad235f.incomplete
+   180443 1460544 -rw-r--r--   1 asad     asad     1495592482 Oct 10 17:14 ~/.cache/huggingface/hub/models--TinyLlama--TinyLlama-1.1B-Chat-v1.0/blobs/6e6001da2106d4757498752a021df6c2bdc332c650aae4bae6b0c004dcf14933.baad235f.incomplete
 $ find ~/.cache/huggingface/hub -type f -size +1M -ls
-   180411   1800 -rw-r--r--   1 asad     asad      1842767 Oct 10 17:07 /home/asad/.cache/huggingface/hub/models--TinyLlama--TinyLlama-1.1B-Chat-v1.0/blobs/a6e931b92caff4c79c5c56282f1e89569a0ae558
-   180443 1460544 -rw-r--r--   1 asad     asad     1495592482 Oct 10 17:14 /home/asad/.cache/huggingface/hub/models--TinyLlama--TinyLlama-1.1B-Chat-v1.0/blobs/6e6001da2106d4757498752a021df6c2bdc332c650aae4bae6b0c004dcf14933.baad235f.incomplete
-   180411   1800 -rw-r--r--   1 asad     asad      1842767 Oct 10 17:07 /home/asad/.cache/huggingface/hub/models--TinyLlama--TinyLlama-1.1B-Chat-v1.0/snapshots/fe8a4ea1ffedaf415f4da2f062534de366a451e6/tokenizer.json
+   180411   1800 -rw-r--r--   1 asad     asad      1842767 Oct 10 17:07 ~/.cache/huggingface/hub/models--TinyLlama--TinyLlama-1.1B-Chat-v1.0/blobs/a6e931b92caff4c79c5c56282f1e89569a0ae558
+   180443 1460544 -rw-r--r--   1 asad     asad     1495592482 Oct 10 17:14 ~/.cache/huggingface/hub/models--TinyLlama--TinyLlama-1.1B-Chat-v1.0/blobs/6e6001da2106d4757498752a021df6c2bdc332c650aae4bae6b0c004dcf14933.baad235f.incomplete
+   180411   1800 -rw-r--r--   1 asad     asad      1842767 Oct 10 17:07 ~/.cache/huggingface/hub/models--TinyLlama--TinyLlama-1.1B-Chat-v1.0/snapshots/fe8a4ea1ffedaf415f4da2f062534de366a451e6/tokenizer.json
 $ tail -40 logs/phase0_tinyllama_server.log
 $ vllm serve TinyLlama/TinyLlama-1.1B-Chat-v1.0 --max-model-len 2048 --gpu-memory-utilization 0.8 --port 8000  (2026-10-10T17:07:11+05:00)
 (APIServer pid=887) INFO 10-10 17:07:19 [api_utils.py:347] 
@@ -33,9 +33,9 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
 (EngineCore pid=1552) INFO 10-10 17:07:51 [cuda.py:526] Using FLASH_ATTN attention backend out of potential backends: ['FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION'].
 (EngineCore pid=1552) INFO 10-10 17:07:51 [flash_attn.py:1167] Using FlashAttention version 2
 $ ps -o pid,ppid,stat,pcpu,pmem,rss,etime,wchan:32,cmd --forest -g $(ps -o sid= -p 887)
-    835     542 S     0.0  0.0  2096       07:31 do_wait                           |       \_ /bin/bash -c source /home/asad/.claude/shell-snapshots/snapshot-bash-1791633984765-z3x0dt.sh 2>/dev/null || true && shopt -u extglob 2>/dev/null || true && { \builtin unalias -- 'unsetenv'; \builtin unset -f -- 'unsetenv'; } >/dev/null 2>&1 || true && eval 'cd ~/llm_inference_digital_twin_fidelity && nohup scripts/gpu_mem_sampler.sh logs/phase0_tinyllama_gpumem.csv > /dev/null 2>&1 & sleep 3; cd ~/llm_inference_digital_twin_fidelity && CMD="vllm serve TinyLlama/TinyLlama-1.1B-Chat-v1.0 --max-model-len 2048 --gpu-memory-utilization 0.8 --port 8000"; { echo "\$ $CMD  ($(date -Is))"; } > logs/phase0_tinyllama_server.log; nohup ~/.venv-vllm/bin/$CMD >> logs/phase0_tinyllama_server.log 2>&1 & echo "server pid $!"' < /dev/null && pwd -P >| /tmp/claude-0892-cwd
-    887     542 Sl    2.4 10.2 1042032     07:28 poll_schedule_timeout.constprop.  |       \_ /home/asad/.venv-vllm/bin/python3 /home/asad/.venv-vllm/bin/vllm serve TinyLlama/TinyLlama-1.1B-Chat-v1.0 --max-model-len 2048 --gpu-memory-utilization 0.8 --port 8000
-   1551     887 S     0.0  0.1 11088       06:56 anon_pipe_read                    |           \_ /home/asad/.venv-vllm/bin/python3 -c from multiprocessing.resource_tracker import main;main(47)
+    835     542 S     0.0  0.0  2096       07:31 do_wait                           |       \_ /bin/bash -c source ~/.claude/shell-snapshots/snapshot-bash-1791633984765-z3x0dt.sh 2>/dev/null || true && shopt -u extglob 2>/dev/null || true && { \builtin unalias -- 'unsetenv'; \builtin unset -f -- 'unsetenv'; } >/dev/null 2>&1 || true && eval 'cd ~/llm_inference_digital_twin_fidelity && nohup scripts/gpu_mem_sampler.sh logs/phase0_tinyllama_gpumem.csv > /dev/null 2>&1 & sleep 3; cd ~/llm_inference_digital_twin_fidelity && CMD="vllm serve TinyLlama/TinyLlama-1.1B-Chat-v1.0 --max-model-len 2048 --gpu-memory-utilization 0.8 --port 8000"; { echo "\$ $CMD  ($(date -Is))"; } > logs/phase0_tinyllama_server.log; nohup ~/.venv-vllm/bin/$CMD >> logs/phase0_tinyllama_server.log 2>&1 & echo "server pid $!"' < /dev/null && pwd -P >| /tmp/claude-0892-cwd
+    887     542 Sl    2.4 10.2 1042032     07:28 poll_schedule_timeout.constprop.  |       \_ ~/.venv-vllm/bin/python3 ~/.venv-vllm/bin/vllm serve TinyLlama/TinyLlama-1.1B-Chat-v1.0 --max-model-len 2048 --gpu-memory-utilization 0.8 --port 8000
+   1551     887 S     0.0  0.1 11088       06:56 anon_pipe_read                    |           \_ ~/.venv-vllm/bin/python3 -c from multiprocessing.resource_tracker import main;main(47)
    1552     887 Sl    6.9 17.0 1734100     06:56 futex_do_wait                     |           \_ VLLM::EngineCore
     216       1 Ss    0.0  0.1 19576       11:48 -                                /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
     260       1 Ssl   0.0  0.2 22060       11:48 -                                /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
@@ -79,7 +79,7 @@ $ journalctl -k --no-pager | grep -iE 'oom|killed process'
 
 === 2026-10-10T17:15:08+05:00 download progress
 $ ls -l *.incomplete
-1583698606 /home/asad/.cache/huggingface/hub/models--TinyLlama--TinyLlama-1.1B-Chat-v1.0/blobs/6e6001da2106d4757498752a021df6c2bdc332c650aae4bae6b0c004dcf14933.baad235f.incomplete
+1583698606 ~/.cache/huggingface/hub/models--TinyLlama--TinyLlama-1.1B-Chat-v1.0/blobs/6e6001da2106d4757498752a021df6c2bdc332c650aae4bae6b0c004dcf14933.baad235f.incomplete
 
 === 2026-10-10T17:23:38+05:00 crash diagnosis
 $ grep -nE 'downloading weights|ERROR .*RuntimeError|^RuntimeError' logs/phase0_tinyllama_server.log
@@ -92,13 +92,13 @@ $ grep -nE 'downloading weights|ERROR .*RuntimeError|^RuntimeError' logs/phase0_
 196:RuntimeError: Could not find nvcc and default cuda_home='/usr/local/cuda' doesn't exist
 243:RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}
 $ pgrep -af 'vllm serve|EngineCore'
-835 /bin/bash -c source /home/asad/.claude/shell-snapshots/snapshot-bash-1791633984765-z3x0dt.sh 2>/dev/null || true && shopt -u extglob 2>/dev/null || true && { \builtin unalias -- 'unsetenv'; \builtin unset -f -- 'unsetenv'; } >/dev/null 2>&1 || true && eval 'cd ~/llm_inference_digital_twin_fidelity && nohup scripts/gpu_mem_sampler.sh logs/phase0_tinyllama_gpumem.csv > /dev/null 2>&1 & sleep 3; cd ~/llm_inference_digital_twin_fidelity && CMD="vllm serve TinyLlama/TinyLlama-1.1B-Chat-v1.0 --max-model-len 2048 --gpu-memory-utilization 0.8 --port 8000"; { echo "\$ $CMD  ($(date -Is))"; } > logs/phase0_tinyllama_server.log; nohup ~/.venv-vllm/bin/$CMD >> logs/phase0_tinyllama_server.log 2>&1 & echo "server pid $!"' < /dev/null && pwd -P >| /tmp/claude-0892-cwd
+835 /bin/bash -c source ~/.claude/shell-snapshots/snapshot-bash-1791633984765-z3x0dt.sh 2>/dev/null || true && shopt -u extglob 2>/dev/null || true && { \builtin unalias -- 'unsetenv'; \builtin unset -f -- 'unsetenv'; } >/dev/null 2>&1 || true && eval 'cd ~/llm_inference_digital_twin_fidelity && nohup scripts/gpu_mem_sampler.sh logs/phase0_tinyllama_gpumem.csv > /dev/null 2>&1 & sleep 3; cd ~/llm_inference_digital_twin_fidelity && CMD="vllm serve TinyLlama/TinyLlama-1.1B-Chat-v1.0 --max-model-len 2048 --gpu-memory-utilization 0.8 --port 8000"; { echo "\$ $CMD  ($(date -Is))"; } > logs/phase0_tinyllama_server.log; nohup ~/.venv-vllm/bin/$CMD >> logs/phase0_tinyllama_server.log 2>&1 & echo "server pid $!"' < /dev/null && pwd -P >| /tmp/claude-0892-cwd
 exit=0
 $ nvidia-smi --query-gpu=utilization.gpu,memory.used,memory.total --format=csv
 utilization.gpu [%], memory.used [MiB], memory.total [MiB]
 9 %, 476 MiB, 6144 MiB
 $ pgrep -af gpu_mem_sampler
-835 /bin/bash -c source /home/asad/.claude/shell-snapshots/snapshot-bash-1791633984765-z3x0dt.sh 2>/dev/null || true && shopt -u extglob 2>/dev/null || true && { \builtin unalias -- 'unsetenv'; \builtin unset -f -- 'unsetenv'; } >/dev/null 2>&1 || true && eval 'cd ~/llm_inference_digital_twin_fidelity && nohup scripts/gpu_mem_sampler.sh logs/phase0_tinyllama_gpumem.csv > /dev/null 2>&1 & sleep 3; cd ~/llm_inference_digital_twin_fidelity && CMD="vllm serve TinyLlama/TinyLlama-1.1B-Chat-v1.0 --max-model-len 2048 --gpu-memory-utilization 0.8 --port 8000"; { echo "\$ $CMD  ($(date -Is))"; } > logs/phase0_tinyllama_server.log; nohup ~/.venv-vllm/bin/$CMD >> logs/phase0_tinyllama_server.log 2>&1 & echo "server pid $!"' < /dev/null && pwd -P >| /tmp/claude-0892-cwd
+835 /bin/bash -c source ~/.claude/shell-snapshots/snapshot-bash-1791633984765-z3x0dt.sh 2>/dev/null || true && shopt -u extglob 2>/dev/null || true && { \builtin unalias -- 'unsetenv'; \builtin unset -f -- 'unsetenv'; } >/dev/null 2>&1 || true && eval 'cd ~/llm_inference_digital_twin_fidelity && nohup scripts/gpu_mem_sampler.sh logs/phase0_tinyllama_gpumem.csv > /dev/null 2>&1 & sleep 3; cd ~/llm_inference_digital_twin_fidelity && CMD="vllm serve TinyLlama/TinyLlama-1.1B-Chat-v1.0 --max-model-len 2048 --gpu-memory-utilization 0.8 --port 8000"; { echo "\$ $CMD  ($(date -Is))"; } > logs/phase0_tinyllama_server.log; nohup ~/.venv-vllm/bin/$CMD >> logs/phase0_tinyllama_server.log 2>&1 & echo "server pid $!"' < /dev/null && pwd -P >| /tmp/claude-0892-cwd
 836 bash scripts/gpu_mem_sampler.sh logs/phase0_tinyllama_gpumem.csv
 $ peak memory_used_mib in logs/phase0_tinyllama_gpumem.csv
 peak 5286 MiB at 2026-10-10T17:17:19.667
@@ -145,13 +145,13 @@ nvidia-nvshmem-cu13                      3.4.5
 nvidia-nvtx                              13.0.85
 nvidia-nvvm                              13.4.92
 $ find ~/.venv-vllm -name 'nvcc*' -o -name 'ptxas' | head
-/home/asad/.venv-vllm/lib/python3.10/site-packages/nvidia/cu13/bin/ptxas
-/home/asad/.venv-vllm/lib/python3.10/site-packages/nvidia/cu13/bin/nvcc
-/home/asad/.venv-vllm/lib/python3.10/site-packages/nvidia/cu13/include/cuda_runtime.h
-/home/asad/.venv-vllm/lib/python3.10/site-packages/tokenspeed_triton/backends/nvidia/bin/ptxas
-/home/asad/.venv-vllm/lib/python3.10/site-packages/tokenspeed_triton/backends/nvidia/include/cuda_runtime.h
-/home/asad/.venv-vllm/lib/python3.10/site-packages/triton/backends/nvidia/bin/ptxas
-/home/asad/.venv-vllm/lib/python3.10/site-packages/triton/backends/nvidia/include/cuda_runtime.h
+~/.venv-vllm/lib/python3.10/site-packages/nvidia/cu13/bin/ptxas
+~/.venv-vllm/lib/python3.10/site-packages/nvidia/cu13/bin/nvcc
+~/.venv-vllm/lib/python3.10/site-packages/nvidia/cu13/include/cuda_runtime.h
+~/.venv-vllm/lib/python3.10/site-packages/tokenspeed_triton/backends/nvidia/bin/ptxas
+~/.venv-vllm/lib/python3.10/site-packages/tokenspeed_triton/backends/nvidia/include/cuda_runtime.h
+~/.venv-vllm/lib/python3.10/site-packages/triton/backends/nvidia/bin/ptxas
+~/.venv-vllm/lib/python3.10/site-packages/triton/backends/nvidia/include/cuda_runtime.h
 $ sed -n '30,70p' flashinfer/jit/cpp_ext.py
         except ValueError as e:
             logger.warning(
@@ -195,10 +195,10 @@ def get_cuda_version() -> Version:
     # Try to query nvcc for CUDA version; if nvcc is unavailable, fall back to torch.version.cuda
     try:
 $ ls ~/.cache/flashinfer
-/home/asad/.cache/flashinfer:
+~/.cache/flashinfer:
 0.7.0.post1
 
-/home/asad/.cache/flashinfer/0.7.0.post1:
+~/.cache/flashinfer/0.7.0.post1:
 86
 $ pip list | grep -i flashinfer
 flashinfer-python                        0.7.0.post1
