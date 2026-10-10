@@ -1,0 +1,40 @@
+=== 2026-10-10T20:15:36+05:00 step C quiet check
+    PID %CPU %MEM COMMAND
+  23140  5.6  3.2 claude
+  35200  3.9  3.5 claude --continue
+    561  2.0  1.5 claude --continue
+     61  0.3  0.1 /lib/systemd/systemd-journald
+none running
+ 20:15:36 up  3:15,  1 user,  load average: 0.14, 0.17, 0.19
+               total        used        free      shared  buff/cache   available
+Mem:           9.7Gi       1.3Gi       7.2Gi       1.0Mi       1.3Gi       8.3Gi
+Swap:          8.0Gi       438Mi       7.6Gi
+port 8000 free
+$ HF cache for TinyLlama
+total 16
+drwxr-xr-x 2 asad asad 4096 Oct 10 17:16 .
+drwxr-xr-x 3 asad asad 4096 Oct 10 17:07 ..
+lrwxrwxrwx 1 asad asad   52 Oct 10 17:07 config.json -> ../../blobs/4ea05f1bc289d48ba9b92eea2f58ad8acd3dce5d
+lrwxrwxrwx 1 asad asad   52 Oct 10 17:07 generation_config.json -> ../../blobs/768e95e5b4dada726d7631277a4a87ecbb236f70
+lrwxrwxrwx 1 asad asad   76 Oct 10 17:16 model.safetensors -> ../../blobs/6e6001da2106d4757498752a021df6c2bdc332c650aae4bae6b0c004dcf14933
+lrwxrwxrwx 1 asad asad   52 Oct 10 17:07 special_tokens_map.json -> ../../blobs/492d4b2966a1763442d426d880dbc29f94906e4c
+lrwxrwxrwx 1 asad asad   52 Oct 10 17:07 tokenizer.json -> ../../blobs/a6e931b92caff4c79c5c56282f1e89569a0ae558
+lrwxrwxrwx 1 asad asad   76 Oct 10 17:07 tokenizer.model -> ../../blobs/9e556afd44213b6bd1be2b850ebbbd98f5481437a8021afaf58ee7fb1818d347
+lrwxrwxrwx 1 asad asad   52 Oct 10 17:07 tokenizer_config.json -> ../../blobs/fa96b85858f4053b0142a18e2b09dbe94e3fae46
+$ weight file patterns sarathi loads
+12:from huggingface_hub import snapshot_download
+94:        allow_patterns = ["*.safetensors"]
+97:        allow_patterns = ["*.bin", "*.pt"]
+102:            hf_folder = snapshot_download(
+104:                allow_patterns=allow_patterns,
+112:    for pattern in allow_patterns:
+164:        # Currently np_cache only support *.bin checkpoints
+$ nvidia-smi --query-compute-apps
+pid, used_gpu_memory [MiB]
+$ nvidia-smi memory.used, utilization x5 (idle baseline)
+0 MiB, 0 %
+0 MiB, 0 %
+0 MiB, 0 %
+0 MiB, 0 %
+0 MiB, 0 %
+readiness: 2026-10-10T20:16:31+05:00

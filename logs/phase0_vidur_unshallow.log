@@ -1,0 +1,6 @@
+$ git fetch --unshallow  (2026-10-10T17:06:24+05:00)
+exit=0
+$ git rev-parse --is-shallow-repository
+false
+abae7f63aa857300f5cdc6f5e0d27860cd24721b Mon Aug 24 18:16:50 2026 +0530
+26

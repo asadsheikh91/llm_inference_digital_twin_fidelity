@@ -1,0 +1,73 @@
+=== 2026-10-10T20:17:20+05:00 stop server
+$ kill -INT 70778
+server exited
+no ray/server left
+$ kill 70703 (gpu sampler)
+$ nvidia-smi after stop
+0 MiB
+
+=== startup timeline (logs/phase2_sarathi_serve_server.log)
+$ cd /tmp/claude-1000/-home-asad-llm-inference-digital-twin-fidelity/4e27c2ba-f5bd-476e-b8c3-42519fd6014f/scratchpad/sarathi_out && PATH=~/.venv-sarathi/bin:$PATH CUDA_HOME=~/micromamba/envs/cuda-12.1 python -m sarathi.entrypoints.openai.api_server --model_config_model TinyLlama/TinyLlama-1.1B-Chat-v1.0 --parallel_config_pipeline_parallel_size 1 --parallel_config_tensor_parallel_size 1 --log_level info --output_dir /tmp/claude-1000/-home-asad-llm-inference-digital-twin-fidelity/4e27c2ba-f5bd-476e-b8c3-42519fd6014f/scratchpad/sarathi_out --port 8000  (2026-10-10T20:16:04+05:00)
+2:WARNING 10-10 20:16:10 hf_utils.py:52] Casting torch.bfloat16 to torch.float16.
+3:INFO 10-10 20:16:10 hf_utils.py:105] Using the derived maximum model length: 2048
+4:INFO 10-10 20:16:10 base_llm_engine.py:47] Initializing an LLM engine with config: model='TinyLlama/TinyLlama-1.1B-Chat-v1.0', dtype=torch.float16, tensor_parallel_size=1, pipeline_parallel_size=1, seed=0)
+7:INFO 10-10 20:16:19 base_llm_engine.py:120] Starting workers with resource mapping: [(None, 0)]
+8:INFO 10-10 20:16:19 base_llm_engine.py:161] Initializing workers with distributed init method: tcp://192.168.152.45:16267
+12:INFO 10-10 20:16:28 base_llm_engine.py:209] # GPU blocks: 7329
+13:INFO 10-10 20:16:29 serving_chat.py:98] Using default chat template:
+14:INFO 10-10 20:16:29 serving_chat.py:98] {% for message in messages %}
+15:INFO 10-10 20:16:29 serving_chat.py:98] {% if message['role'] == 'user' %}
+16:INFO 10-10 20:16:29 serving_chat.py:98] {{ '<|user|>
+17:INFO 10-10 20:16:29 serving_chat.py:98] ' + message['content'] + eos_token }}
+18:INFO 10-10 20:16:29 serving_chat.py:98] {% elif message['role'] == 'system' %}
+19:INFO 10-10 20:16:29 serving_chat.py:98] {{ '<|system|>
+20:INFO 10-10 20:16:29 serving_chat.py:98] ' + message['content'] + eos_token }}
+21:INFO 10-10 20:16:29 serving_chat.py:98] {% elif message['role'] == 'assistant' %}
+22:INFO 10-10 20:16:29 serving_chat.py:98] {{ '<|assistant|>
+23:INFO 10-10 20:16:29 serving_chat.py:98] '  + message['content'] + eos_token }}
+24:INFO 10-10 20:16:29 serving_chat.py:98] {% endif %}
+25:INFO 10-10 20:16:29 serving_chat.py:98] {% if loop.last and add_generation_prompt %}
+26:INFO 10-10 20:16:29 serving_chat.py:98] {{ '<|assistant|>' }}
+31:INFO:     Application startup complete.
+32:INFO:     Uvicorn running on http://localhost:8000 (Press CTRL+C to quit)
+readiness: 2026-10-10T20:16:31+05:00
+
+=== request failure (logs/phase2_sarathi_serve_request.log + server log)
+logs/phase2_sarathi_serve_server.log:49:ERROR 10-10 20:16:45 async_llm_engine.py:197] TypeError: BaseLLMEngine.step() takes 1 positional argument but 2 were given
+logs/phase2_sarathi_serve_server.log:65:TypeError: BaseLLMEngine.step() takes 1 positional argument but 2 were given
+logs/phase2_sarathi_serve_server.log:150:TypeError: BaseLLMEngine.step() takes 1 positional argument but 2 were given
+logs/phase2_sarathi_serve_request.log:3:HTTP 500 time_total 0.025673s
+
+=== GPU memory (logs/phase2_sarathi_serve_gpumem.csv)
+baseline samples=9 min=0 max=0 MiB
+peak=5235 MiB at 2026-10-10T20:16:28.965
+peak minus baseline max=5235 MiB
+$ RAM log
+timestamp,mem_free_kib,mem_available_kib,swap_free_kib
+2026-10-10T20:15:59+05:00,7449912,8622008,7939372
+2026-10-10T20:16:28+05:00,2098160,5826304,7939376
+2026-10-10T20:16:57+05:00,1811336,5617848,7939740
+$ min MemAvailable KiB
+5617848
+
+=== bug analysis
+$ sed -n 229,235p ~/sarathi-serve/sarathi/engine/async_llm_engine.py
+    async def step_async(self) -> List[RequestOutput]:
+        """
+        Simple wrapper around the synchronous `step` method to make it
+        """
+        return await asyncio.get_event_loop().run_in_executor(
+            None, self.engine.step, False
+        )
+$ grep -n 'def step' sarathi/engine/*.py
+sarathi/engine/pipeline_parallel_llm_engine.py:182:    def step(self, block: bool = True) -> List[RequestOutput]:
+sarathi/engine/base_llm_engine.py:338:    def step(self) -> List[RequestOutput]:
+sarathi/engine/async_llm_engine.py:229:    async def step_async(self) -> List[RequestOutput]:
+$ git -C ~/sarathi-serve show c94dbf4 -- sarathi/engine/async_llm_engine.py | grep -E '^[-+].*step'
+-        return await asyncio.get_event_loop().run_in_executor(None, self.engine.step)
++        return await asyncio.get_event_loop().run_in_executor(
++            None, self.engine.step, False
+$ which engine class for PP=1: grep -n 'PipelineParallel\|pipeline_parallel_size' sarathi/engine/llm_engine.py
+3:from sarathi.engine.pipeline_parallel_llm_engine import PipelineParallelLLMEngine
+12:        if config.parallel_config.pipeline_parallel_size > 1:
+13:            engine = PipelineParallelLLMEngine(config)

@@ -1,0 +1,47 @@
+=== 2026-10-10T20:23:56+05:00 stop server
+$ kill -INT 73905
+still running after 30 s; kill -TERM
+server exited
+no ray/server left
+$ kill 73827 (gpu sampler)
+$ nvidia-smi after stop
+0 MiB
+
+=== startup timeline (logs/phase2_sarathi_serve_run2_server.log)
+(2026-10-10T20:23:00+05:00)
+2:WARNING 10-10 20:23:05 hf_utils.py:52] Casting torch.bfloat16 to torch.float16.
+3:INFO 10-10 20:23:05 hf_utils.py:105] Using the derived maximum model length: 2048
+4:INFO 10-10 20:23:05 base_llm_engine.py:47] Initializing an LLM engine with config: model='TinyLlama/TinyLlama-1.1B-Chat-v1.0', dtype=torch.float16, tensor_parallel_size=1, pipeline_parallel_size=1, seed=0)
+7:INFO 10-10 20:23:15 base_llm_engine.py:120] Starting workers with resource mapping: [(None, 0)]
+12:INFO 10-10 20:23:33 base_llm_engine.py:209] # GPU blocks: 7329
+32:INFO:     Uvicorn running on http://localhost:8000 (Press CTRL+C to quit)
+readiness: 2026-10-10T20:23:34+05:00 (server pid 73905)
+
+=== errors / warnings after startup
+(end)
+$ request log lines in server log
+INFO:     127.0.0.1:49542 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49546 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49560 - "POST /v1/completions HTTP/1.1" 200 OK
+
+=== GPU memory (logs/phase2_sarathi_serve_run2_gpumem.csv)
+baseline samples=8 min=0 max=0 MiB
+peak=5271 MiB at 2026-10-10T20:23:41.583
+peak minus baseline max=5271 MiB
+$ max memory_used during request window 20:23:40 to 20:23:42
+5271 MiB
+$ RAM log
+timestamp,mem_free_kib,mem_available_kib,swap_free_kib
+2026-10-10T20:22:55+05:00,4517504,8475540,7940332
+2026-10-10T20:23:24+05:00,1942096,5930080,7940348
+$ min MemAvailable KiB
+5930080
+
+=== dtype difference vs vLLM 0.2 run
+$ grep dtype logs/phase0_tinyllama_retry_server.log (vLLM)
+dtype=torch.bfloat16
+$ grep dtype/Casting logs/phase2_sarathi_serve_run2_server.log (sarathi)
+Casting torch.bfloat16 to torch.float16
+dtype=torch.float16
+$ TinyLlama config.json torch_dtype
+  "torch_dtype": "bfloat16",

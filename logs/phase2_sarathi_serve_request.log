@@ -1,0 +1,4 @@
+$ curl -s localhost:8000/v1/completions -d '{"model":"TinyLlama/TinyLlama-1.1B-Chat-v1.0","prompt":"The capital of France is","max_tokens":32,"temperature":0.8,"top_p":0.95,"top_k":50}'  (2026-10-10T20:16:45+05:00)
+Internal Server Error
+HTTP 500 time_total 0.025673s
+(2026-10-10T20:16:45+05:00)

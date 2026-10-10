@@ -1,0 +1,122 @@
+=== 2026-10-10T18:53:20+05:00 install vidur (worktree ~/vidur-phase2, branch ext-profiling) into ~/.venv-sarathi
+$ git -C ~/vidur-phase2 diff --stat
+ vidur/config/model_config.py | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+$ wc -l logs/phase2_sarathi_freeze_before_vidur.txt
+186
+$ grep -nE 'install_requires|python_requires' -A12 ~/vidur-phase2/setup.py
+6:    python_requires='>=3.10',
+7-    description="A LLM inference cluster simulator",
+8-    include_package_data=True,
+9-    keywords='vidur',
+10-    name='vidur',
+11-    packages=find_packages(include=['vidur', 'vidur.*']),
+12-    version='0.0.1',
+13-)
+$ cd ~/vidur-phase2 && pip install -e . --no-deps
+Successfully built vidur
+Installing collected packages: vidur
+Successfully installed vidur-0.0.1
+exit=0
+$ import checks (from ~)
+vidur: OK
+vidur.profiling.mlp.main: ModuleNotFoundError: No module named 'vidur.profiling'
+vidur.profiling.mlp.mlp_wrapper: ModuleNotFoundError: No module named 'vidur.profiling'
+vidur.profiling.common.model_config: ModuleNotFoundError: No module named 'vidur.profiling'
+
+=== 2026-10-10T18:53:34+05:00 note: the checks above ran from ~, where the directory ~/vidur (another checkout) shadows the package as a namespace package. Rerun from ~/vidur-phase2.
+$ cd ~/vidur-phase2 && python -c 'import vidur; print(vidur.__file__, vidur.__path__)'
+None ['~/vidur-phase2/vidur']
+vidur.profiling.common.model_config: OK
+vidur.profiling.mlp.mlp_wrapper: OK
+vidur.profiling.mlp.main: OK
+
+=== 2026-10-10T18:54:14+05:00 freeze diff and pin check
+$ diff logs/phase2_sarathi_freeze_before_vidur.txt logs/phase2_sarathi_freeze_after_vidur.txt
+179a180
+> -e git+https://github.com/microsoft/vidur.git@abae7f63aa857300f5cdc6f5e0d27860cd24721b#egg=vidur&subdirectory=../../../vidur-phase2
+$ grep -E '^(transformers|numpy|torch)==' after-file
+numpy==1.26.4
+torch==2.3.0
+transformers==4.42.4
+
+$ cd ~/vidur-phase2 && python vidur/profiling/mlp/main.py --help
+Traceback (most recent call last):
+  File "~/vidur-phase2/vidur/profiling/mlp/main.py", line 12, in <module>
+    from vidur.profiling.common.model_config import ModelConfig
+ModuleNotFoundError: No module named 'vidur'
+exit=1
+$ grep -n 'def get_num_tokens_to_profile' -A25 vidur/profiling/utils/__init__.py
+22:def get_num_tokens_to_profile(
+23-    max_num_tokens: int,
+24-):
+25-    NUM_TOKENS_SPACE = (
+26-        list([1, 2, 4])
+27-        + list(range(8, 1024, 8))
+28-        + list(range(1024, 2 * 1024 + 1, 16))
+29-        + list(range(2 * 1024, 4 * 1024 + 1, 32))
+30-        + list(range(4 * 1024, 8 * 1024 + 1, 64))
+31-        + list(range(8 * 1024, 16 * 1024 + 1, 128))
+32-        + list(range(16 * 1024, 32 * 1024 + 1, 256))
+33-        + list(range(32 * 1024, 64 * 1024 + 1, 512))
+34-        + list(range(64 * 1024, 128 * 1024 + 1, 1024))
+35-    )
+36-    num_tokens_to_profile = []
+37-    for num_tokens in NUM_TOKENS_SPACE:
+38-        if num_tokens <= max_num_tokens:
+39-            num_tokens_to_profile.append(num_tokens)
+40-        else:
+41-            break
+42-    num_tokens_to_profile.sort(reverse=True)
+43-
+44-    return num_tokens_to_profile
+45-
+46-
+47-def get_attention_batch_sizes_to_profile(min_batch_size: int, max_batch_size: int):
+
+=== 2026-10-10T18:54:27+05:00 why the editable install does not expose vidur
+$ ls ~/vidur-phase2/vidur/__init__.py ~/vidur-phase2/vidur/profiling/__init__.py
+ls: cannot access '~/vidur-phase2/vidur/__init__.py': No such file or directory
+~/vidur-phase2/vidur/profiling/__init__.py
+$ python -c 'from setuptools import find_packages; print(find_packages(where="~/vidur-phase2", include=["vidur","vidur.*"]))'
+[]
+$ ls site-packages | grep -i vidur; cat the editable finder mapping
+__editable__.vidur-0.0.1.pth
+__editable___vidur_0_0_1_finder.py
+vidur-0.0.1.dist-info
+MAPPING: dict[str, str] = {}
+NAMESPACES: dict[str, list[str]] = {}
+import __editable___vidur_0_0_1_finder; __editable___vidur_0_0_1_finder.install()$ grep -rn 'profiling' ~/vidur-phase2/README.md | head -3
+65:5. Install the dependencies using `python -m pip install -r requirements.txt`
+95:python -m vidur.main
+101:python -m vidur.main  \
+125:python -m vidur.main -h
+
+=== 2026-10-10T18:54:39+05:00 fix 1 of 2: run as module from the worktree root (same pattern as README's python -m vidur.main)
+$ cd ~/vidur-phase2 && python -m vidur.profiling.mlp.main --help
+usage: main.py [-h] [--disable_ray] [--num_gpus NUM_GPUS]
+               [--output_dir OUTPUT_DIR] [--models MODELS [MODELS ...]]
+               [--num_tensor_parallel_workers NUM_TENSOR_PARALLEL_WORKERS [NUM_TENSOR_PARALLEL_WORKERS ...]]
+               [--max_tokens MAX_TOKENS]
+               [--profile_method {cuda_event,kineto,perf_counter,record_function}]
+
+MLP Profiling
+
+options:
+  -h, --help            show this help message and exit
+  --disable_ray         Disable Ray
+  --num_gpus NUM_GPUS   Number of GPUs to use for profiling
+  --output_dir OUTPUT_DIR
+                        Output directory for profiling results
+  --models MODELS [MODELS ...]
+                        Models to profile
+  --num_tensor_parallel_workers NUM_TENSOR_PARALLEL_WORKERS [NUM_TENSOR_PARALLEL_WORKERS ...]
+                        Number of tensor parallel workers to profile
+  --max_tokens MAX_TOKENS
+                        Maximum number of tokens to profile
+  --profile_method {cuda_event,kineto,perf_counter,record_function}
+                        Method to use for measuring time taken by operations
+                        (default: record_function)
+exit=0
+$ ls ~/vidur-phase2/profiling_outputs/mlp (created by parse_args even for --help?)
+ls: cannot access '~/vidur-phase2/profiling_outputs/mlp': No such file or directory

@@ -1,0 +1,46 @@
+$ date
+2026-10-10T17:06:32+05:00
+$ free -h
+               total        used        free      shared  buff/cache   available
+Mem:           9.7Gi       1.1Gi       5.9Gi       4.0Mi       2.7Gi       8.4Gi
+Swap:          8.0Gi          0B       8.0Gi
+$ nvidia-smi
+Sat Oct 10 17:06:32 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.108                Driver Version: 581.83         CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 3060 ...    On  |   00000000:01:00.0  On |                  N/A |
+| N/A   40C    P8             12W /  115W |     453MiB /   6144MiB |     10%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+$ ~/.venv-vllm/bin/python -c "import vllm, torch, transformers ..."
+python 3.10.12
+vllm 0.31.0
+torch 2.13.0+cu130 cuda_build 13.0
+transformers 5.17.0
+torch.cuda.is_available() True
+device NVIDIA GeForce RTX 3060 Laptop GPU capability (8, 6)
+exit=0
+$ pip list | grep -iE "vllm|torch|transformers|flash|xformers|triton"
+flashinfer-python                        0.7.0.post1
+tokenspeed-triton                        3.8.10.post20260920
+torch                                    2.13.0
+torch_c_dlpack_ext                       0.1.5
+torchaudio                               2.11.0
+torchcodec                               0.17.0
+torchvision                              0.28.0
+transformers                             5.17.0
+triton                                   3.7.1
+vllm                                     0.31.0

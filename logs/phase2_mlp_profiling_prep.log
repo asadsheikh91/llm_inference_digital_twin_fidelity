@@ -1,0 +1,21 @@
+=== 2026-10-10T18:55:04+05:00 pre-run checks
+$ grep -rnE 'from_pretrained|hf_hub|snapshot_download|safetensors' ~/vidur-phase2/vidur/profiling
+(no weight-loading calls in vidur/profiling)
+$ python -c 'ModelConfig.from_model_name("TinyLlama/TinyLlama-1.1B-Chat-v1.0")'
+{'name': 'TinyLlama/TinyLlama-1.1B-Chat-v1.0', 'num_layers': 22, 'num_q_heads': 32, 'num_kv_heads': 4, 'embedding_dim': 2048, 'mlp_hidden_dim': 5632, 'max_position_embeddings': 2048, 'use_gated_mlp': True, 'vocab_size': 32000, 'use_bias': False, 'use_qkv_bias': False, 'activation': 'silu', 'norm': 'rms_norm', 'post_attn_norm': True, 'no_tensor_parallel': False, 'partial_rotary_factor': 1.0, 'rope_theta': 10000, 'rope_scaling': None, 'is_neox_style': True}
+$ python -c 'get_num_tokens_to_profile(8)'
+[8, 4, 2, 1]
+$ processes: servers, samplers, ray
+none running
+$ nvidia-smi --query-compute-apps=pid,used_memory --format=csv
+pid, used_gpu_memory [MiB]
+$ nvidia-smi memory.used, utilization x5 (idle baseline)
+317 MiB, 7 %
+317 MiB, 10 %
+317 MiB, 6 %
+317 MiB, 9 %
+317 MiB, 9 %
+$ free -h
+               total        used        free      shared  buff/cache   available
+Mem:           9.7Gi       2.9Gi       3.2Gi       1.0Mi       3.6Gi       6.6Gi
+Swap:          8.0Gi       539Mi       7.5Gi

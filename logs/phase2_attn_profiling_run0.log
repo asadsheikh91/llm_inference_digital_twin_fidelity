@@ -1,0 +1,57 @@
+=== 2026-10-10T19:10:37+05:00 attempt 0 (instructed change: attention_wrapper.py profile_method kineto -> cuda_event)
+diff --git a/vidur/profiling/attention/attention_wrapper.py b/vidur/profiling/attention/attention_wrapper.py
+index b991420..d96bca7 100644
+--- a/vidur/profiling/attention/attention_wrapper.py
++++ b/vidur/profiling/attention/attention_wrapper.py
+@@ -37,7 +37,7 @@ class AttentionWrapper:
+         attention_backend: AttentionBackend,
+         dtype: torch.dtype,
+     ):
+-        self.time_stats_store = TimerStatsStore(profile_method="kineto")
++        self.time_stats_store = TimerStatsStore(profile_method="cuda_event")
+ 
+         self._model_config = model_config
+         self._parallel_config = parallel_config
+$ ps vidur.main (contention)
+  61395  106 ~/.venv-vidur/bin/python -m vidur.main --seed 42 --replica_config_device a100 --replica_config_mod
+331 MiB
+=== start 2026-10-10T19:10:37+05:00
+$ cd ~/vidur-phase2 && /usr/bin/time -v python -m vidur.profiling.attention.main --models TinyLlama/TinyLlama-1.1B-Chat-v1.0 --num_gpus 1 --num_tensor_parallel_workers 1 --max_seq_len 64 --max_model_len 64 --min_batch_size 1 --max_batch_size 1
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "~/vidur-phase2/vidur/profiling/attention/main.py", line 240, in <module>
+    main()
+  File "~/vidur-phase2/vidur/profiling/attention/main.py", line 196, in main
+    max_num_blocks = get_max_num_blocks(
+  File "~/vidur-phase2/vidur/profiling/utils/__init__.py", line 167, in get_max_num_blocks
+    assert model_config.num_layers % max_pipeline_parallel_size == 0
+AssertionError
+Command exited with non-zero status 1
+	Command being timed: "~/.venv-sarathi/bin/python -m vidur.profiling.attention.main --models TinyLlama/TinyLlama-1.1B-Chat-v1.0 --num_gpus 1 --num_tensor_parallel_workers 1 --max_seq_len 64 --max_model_len 64 --min_batch_size 1 --max_batch_size 1"
+	User time (seconds): 6.79
+	System time (seconds): 3.02
+	Percent of CPU this job got: 111%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:08.77
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 655240
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 173
+	Minor (reclaiming a frame) page faults: 96862
+	Voluntary context switches: 1601
+	Involuntary context switches: 102
+	Swaps: 0
+	File system inputs: 233854
+	File system outputs: 16
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1
+exit=1
+=== end 2026-10-10T19:10:46+05:00

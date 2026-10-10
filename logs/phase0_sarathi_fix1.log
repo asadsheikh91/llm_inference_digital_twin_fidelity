@@ -1,0 +1,97 @@
+=== 2026-10-10T18:07:24+05:00 fix 1 prerequisites
+$ which gcc g++ ninja make; gcc --version | head -1; g++ --version | head -1
+/usr/bin/gcc
+/usr/bin/g++
+/usr/bin/make
+gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
+g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
+$ cat /etc/os-release | head -2
+PRETTY_NAME="Ubuntu 22.04.5 LTS"
+NAME="Ubuntu"
+$ wheel sizes from PyPI JSON
+19996355 nvidia_cuda_nvcc_cu12-12.1.105-py3-none-manylinux1_x86_64.whl
+823596 nvidia_cuda_runtime_cu12-12.1.105-py3-none-manylinux1_x86_64.whl
+
+=== 2026-10-10T18:07:38+05:00 install pip CUDA 12.1 compiler + runtime into ~/.venv-sarathi
+$ ~/.venv-sarathi/bin/pip install nvidia-cuda-nvcc-cu12==12.1.105 nvidia-cuda-runtime-cu12==12.1.105
+Installing collected packages: nvidia-cuda-runtime-cu12, nvidia-cuda-nvcc-cu12
+Successfully installed nvidia-cuda-nvcc-cu12-12.1.105 nvidia-cuda-runtime-cu12-12.1.105
+$ ls nvidia/cuda_nvcc nvidia/cuda_nvcc/bin nvidia/cuda_runtime nvidia/cuda_runtime/lib
+~/.venv-sarathi/lib/python3.10/site-packages/nvidia/cuda_nvcc:
+__init__.py
+__pycache__
+bin
+include
+lib
+nvvm
+
+~/.venv-sarathi/lib/python3.10/site-packages/nvidia/cuda_nvcc/bin:
+ptxas
+
+~/.venv-sarathi/lib/python3.10/site-packages/nvidia/cuda_runtime:
+__init__.py
+__pycache__
+include
+lib
+
+~/.venv-sarathi/lib/python3.10/site-packages/nvidia/cuda_runtime/lib:
+__init__.py
+__pycache__
+libcudart.so.12
+$ ls nvidia/cuda_nvcc/include | head; ls nvidia/cuda_runtime/include | head -50
+__init__.py
+__pycache__
+crt
+fatbinary_section.h
+nvPTXCompiler.h
+---
+__init__.py __pycache__ builtin_types.h channel_descriptor.h common_functions.h cooperative_groups cooperative_groups.h cuComplex.h cuda.h cudaEGL.h cudaEGLTypedefs.h cudaGL.h cudaGLTypedefs.h cudaProfilerTypedefs.h cudaTypedefs.h cudaVDPAU.h cudaVDPAUTypedefs.h cuda_awbarrier.h cuda_awbarrier_helpers.h cuda_awbarrier_primitives.h cuda_bf16.h cuda_bf16.hpp cuda_device_runtime_api.h cuda_egl_interop.h cuda_fp16.h cuda_fp16.hpp cuda_fp8.h cuda_fp8.hpp cuda_gl_interop.h cuda_occupancy.h cuda_pipeline.h cuda_pipeline_helpers.h cuda_pipeline_primitives.h cuda_runtime.h cuda_runtime_api.h cuda_surface_types.h cuda_texture_types.h cuda_vdpau_interop.h cudart_platform.h device_atomic_functions.h device_atomic_functions.hpp device_double_functions.h device_functions.h device_launch_parameters.h device_types.h driver_functions.h driver_types.h host_config.h host_defines.h library_types.h math_constants.h math_functions.h mma.h sm_20_atomic_functions.h sm_20_atomic_functions.hpp sm_20_intrinsics.h sm_20_intrinsics.hpp sm_30_intrinsics.h sm_30_intrinsics.hpp sm_32_atomic_functions.h sm_32_atomic_functions.hpp sm_32_intrinsics.h sm_32_intrinsics.hpp sm_35_atomic_functions.h sm_35_intrinsics.h sm_60_atomic_functions.h sm_60_atomic_functions.hpp sm_61_intrinsics.h sm_61_intrinsics.hpp surface_functions.h surface_indirect_functions.h surface_types.h texture_fetch_functions.h texture_indirect_functions.h texture_types.h vector_functions.h vector_functions.hpp vector_types.h 
+$ nvidia/cuda_nvcc/bin/nvcc --version
+/bin/bash: line 12: ~/.venv-sarathi/lib/python3.10/site-packages/nvidia/cuda_nvcc/bin/nvcc: No such file or directory
+
+=== 2026-10-10T18:08:07+05:00 finding first nvidia-cuda-nvcc-cu12 wheel that ships bin/nvcc
+$ available versions (PyPI)
+0.0.1.dev5 12.0.76 12.0.140 12.1.66 12.1.105 12.2.91 12.2.128 12.2.140 12.3.52 12.3.103 12.3.107 12.4.99 12.4.131 12.5.40 12.5.82 12.6.20 12.6.68 12.6.77 12.6.85 12.8.61 12.8.93 12.9.41 12.9.86
+$ pip download nvidia-cuda-nvcc-cu12==12.1.105 --no-deps; unzip -l | grep bin/
+19996355 bytes /tmp/claude-1000/-home-asad-llm-inference-digital-twin-fidelity/4e27c2ba-f5bd-476e-b8c3-42519fd6014f/scratchpad/nvcc_wheels/12.1.105/nvidia_cuda_nvcc_cu12-12.1.105-py3-none-manylinux1_x86_64.whl
+/bin/bash: line 15: unzip: command not found
+$ pip download nvidia-cuda-nvcc-cu12==12.2.140 --no-deps; unzip -l | grep bin/
+21319729 bytes /tmp/claude-1000/-home-asad-llm-inference-digital-twin-fidelity/4e27c2ba-f5bd-476e-b8c3-42519fd6014f/scratchpad/nvcc_wheels/12.2.140/nvidia_cuda_nvcc_cu12-12.2.140-py3-none-manylinux1_x86_64.whl
+/bin/bash: line 15: unzip: command not found
+$ pip download nvidia-cuda-nvcc-cu12==12.3.107 --no-deps; unzip -l | grep bin/
+21955316 bytes /tmp/claude-1000/-home-asad-llm-inference-digital-twin-fidelity/4e27c2ba-f5bd-476e-b8c3-42519fd6014f/scratchpad/nvcc_wheels/12.3.107/nvidia_cuda_nvcc_cu12-12.3.107-py3-none-manylinux1_x86_64.whl
+/bin/bash: line 15: unzip: command not found
+$ pip download nvidia-cuda-nvcc-cu12==12.4.131 --no-deps; unzip -l | grep bin/
+22265199 bytes /tmp/claude-1000/-home-asad-llm-inference-digital-twin-fidelity/4e27c2ba-f5bd-476e-b8c3-42519fd6014f/scratchpad/nvcc_wheels/12.4.131/nvidia_cuda_nvcc_cu12-12.4.131-py3-none-manylinux2014_x86_64.whl
+/bin/bash: line 15: unzip: command not found
+$ (unzip missing) list wheel bin/ entries with python -I zipfile
+nvidia_cuda_nvcc_cu12-12.1.105-py3-none-manylinux1_x86_64.whl
+    20491504 nvidia/cuda_nvcc/bin/ptxas
+nvidia_cuda_nvcc_cu12-12.2.140-py3-none-manylinux1_x86_64.whl
+    25750800 nvidia/cuda_nvcc/bin/ptxas
+nvidia_cuda_nvcc_cu12-12.3.107-py3-none-manylinux1_x86_64.whl
+    29421152 nvidia/cuda_nvcc/bin/ptxas
+nvidia_cuda_nvcc_cu12-12.4.131-py3-none-manylinux2014_x86_64.whl
+    30322304 nvidia/cuda_nvcc/bin/ptxas
+$ pip download nvidia-cuda-nvcc-cu12==12.5.82 --no-deps; list bin/
+22468537 bytes 12.5.82/nvidia_cuda_nvcc_cu12-12.5.82-py3-none-manylinux2014_x86_64.whl
+    30924560 nvidia/cuda_nvcc/bin/ptxas
+$ pip download nvidia-cuda-nvcc-cu12==12.6.85 --no-deps; list bin/
+21172353 bytes 12.6.85/nvidia_cuda_nvcc_cu12-12.6.85-py3-none-manylinux1_x86_64.manylinux_2_5_x86_64.whl
+    31035152 nvidia/cuda_nvcc/bin/ptxas
+$ pip download nvidia-cuda-nvcc-cu12==12.8.93 --no-deps; list bin/
+40128098 bytes 12.8.93/nvidia_cuda_nvcc_cu12-12.8.93-py3-none-manylinux2010_x86_64.manylinux_2_12_x86_64.whl
+    31912192 nvidia/cuda_nvcc/bin/ptxas
+$ pip download nvidia-cuda-nvcc-cu12==12.9.86 --no-deps; list bin/
+40546229 bytes 12.9.86/nvidia_cuda_nvcc_cu12-12.9.86-py3-none-manylinux2010_x86_64.manylinux_2_12_x86_64.whl
+    34931056 nvidia/cuda_nvcc/bin/ptxas
+
+=== 2026-10-10T18:11:35+05:00 fix 1 conclusion
+Checked nvidia-cuda-nvcc-cu12 wheels 12.1.105, 12.2.140, 12.3.107, 12.4.131, 12.5.82, 12.6.85, 12.8.93, 12.9.86 (the latest patch of each minor, plus 12.1.105 itself).
+None contains nvidia/cuda_nvcc/bin/nvcc; each ships only bin/ptxas. Fix 1 (pip nvcc 12.x + CUDA_HOME) cannot be executed via pip.
+No sarathi-serve build was run under fix 1. Left installed in ~/.venv-sarathi: nvidia-cuda-nvcc-cu12 12.1.105, nvidia-cuda-runtime-cu12 12.1.105.
+$ ~/.venv-sarathi/bin/pip list | grep -i nvidia
+nvidia-cuda-nvcc-cu12    12.1.105
+nvidia-cuda-runtime-cu12 12.1.105
+$ cd ~ && ~/.venv-sarathi/bin/python -c 'import sarathi'
+ModuleNotFoundError: No module named 'sarathi'

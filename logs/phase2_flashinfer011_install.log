@@ -1,0 +1,26 @@
+=== 2026-10-10T19:45:38+05:00 step 1: install flashinfer 0.1.1 into ~/.venv-sarathi
+$ df -h ~
+/dev/sdf       1007G   38G  919G   4% /
+$ pip install --no-deps 'flashinfer==0.1.1+cu121torch2.3' --index-url https://flashinfer.ai/whl/cu121/torch2.3/
+Installing collected packages: flashinfer
+  Attempting uninstall: flashinfer
+    Found existing installation: flashinfer 0.2.0.post1+cu121torch2.3
+    Uninstalling flashinfer-0.2.0.post1+cu121torch2.3:
+      Successfully uninstalled flashinfer-0.2.0.post1+cu121torch2.3
+Successfully installed flashinfer-0.1.1+cu121torch2.3
+exit=0
+$ pip check
+No broken requirements found.
+exit=0
+
+=== step 2: freeze diff and pin check
+$ diff before after
+30c30
+< flashinfer==0.2.0.post1+cu121torch2.3
+---
+> flashinfer==0.1.1+cu121torch2.3
+$ grep pins
+flashinfer==0.1.1+cu121torch2.3
+numpy==1.26.4
+torch==2.3.0
+transformers==4.42.4

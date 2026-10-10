@@ -1,0 +1,29 @@
+=== 2026-10-10T18:46:13+05:00 import + rms_norm check after pins (run from ~)
+The cache for model files in Transformers v4.22.0 has been updated. Migrating your old cache. This is a one-time only operation. You can interrupt this and resume the migration later on by calling `transformers.utils.move_cache()`.
+0it [00:00, ?it/s]0it [00:00, ?it/s]
+torch 2.3.0+cu121 cuda build 12.1 is_available True
+numpy 1.26.4 transformers 4.42.4
+transformers sees torch: True
+device NVIDIA GeForce RTX 3060 Laptop GPU capability (8, 6)
+import sarathi OK, file: ~/sarathi-serve/sarathi/__init__.py version: 0.1.7
+extension modules, LLMEngine, model_loader OK; flashinfer 0.2.0.post1+cu121torch2.3
+rms_norm kernel ran on GPU; max abs diff vs torch reference: 0.0
+tensor -> numpy round trip: float16 (4, 2048)
+exit=0
+
+=== 2026-10-10T18:46:32+05:00 HF cache after transformers 4.42 migration message
+$ ls -la ~/.cache/huggingface/hub
+total 32
+drwxr-xr-x 6 asad asad 4096 Oct 10 18:46 .
+drwxr-xr-x 4 asad asad 4096 Oct 10 17:07 ..
+drwxr-xr-x 4 asad asad 4096 Oct 10 17:54 .locks
+-rw-r--r-- 1 asad asad  191 Oct 10 17:07 CACHEDIR.TAG
+drwxr-xr-x 5 asad asad 4096 Oct 10 18:01 blobs
+drwxr-xr-x 7 asad asad 4096 Oct 10 17:16 models--TinyLlama--TinyLlama-1.1B-Chat-v1.0
+drwxr-xr-x 7 asad asad 4096 Oct 10 18:01 models--llava-hf--llava-onevision-qwen2-0.5b-ov-hf
+-rw-r--r-- 1 asad asad    1 Oct 10 18:46 version.txt
+$ cat ~/.cache/huggingface/hub/version.txt
+1
+$ find ~/.cache/huggingface/hub -name '*.safetensors' -printf '%s %p\n'
+1787445680 ~/.cache/huggingface/hub/models--llava-hf--llava-onevision-qwen2-0.5b-ov-hf/snapshots/74dd0bf867a4cda7950c17663794267c60cf4b40/model.safetensors
+2200119864 ~/.cache/huggingface/hub/models--TinyLlama--TinyLlama-1.1B-Chat-v1.0/snapshots/fe8a4ea1ffedaf415f4da2f062534de366a451e6/model.safetensors

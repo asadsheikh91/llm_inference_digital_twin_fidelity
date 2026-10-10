@@ -1,0 +1,172 @@
+=== 2026-10-10T19:35:47+05:00 FlashInfer releases (GitHub API, flashinfer-ai/flashinfer)
+
+=== sarathi-serve vidur branch: history of flashinfer usage
+$ git -C ~/sarathi-serve log --format='%h %ad %s' --date=short -- sarathi/model_executor/attention/flashinfer_attention_wrapper.py
+50e59c5 2024-06-23 Merged PR 1865: Critical bug fixes related to sampling (#18)
+8245cba 2024-06-20 Port of PR 1863: Remove flashinfer-unpaged and flashattention backends (#17)
+f101990 2024-05-26 Port of PR 1813: Replace yapf with black (#10)
+337e4de 2024-05-26 Port of PR 1798: Add flashinfer unpaged attention (#8)
+8d8c986 2024-05-09 Prepare for open-source release (#5)
+$ git -C ~/sarathi-serve log --format='%h %ad %s' --date=short -S'flashinfer' -- requirements.txt setup.py README.md
+8d8c986 2024-05-09 Prepare for open-source release (#5)
+$ flashinfer APIs used by sarathi
+      4 .begin_forward(
+      4 .end_forward(
+      8 .forward(
+      8 .run(
+      1 from flashinfer import BatchPrefillWithPagedKVCacheWrapper, append_paged_kv_cache
+
+=== 2026-10-10T19:35:59+05:00 FlashInfer releases v0.0.x to v0.2.0 (GitHub API, pages 1 to 5)
+parse issue Unterminated string starting at: line 1879 column 13 (char 112150)
+parse issue Expecting value: line 1 column 2 (char 1)
+parse issue Expecting value: line 1 column 2 (char 1)
+parse issue Expecting value: line 1 column 2 (char 1)
+parse issue Expecting value: line 1 column 2 (char 1)
+parse issue Expecting value: line 1 column 2 (char 1)
+parse issue Unterminated string starting at: line 32951 column 13 (char 2028524)
+parse issue Expecting value: line 1 column 2 (char 1)
+parse issue Unterminated string starting at: line 3670 column 13 (char 218350)
+parse issue Expecting value: line 1 column 2 (char 1)
+2024-01-31T19:03:35Z v0.0.1
+2024-02-16T11:38:42Z v0.0.2
+2024-03-08T10:06:10Z v0.0.3
+2024-05-02T07:52:09Z v0.0.4
+2024-06-20T08:42:08Z v0.0.5
+2024-06-21T18:47:29Z v0.0.6
+2024-06-28T10:15:20Z v0.0.7
+2024-07-03T07:58:48Z v0.0.8
+2024-07-12T05:54:48Z v0.0.9
+2024-07-17T08:29:42Z v0.1.0
+2024-07-20T09:15:34Z v0.1.1
+2024-07-29T12:11:27Z v0.1.2
+2024-07-31T10:47:48Z v0.1.3
+2024-08-09T09:07:16Z v0.1.4
+2024-08-13T10:19:44Z v0.1.5
+2024-08-27T01:18:51Z v0.1.6
+2024-12-17T12:59:20Z v0.2.0
+2024-12-23T00:49:27Z v0.2.0.post1
+2025-01-31T19:49:18Z v0.2.0.post2
+total releases fetched: 70
+
+=== history of the flashinfer line in requirements.txt
+fatal: -L invalid empty range
+
+=== sarathi call sites (begin_forward / forward / append_paged_kv_cache / wrapper construction)
+24:        prefill_workspace_buffer = torch.empty(
+27:        self.prefill_wrapper = BatchPrefillWithPagedKVCacheWrapper(
+28:            prefill_workspace_buffer, "NHD"
+31:        decode_workspace_buffer = torch.empty(
+34:        self.decode_wrapper = BatchPrefillWithPagedKVCacheWrapper(
+35:            decode_workspace_buffer, "NHD"
+63:    def begin_forward(
+151:            self.prefill_wrapper.begin_forward(
+163:            self.decode_wrapper.begin_forward(
+224:            append_paged_kv_cache(
+237:                output[: self.num_prefill_tokens] = self.prefill_wrapper.forward(
+247:                    self.decode_wrapper.forward(
+                return
+
+            self.contains_decode = True
+
+            context_len = seq_metadata.seq.get_len()
+            # indptr for the prompt tokens in q/o tensor
+            decode_qo_indptr.append(decode_qo_indptr[-1] + 1)
+            # Compute the kv page indices for the prompt tokens.
+            num_blocks_in_use = (context_len + self.block_size - 1) // self.block_size
+            decode_kv_page_indices.extend(seq_metadata.block_table[:num_blocks_in_use])
+            decode_kv_page_indptr.append(decode_kv_page_indptr[-1] + num_blocks_in_use)
+            decode_kv_last_page_len.append(
+                context_len % self.block_size or self.block_size
+            )
+
+        if self.contains_prefill:
+            self.prefill_wrapper.begin_forward(
+                self.to_int_tensor(prefill_qo_indptr),
+                self.to_int_tensor(prefill_kv_page_indptr),
+                self.to_int_tensor(prefill_kv_page_indices),
+                self.to_int_tensor(prefill_kv_last_page_len),
+                self.num_q_heads,
+                self.num_kv_heads,
+                self.head_dim,
+                self.block_size,
+            )
+
+        if self.contains_decode:
+            self.decode_wrapper.begin_forward(
+                self.to_int_tensor(decode_qo_indptr),
+                self.to_int_tensor(decode_kv_page_indptr),
+                self.to_int_tensor(decode_kv_page_indices),
+                self.to_int_tensor(decode_kv_last_page_len),
+                self.num_q_heads,
+                self.num_kv_heads,
+                self.head_dim,
+            if self.contains_prefill:
+                output[: self.num_prefill_tokens] = self.prefill_wrapper.forward(
+                    query[: self.num_prefill_tokens],
+                    kv_cache,
+                    pos_encoding_mode="NONE",
+                    sm_scale=softmax_scale,
+                )
+
+        with self.get_timer(OperationMetrics.ATTN_DECODE, layer_id):
+            if self.contains_decode:
+                output[self.num_prefill_tokens : self.num_total_tokens] = (
+                    self.decode_wrapper.forward(
+                        query[self.num_prefill_tokens : self.num_total_tokens],
+                        kv_cache,
+                        pos_encoding_mode="NONE",
+                        sm_scale=softmax_scale,
+                    )
+                )
+
+        with self.get_timer(OperationMetrics.ATTN_OUTPUT_RESHAPE, layer_id):
+            output = output.reshape(-1, self.num_q_heads * self.head_dim)
+
+        return output
+
+$ git -C ~/sarathi-serve log -p --format='COMMIT %h %ad %s' --date=short -- requirements.txt | grep -E '^COMMIT|^[-+].*flashinfer'
+COMMIT 8245cba 2024-06-20 Port of PR 1863: Remove flashinfer-unpaged and flashattention backends (#17)
+-flashinfer
++flashinfer >= 0.0.5
+COMMIT fd3a31e 2024-06-20 Merged PR 1857: Add OpenAI Server (#16)
+COMMIT f6eca6e 2024-05-26 Port of PR 1797: Pipeline parallel fix for PP>2 and other edge cases
+COMMIT 8d8c986 2024-05-09 Prepare for open-source release (#5)
++flashinfer
+COMMIT 19b403a 2023-11-04 Initial commit  (#1)
+
+=== FlashInfer API at candidate tags (raw source from GitHub)
+--- v0.0.6
+append_paged_kv_cache(  append_key: torch.Tensor, append_value: torch.Tensor, append_indptr: torch.Tensor, kv_data: torch.Tensor, kv_indices: torch.Tensor, kv_indptr: torch.Tensor, kv_last_page_len: torch.Tensor, kv_layout: str = "NHD",  )
+  begin_forward(  qo_indptr: torch.Tensor, paged_kv_indptr: torch.Tensor, paged_kv_indices: torch.Tensor, paged_kv_last_page_len: torch.Tensor, num_qo_heads: int, num_kv_heads: int, head_dim: int, page_size: int, custom_mask: Optional[torch.Tensor] = None, packed_custom_mask: Optional[torch.Tensor] = None, q_data_type: str = "float16",  )
+  forward(  q: torch.Tensor, paged_kv_data: torch.Tensor, causal: bool = True, pos_encoding_mode: str = "NONE", logits_cap: bool = False, allow_fp16_qk_reduction: bool = False, sm_scale: Optional[float] = None, rope_scale: Optional[float] = None, rope_theta: Optional[float] = None,  )
+--- v0.0.9
+append_paged_kv_cache(  append_key: torch.Tensor, append_value: torch.Tensor, append_indptr: torch.Tensor, kv_data: torch.Tensor, kv_indices: torch.Tensor, kv_indptr: torch.Tensor, kv_last_page_len: torch.Tensor, kv_layout: str = "NHD",  )
+  begin_forward(  qo_indptr: torch.Tensor, paged_kv_indptr: torch.Tensor, paged_kv_indices: torch.Tensor, paged_kv_last_page_len: torch.Tensor, num_qo_heads: int, num_kv_heads: int, head_dim: int, page_size: int, custom_mask: Optional[torch.Tensor] = None, packed_custom_mask: Optional[torch.Tensor] = None, q_data_type: str = "float16",  )
+  forward(  q: torch.Tensor, paged_kv_data: torch.Tensor, causal: bool = True, pos_encoding_mode: str = "NONE", allow_fp16_qk_reduction: bool = False, logits_soft_cap: Optional[float] = None, sm_scale: Optional[float] = None, rope_scale: Optional[float] = None, rope_theta: Optional[float] = None,  )
+--- v0.1.0
+append_paged_kv_cache(  append_key: torch.Tensor, append_value: torch.Tensor, append_indptr: torch.Tensor, kv_data: torch.Tensor, kv_indices: torch.Tensor, kv_indptr: torch.Tensor, kv_last_page_len: torch.Tensor, kv_layout: str = "NHD",  )
+  begin_forward(  qo_indptr: torch.Tensor, paged_kv_indptr: torch.Tensor, paged_kv_indices: torch.Tensor, paged_kv_last_page_len: torch.Tensor, num_qo_heads: int, num_kv_heads: int, head_dim: int, page_size: int, custom_mask: Optional[torch.Tensor] = None, packed_custom_mask: Optional[torch.Tensor] = None, q_data_type: str = "float16",  )
+  forward(  q: torch.Tensor, paged_kv_data: torch.Tensor, causal: bool = True, pos_encoding_mode: str = "NONE", allow_fp16_qk_reduction: bool = False, logits_soft_cap: Optional[float] = None, sm_scale: Optional[float] = None, rope_scale: Optional[float] = None, rope_theta: Optional[float] = None,  )
+--- v0.1.1
+append_paged_kv_cache(  append_key: torch.Tensor, append_value: torch.Tensor, append_indptr: torch.Tensor, paged_kv_cache: torch.Tensor, kv_indices: torch.Tensor, kv_indptr: torch.Tensor, kv_last_page_len: torch.Tensor, kv_layout: str = "NHD",  )
+  begin_forward(  qo_indptr: torch.Tensor, paged_kv_indptr: torch.Tensor, paged_kv_indices: torch.Tensor, paged_kv_last_page_len: torch.Tensor, num_qo_heads: int, num_kv_heads: int, head_dim: int, page_size: int, custom_mask: Optional[torch.Tensor] = None, packed_custom_mask: Optional[torch.Tensor] = None, q_data_type: str = "float16",  )
+  forward(  q: torch.Tensor, paged_kv_cache: torch.Tensor, causal: bool = True, pos_encoding_mode: str = "NONE", allow_fp16_qk_reduction: bool = False, logits_soft_cap: Optional[float] = None, sm_scale: Optional[float] = None, rope_scale: Optional[float] = None, rope_theta: Optional[float] = None,  )
+--- v0.1.2
+append_paged_kv_cache( NOT FOUND )
+  begin_forward(  qo_indptr: torch.Tensor, paged_kv_indptr: torch.Tensor, paged_kv_indices: torch.Tensor, paged_kv_last_page_len: torch.Tensor, num_qo_heads: int, num_kv_heads: int, head_dim: int, page_size: int, custom_mask: Optional[torch.Tensor] = None, packed_custom_mask: Optional[torch.Tensor] = None, q_data_type: str = "float16",  )
+  forward(  q: torch.Tensor, paged_kv_cache: torch.Tensor, causal: bool = True, pos_encoding_mode: str = "NONE", allow_fp16_qk_reduction: bool = False, window_left: int = -1, logits_soft_cap: Optional[float] = None, sm_scale: Optional[float] = None, rope_scale: Optional[float] = None, rope_theta: Optional[float] = None,  )
+--- v0.1.6
+append_paged_kv_cache( NOT FOUND )
+  begin_forward( NOT FOUND )
+  forward(  q: torch.Tensor, paged_kv_cache: Union[torch.Tensor, Tuple[torch.Tensor, torch.Tensor]], causal: bool = True, pos_encoding_mode: str = "NONE", allow_fp16_qk_reduction: bool = False, k_scale: Optional[float] = None, v_scale: Optional[float] = None, window_left: int = -1, logits_soft_cap: Optional[float] = None, sm_scale: Optional[float] = None, rope_scale: Optional[float] = None, rope_theta: Optio )
+
+--- v0.0.5
+append_paged_kv_cache(  append_key: torch.Tensor, append_value: torch.Tensor, append_indptr: torch.Tensor, kv_data: torch.Tensor, kv_indices: torch.Tensor, kv_indptr: torch.Tensor, kv_last_page_len: torch.Tensor, kv_layout: str = "NHD",  )
+  begin_forward(  qo_indptr: torch.Tensor, paged_kv_indptr: torch.Tensor, paged_kv_indices: torch.Tensor, paged_kv_last_page_len: torch.Tensor, num_qo_heads: int, num_kv_heads: int, head_dim: int, page_size: int, custom_mask: Optional[torch.Tensor] = None, packed_custom_mask: Optional[torch.Tensor] = None, q_data_type: str = "float16",  )
+  forward(  q: torch.Tensor, paged_kv_data: torch.Tensor, causal: bool = True, pos_encoding_mode: str = "NONE", logits_cap: bool = False, allow_fp16_qk_reduction: bool = False, sm_scale: Optional[float] = None, rope_scale: Optional[float] = None, rope_theta: Optional[float] = None,  )
+
+=== wheel sizes (HEAD content-length)
+https://github.com/flashinfer-ai/flashinfer/releases/download/v0.1.1/flashinfer-0.1.1+cu121torch2.3-cp310-cp310-linux_x86_64.whl
+content-length: 1262500987
+https://github.com/flashinfer-ai/flashinfer/releases/download/v0.0.6/flashinfer-0.0.6+cu121torch2.3-cp310-cp310-linux_x86_64.whl
+content-length: 1347305395

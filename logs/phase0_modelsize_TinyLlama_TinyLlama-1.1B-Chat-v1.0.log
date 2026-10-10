@@ -1,0 +1,12 @@
+$ curl -s https://huggingface.co/api/models/TinyLlama/TinyLlama-1.1B-Chat-v1.0/tree/main  (2026-10-10T17:06:49+05:00)
+          1519 .gitattributes
+          3196 README.md
+           608 config.json
+           566 eval_results.json
+           124 generation_config.json
+    2200119864 model.safetensors
+           551 special_tokens_map.json
+       1842767 tokenizer.json
+        499723 tokenizer.model
+          1289 tokenizer_config.json
+TOTAL_BYTES 2202470207

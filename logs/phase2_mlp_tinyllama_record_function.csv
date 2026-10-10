@@ -1,0 +1,5 @@
+n_head,n_kv_head,n_embd,n_expanded_embd,vocab_size,use_gated_mlp,num_tokens,num_tensor_parallel_workers
+32,4,2048,5632,32000,True,8,1
+32,4,2048,5632,32000,True,4,1
+32,4,2048,5632,32000,True,2,1
+32,4,2048,5632,32000,True,1,1
