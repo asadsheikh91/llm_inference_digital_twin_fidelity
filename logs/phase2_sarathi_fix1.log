@@ -1,0 +1,35 @@
+=== 2026-10-10T20:22:19+05:00 sarathi-serve fix 1 on branch local-fixes (from vidur c94dbf4)
+$ git -C ~/sarathi-serve diff
+diff --git a/sarathi/engine/async_llm_engine.py b/sarathi/engine/async_llm_engine.py
+index febb7b5..7ad339c 100644
+--- a/sarathi/engine/async_llm_engine.py
++++ b/sarathi/engine/async_llm_engine.py
+@@ -16,6 +16,7 @@ from sarathi.config import ModelConfig, SystemConfig
+ from sarathi.core.datatypes.request_output import RequestOutput
+ from sarathi.core.datatypes.sampling_params import SamplingParams
+ from sarathi.engine.llm_engine import LLMEngine
++from sarathi.engine.pipeline_parallel_llm_engine import PipelineParallelLLMEngine
+ from sarathi.logger import init_logger
+ 
+ logger = init_logger(__name__)
+@@ -230,8 +231,11 @@ class _AsyncLLMEngine(LLMEngine):
+         """
+         Simple wrapper around the synchronous `step` method to make it
+         """
++        # Only PipelineParallelLLMEngine.step accepts the `block` argument;
++        # BaseLLMEngine.step (pipeline_parallel_size == 1) takes none.
++        args = (False,) if isinstance(self.engine, PipelineParallelLLMEngine) else ()
+         return await asyncio.get_event_loop().run_in_executor(
+-            None, self.engine.step, False
++            None, self.engine.step, *args
+         )
+ 
+ 
+$ python -c 'import sarathi.engine.async_llm_engine'
+import OK /home/asad/sarathi-serve/sarathi/engine/async_llm_engine.py
+$ git -C ~/sarathi-serve log --oneline -2 local-fixes; git rev-parse vidur origin/vidur
+03233cb Fix step_async for pipeline_parallel_size == 1
+c94dbf4 Merged PR 1908: Fix performance regression in pipeline parallel benchmark (#28)
+c94dbf438711a4670dbf7477175062e87748999d
+c94dbf438711a4670dbf7477175062e87748999d
+## local-fixes

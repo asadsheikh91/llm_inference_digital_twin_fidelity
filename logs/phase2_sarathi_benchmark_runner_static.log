@@ -1,0 +1,83 @@
+=== 2026-10-10T20:25:38+05:00 static check (nothing executed) of sarathi-serve benchmark runner, branch local-fixes
+$ ls sarathi/benchmark
+README.md
+__init__.py
+benchmark_runner.py
+capacity_search
+config.py
+constants.py
+entities
+main.py
+request_generator
+utils
+$ grep -n '__main__' sarathi/benchmark
+/home/asad/sarathi-serve/sarathi/benchmark/main.py:35:if __name__ == "__main__":
+/home/asad/sarathi-serve/sarathi/benchmark/capacity_search/main.py:59:if __name__ == "__main__":
+$ engine use in benchmark_runner.py (no HTTP)
+9:from sarathi import LLMEngine, SamplingParams
+59:        self.llm_engine = LLMEngine.from_system_config(system_config)
+83:        self.llm_engine.add_request(**self._get_input_params(self.requests[0], 0))
+87:            step_outputs = self.llm_engine.step()
+110:            step_outputs = self.llm_engine.step()
+128:    def _add_requests(self) -> None:
+133:            self.llm_engine.add_request(
+140:        self._add_requests()
+153:        ray.init(ignore_reinit_error=True)
+165:        available_resources = ray.available_resources()
+179:        cluster_resources_keys = list(ray.available_resources().keys())
+180:        num_gpus = ray.available_resources()["GPU"]
+229:        runner_class = ray.remote(num_cpus=1)(BenchmarkRunner)
+264:            ray.get([runner.warmup.remote() for runner in self.runners])
+266:            runner_metrics = ray.get([runner.run.remote() for runner in self.runners])
+$ grep -nE 'import (requests|aiohttp|httpx)|http' benchmark_runner.py
+(no HTTP client usage)
+$ flag naming rule: sarathi/config/flat_dataclass.py lines 139-176 (poly field -> --<field>_type; subclass fields -> --<snake_case(ClassName)>_<field>)
+            # # if field is a BasePolyConfig, add a type argument and process it as a dataclass
+            if is_subclass(field_type, BasePolyConfig):
+                dataclass_args[_input_dataclass].append(
+                    (field.name, field.name, field_type)
+                )
+
+                type_field_name = f"{field.name}_type"
+                default_value = field.default_factory().get_type()
+                meta_fields.append(
+                    (
+                        type_field_name,
+                        type(default_value),
+                        dataclass_field(default=default_value, metadata=field.metadata),
+                    )
+                )
+
+                assert hasattr(field_type, "__dataclass_fields__")
+                for subclass in get_all_subclasses(field_type):
+                    dataclass_dependencies[_input_dataclass].add(subclass)
+                    process_dataclass(subclass, f"{to_snake_case(subclass.__name__)}_")
+                continue
+
+            # if field is a dataclass, recursively process it
+            if hasattr(field_type, "__dataclass_fields__"):
+$ type enums: sarathi/types.py
+class RequestGeneratorType(Enum):
+    SYNTHETIC = "SYNTHETIC"
+    TRACE = "TRACE"
+
+
+class RequestIntervalGeneratorType(Enum):
+    POISSON = "POISSON"
+    GAMMA = "GAMMA"
+    STATIC = "STATIC"
+    TRACE = "TRACE"
+
+
+class RequestLengthGeneratorType(Enum):
+    UNIFORM = "UNIFORM"
+    ZIPF = "ZIPF"
+    TRACE = "TRACE"
+    FIXED = "FIXED"
+
+$ default trace paths exist in clone?
+ls: cannot access '/home/asad/sarathi-serve/data/processed_traces': No such file or directory
+$ ls ~/vidur/data/processed_traces (read-only)
+arxiv_summarization_stats_llama2_tokenizer_filtered_v2.csv
+splitwise_code.csv
+splitwise_conv.csv

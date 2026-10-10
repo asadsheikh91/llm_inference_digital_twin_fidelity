@@ -1,0 +1,4 @@
+$ curl -s localhost:8000/v1/completions -d '{"model":"TinyLlama/TinyLlama-1.1B-Chat-v1.0","prompt":"The capital of France is","max_tokens":32,"temperature":0.8,"top_p":0.95,"top_k":50}'  (2026-10-10T20:23:40+05:00)
+{"id":"cmpl-409c532e663247a4b5e413ae9dd0d265","object":"text_completion","created":1791645820,"model":"TinyLlama/TinyLlama-1.1B-Chat-v1.0","choices":[{"text":" a city that holds a deep historical significance. The city was founded in 31 BCE by Julius Caesar, and it played a pivotal role","index":0,"finish_reason":"length"}],"usage":{"prompt_tokens":6,"total_tokens":38,"completion_tokens":32}}
+HTTP 200 time_total 1.367453s
+(2026-10-10T20:23:41+05:00)
