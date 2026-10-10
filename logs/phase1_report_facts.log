@@ -1,0 +1,63 @@
+=== 2026-10-10T20:26:53+05:00 facts gathered for docs/REPORT_DRAFT.md
+$ python: pandas read ~/vidur/data/processed_traces/splitwise_conv.csv
+rows 19366
+columns ['arrived_at', 'num_prefill_tokens', 'num_decode_tokens']
+arrived_at min 0.0 max 3501.721937
+num_prefill_tokens min 2 max 14050
+num_decode_tokens min 7 max 1000
+$ git -C ~/vidur log --format='%h %ad %s' --date=short -- data/processed_traces/splitwise_conv.csv
+8e54dd5 2024-08-16 [Trace][Core] Add traces from Splitwise, make CLI params more intuitive (#29)
+$ arXiv submission history (data/paper_2405.05465/abs.html)
+[v1]
+[v2]
+[v1]
+[v2]
+$ trace columns read by the trace length generator
+23:        self.trace_df["num_prefill_tokens"] = (
+24:            self.trace_df["num_prefill_tokens"] * config.prefill_scale_factor
+26:        self.trace_df["num_decode_tokens"] = (
+27:            self.trace_df["num_decode_tokens"] * config.decode_scale_factor
+$ attn_kv_cache_save columns in shipped a100 attention.csv
+Llama-2-7b-hf: 0 columns
+Meta-Llama-3-8B: 5 columns
+$ kv_cache_save handling in predictor
+148:            "time_stats.attn_kv_cache_save.median",
+483:            "attn_kv_cache_save",
+598:            "attn_kv_cache_save",
+829:    def _get_attention_kv_cache_save_execution_time(self, batch: Batch) -> float:
+834:        return self._predictions["attn_kv_cache_save"][(num_tokens,)]
+$ ls ~/vidur/data/model_configs
+ls: cannot access '~/vidur/data/model_configs': No such file or directory
+$ ls ~/vidur/data/profiling/network
+a100_dgx
+a100_pairwise_nvlink
+a40_pairwise_nvlink
+h100_dgx
+h100_pairwise_nvlink
+$ default --profile_method in vidur/profiling/mlp/main.py
+66:        "--profile_method",
+67-        default="record_function",
+67:        default="record_function",
+$ README Supported Models rows
+| Model / Device | A100 80GB DGX | H100 DGX | 4xA100 80GB Pairwise NVLink Node | 8xA40 Pairwise NVLink Node |
+| --- | --- | --- | --- | --- |
+| `meta-llama/Meta-Llama-3-8B` | ✅ | ❌ | ✅ | ❌ |
+| `meta-llama/Meta-Llama-3-70B` | ✅ | ❌ | ✅ | ❌ |
+| `meta-llama/Llama-2-7b-hf` | ✅ | ✅ | ✅ | ✅ |
+| `codellama/CodeLlama-34b-Instruct-hf"` | ✅ | ✅ | ✅ | ✅ |
+| `meta-llama/Llama-2-70b-hf` | ✅ | ✅ | ✅ | ✅ |
+| `internlm/internlm-20b` | ✅ | ✅ | ✅ | ✅ |
+| `Qwen/Qwen-72B` | ✅ | ✅ | ✅ | ✅ |
+
+$ arXiv submission history (data/paper_2405.05465/abs.html, tags stripped)
+[v1] Wed, 8 May 2024 23:42:13 UTC (303 KB) [v2] Tue, 21 May 2024 05:17:29 UTC (303 KB)
+$ grep -n 'Copyright 2024' data/paper_2405.05465/paper.txt
+46:2024. Copyright 2024 by the author(s).(e.g., chunk size in Sarathi, watermark fraction in vLLM)
+$ grep -n 'Proceedings of the 7th' data/paper_2405.05465/paper.txt
+45:Proceedings of the 7thMLSys Conference , Santa Clara, CA, USA,
+$ ls -l ~/vidur/data/processed_traces (size name)
+884932 arxiv_summarization_stats_llama2_tokenizer_filtered_v2.csv
+166195 splitwise_code.csv
+382729 splitwise_conv.csv
+$ ls ~/vidur/vidur
+config config_optimizer entities events execution_time_predictor logger.py main.py metrics profiling request_generator scheduler simulator.py types utils 
