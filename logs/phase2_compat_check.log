@@ -1,0 +1,124 @@
+=== 2026-10-10T19:05:48+05:00 A. column comparison
+$ ls ~/vidur-phase2/data/profiling/compute/
+a100
+a40
+h100
+$ wc -l /home/asad/vidur-phase2/data/profiling/compute/a100/meta-llama/Llama-2-7b-hf/mlp.csv; head -c 300 /home/asad/vidur-phase2/data/profiling/compute/a100/meta-llama/Llama-2-7b-hf/mlp.csv
+1045 /home/asad/vidur-phase2/data/profiling/compute/a100/meta-llama/Llama-2-7b-hf/mlp.csv
+time_stats.emb.min,time_stats.emb.max,time_stats.emb.mean,time_stats.emb.median,time_stats.emb.std,time_stats.input_layernorm.min,time_stats.input_layernorm.max,time_stats.input_layernorm.mean,time_stats.input_layernorm.median,time_stats.input_layernorm.std,time_stats.attn_pre_proj.min,time_stats.at
+shipped columns: 58 ours: 58
+only in shipped: []
+only in ours: []
+same order: True
+shipped rows: 1044
+shipped distinct num_tensor_parallel_workers: ['1', '2', '4', '8']
+shipped num_tokens: min 1 max 4096 count 259
+shipped row num_tokens 8 tp1: mlp_up_proj mean 0.11085000000000003 median 0.111
+shipped row num_tokens 1 tp1: mlp_up_proj mean 0.11570000000000003 median 0.116
+
+=== 2026-10-10T19:06:28+05:00 A. predictor code (vidur/execution_time_predictor/sklearn_execution_time_predictor.py)
+$ grep -n 'target_col=\|feature_cols=\|df\["n_head"\]\|model_names = \[' (selected lines)
+387:            feature_cols=feature_cols,
+388:            target_col=target_col,
+456:        model_names = [
+475:                feature_cols=["num_tokens"],
+476:                target_col=f"time_stats.{model_name}.median",
+482:        model_names = [
+490:                feature_cols=["num_tokens"],
+491:                target_col=f"time_stats.{model_name}.median",
+501:                feature_cols=["num_tokens"],
+502:                target_col="time_stats.send_recv.median",
+512:                feature_cols=["num_tokens"],
+513:                target_col="time_stats.all_reduce.median",
+523:        model_names = [
+545:                feature_cols=["batch_size"],
+546:                target_col=target_col,
+568:            feature_cols=["kv_cache_size", "prefill_chunk_size_squared"],
+569:            target_col="time_stats.attn_prefill.median",
+575:            feature_cols=["batch_size", "kv_cache_size"],
+576:            target_col="time_stats.attn_decode.median",
+591:        model_names = [
+625:        model_names = [
+$ sed -n 119,140p (compute df filter + filled columns)
+        df = df[
+            (df["n_head"] == self._model_config.num_q_heads)
+            & (df["n_kv_head"] == self._model_config.num_kv_heads)
+            & (df["n_embd"] == self._model_config.embedding_dim)
+            & (df["n_expanded_embd"] == self._model_config.mlp_hidden_dim)
+            & (df["use_gated_mlp"] == self._model_config.use_gated_mlp)
+            & (df["vocab_size"] == self._model_config.vocab_size)
+            & (
+                df["num_tensor_parallel_workers"]
+                == self._replica_config.tensor_parallel_size
+            )
+        ]
+
+        for column in [
+            "time_stats.post_attention_layernorm.median",
+            "time_stats.add.median",
+            "time_stats.input_layernorm.median",
+        ]:
+            if column not in df.columns:
+                df[column] = 0
+            else:
+                df.fillna({column: 0}, inplace=True)
+$ sed -n 448,477p (compute model names and target)
+
+        return predictions
+
+    def _train_compute_models(self) -> Dict[str, BaseEstimator]:
+        compute_df = self._load_compute_df(self._compute_input_file)
+        compute_df = self._get_compute_df_with_derived_features(compute_df)
+
+        models = {}
+        model_names = [
+            "attn_pre_proj",
+            "attn_post_proj",
+            "mlp_up_proj",
+            "mlp_down_proj",
+            "mlp_act",
+            "input_layernorm",
+            "post_attention_layernorm",
+            "attn_rope",
+            "add",
+        ]
+
+        for model_name in model_names:
+            logger.debug(
+                f"Training model {model_name}, size of training data: {len(compute_df)}"
+            )
+            models[model_name] = self._train_model(
+                model_name=model_name,
+                df=compute_df,
+                feature_cols=["num_tokens"],
+                target_col=f"time_stats.{model_name}.median",
+            )
+$ grep -n 'compute_input_file' -A2 vidur/config/config.py
+495:    compute_input_file: str = field(
+496-        default="./data/profiling/compute/{DEVICE}/{MODEL}/mlp.csv",
+497-        metadata={"help": "Path to the compute input file."},
+
+=== provenance of profile method for shipped A100 data
+$ grep -rniE 'record_function|cuda_event|kineto|profile_method' docs README.md data (md/txt/yml/json)
+(no matches)
+$ find data/profiling -name '*.yaml' -o -name '*.yml' -o -name '*.md' -o -name '*.json'
+(end)
+$ git log --format='%h %ad %s' --date=short -- data/profiling/compute/a100/meta-llama/Llama-2-7b-hf/mlp.csv
+bee57da 2024-05-14 [Profiling] Model and device specific folders for profiled data, documentation for profiling (#7)
+$ git log --format='%h %ad %s' --date=short -S'RECORD_FUNCTION' --all
+bee57da 2024-05-14 [Profiling] Model and device specific folders for profiled data, documentation for profiling (#7)
+6d98aa8 2024-05-09 Prepare for open-source release (#6)
+$ git log -L '/--profile_method/,+5:vidur/profiling/mlp/main.py' --format='%h %ad %s' --date=short | grep -E '^[0-9a-f]{7} |default='
+bee57da 2024-05-14 [Profiling] Model and device specific folders for profiled data, documentation for profiling (#7)
+-        default=ProfileMethod.RECORD_FUNCTION,
++        default="record_function",
+6d98aa8 2024-05-09 Prepare for open-source release (#6)
++        default=ProfileMethod.RECORD_FUNCTION,
+
+=== numeric resolution of shipped vs our median values
+data/profiling/compute/a100/meta-llama/Llama-2-7b-hf/mlp.csv: median values 10440, integer multiples of 0.001 ms (whole microseconds): 9726
+   first 5 median values of first row: ['0.234', '0.105', '1.911', '0.149', '0.611']
+phase2_mlp_tinyllama_cuda_event.csv: median values 40, integer multiples of 0.001 ms (whole microseconds): 0
+   first 5 median values of first row: ['0.011264000087976456', '0.04044799879193306', '0.08755199983716011', '0.01945600053295493', '0.08294399827718735']
+$ shipped medians that are not whole microseconds: are they half-microseconds?
+not whole us: 714 of which multiples of 0.0005 ms: 714 examples: [3.3655, 1.8865, 0.1485, 0.2645, 1.9015]
