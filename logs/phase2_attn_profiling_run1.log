@@ -1,0 +1,148 @@
+=== 2026-10-10T19:11:14+05:00 attempt 1 = fix 1 of 2 (get_max_num_blocks: largest divisor of num_layers <= 8 instead of assert)
+diff --git a/vidur/profiling/utils/__init__.py b/vidur/profiling/utils/__init__.py
+index aeb9b18..227fcdc 100644
+--- a/vidur/profiling/utils/__init__.py
++++ b/vidur/profiling/utils/__init__.py
+@@ -164,7 +164,14 @@ def get_max_num_blocks(
+         * model_config.get_head_size()
+         * element_size
+     )
+-    assert model_config.num_layers % max_pipeline_parallel_size == 0
++    # Use the largest pipeline degree <= max_pipeline_parallel_size that divides
++    # num_layers, so models like TinyLlama (22 layers) are supported. Unchanged
++    # for models whose layer count is divisible by max_pipeline_parallel_size.
++    max_pipeline_parallel_size = max(
++        p
++        for p in range(1, max_pipeline_parallel_size + 1)
++        if model_config.num_layers % p == 0
++    )
+     block_memory_total = block_memory_size * (
+         model_config.num_layers // max_pipeline_parallel_size
+     )
+$ ps vidur.main (contention)
+  61616  170 /home/asad/.venv-vidur/bin/python -m vidur.main --seed 44 --replica_config_device a100 --replica_config_mod
+331 MiB
+=== start 2026-10-10T19:11:14+05:00
+$ cd ~/vidur-phase2 && /usr/bin/time -v python -m vidur.profiling.attention.main --models TinyLlama/TinyLlama-1.1B-Chat-v1.0 --num_gpus 1 --num_tensor_parallel_workers 1 --max_seq_len 64 --max_model_len 64 --min_batch_size 1 --max_batch_size 1
+  0%|          | 0/3 [00:00<?, ?it/s]2026-10-10 19:11:21,961	WARNING authentication_token_setup.py:85 -- Token authentication is enabled for this Ray cluster. Set RAY_AUTH_MODE=disabled to opt out. For more information, see https://docs.ray.io/en/latest/ray-security/token-auth.html
+2026-10-10 19:11:28,364	INFO worker.py:2033 -- Started a local Ray instance.
+[36m(AttentionWrapper pid=62716)[0m 2026-10-10 19:11:43,911 - INFO - flashinfer.jit: Loading JIT ops: batch_prefill_with_kv_cache_dtype_q_f16_dtype_kv_f16_dtype_o_f16_dtype_idx_i32_head_dim_64_posenc_0_use_swa_False_use_logits_cap_False_f16qk_False
+[36m(AttentionWrapper pid=62716)[0m /home/asad/.venv-sarathi/lib/python3.10/site-packages/torch/utils/cpp_extension.py:1967: UserWarning: TORCH_CUDA_ARCH_LIST is not set, all archs for visible cards are included for compilation. 
+[36m(AttentionWrapper pid=62716)[0m If this is not desired, please set os.environ['TORCH_CUDA_ARCH_LIST'].
+[36m(AttentionWrapper pid=62716)[0m   warnings.warn(
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/asad/vidur-phase2/vidur/profiling/attention/main.py", line 240, in <module>
+    main()
+  File "/home/asad/vidur-phase2/vidur/profiling/attention/main.py", line 223, in main
+    profile_model(
+  File "/home/asad/vidur-phase2/vidur/profiling/attention/main.py", line 157, in profile_model
+    results = ray.get(promises)
+  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 22, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 134, in wrapper
+    return func(*args, **kwargs)
+  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/ray/_private/worker.py", line 3004, in get
+    values, debugger_breakpoint = worker.get_objects(
+  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/ray/_private/worker.py", line 1053, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(RuntimeError): [36mray::AttentionWrapper.profile()[39m (pid=62716, ip=192.168.152.45, actor_id=d3f54a61e0cababbebe13f5501000000, repr=<vidur.profiling.attention.attention_wrapper.AttentionWrapper object at 0x7b3c8c576500>)
+  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/asad/vidur-phase2/vidur/profiling/attention/attention_wrapper.py", line 128, in profile
+    get_attention_wrapper().begin_forward(seq_metadata_list)
+  File "/home/asad/sarathi-serve/sarathi/model_executor/attention/flashinfer_attention_wrapper.py", line 151, in begin_forward
+    self.prefill_wrapper.begin_forward(
+  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/flashinfer/prefill.py", line 1425, in plan
+    self._cached_module = get_batch_prefill_module(*get_module_args)
+  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/flashinfer/prefill.py", line 442, in get_batch_prefill_module
+    module = gen_batch_prefill_module(*args)
+  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/flashinfer/jit/attention.py", line 435, in gen_batch_prefill_module
+    return load_cuda_ops(uri, source_paths)
+  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/flashinfer/jit/core.py", line 112, in load_cuda_ops
+    module = torch_cpp_ext.load(
+  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/torch/utils/cpp_extension.py", line 1309, in load
+    return _jit_compile(
+  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/torch/utils/cpp_extension.py", line 1719, in _jit_compile
+    _write_ninja_file_and_build_library(
+  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/torch/utils/cpp_extension.py", line 1802, in _write_ninja_file_and_build_library
+    verify_ninja_availability()
+  File "/home/asad/.venv-sarathi/lib/python3.10/site-packages/torch/utils/cpp_extension.py", line 1851, in verify_ninja_availability
+    raise RuntimeError("Ninja is required to load C++ extensions")
+RuntimeError: Ninja is required to load C++ extensions
+  0%|          | 0/3 [00:24<?, ?it/s]
+Command exited with non-zero status 1
+	Command being timed: "/home/asad/.venv-sarathi/bin/python -m vidur.profiling.attention.main --models TinyLlama/TinyLlama-1.1B-Chat-v1.0 --num_gpus 1 --num_tensor_parallel_workers 1 --max_seq_len 64 --max_model_len 64 --min_batch_size 1 --max_batch_size 1"
+	User time (seconds): 15.29
+	System time (seconds): 5.84
+	Percent of CPU this job got: 64%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:32.99
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 760412
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 351
+	Minor (reclaiming a frame) page faults: 288599
+	Voluntary context switches: 19707
+	Involuntary context switches: 110521
+	Swaps: 0
+	File system inputs: 391966
+	File system outputs: 296
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1
+exit=1
+=== end 2026-10-10T19:11:47+05:00
+
+=== 2026-10-10T19:12:08+05:00 post-failure state and analysis (read-only)
+$ grep -n 'RayTaskError\|RuntimeError:' (first occurrences)
+52:ray.exceptions.RayTaskError(RuntimeError): [36mray::AttentionWrapper.profile()[39m (pid=62716, ip=192.168.152.45, actor_id=d3f54a61e0cababbebe13f5501000000, repr=<vidur.profiling.attention.attent
+75:RuntimeError: Ninja is required to load C++ extensions
+105:$ grep -n 'RayTaskError\|RuntimeError:' (first occurrences)
+$ leftover ray / GPU
+no ray
+331 MiB
+$ which ninja; ~/.venv-sarathi/bin/pip show ninja
+ninja not on PATH
+Name: ninja
+Version: 1.13.2
+$ ls ~/.venv-sarathi/lib/python3.10/site-packages/flashinfer/data 2>/dev/null | head; ls flashinfer for prebuilt .so
+557410336 _kernels.cpython-310-x86_64-linux-gnu.so
+$ sed -n '430,442p' flashinfer/prefill.py (get_batch_prefill_module)
+
+def get_batch_prefill_module(*args):
+    global _batch_prefill_modules
+    if args not in _batch_prefill_modules:
+        uri = get_batch_prefill_uri(*args)
+        if has_prebuilt_ops and uri in prebuilt_ops_uri:
+            from . import _kernels
+
+            # NOTE(Zihao): we should avoid hard-coded index like this, refactor it later
+            head_dim = args[4]
+            plan_func = lambda *plan_args: _kernels.batch_prefill_with_kv_cache_plan(
+                head_dim,
+                *plan_args,
+            )
+            ragged_run_func = _kernels.batch_prefill_with_ragged_kv_cache_run
+            paged_run_func = _kernels.batch_prefill_with_paged_kv_cache_run
+        else:
+            module = gen_batch_prefill_module(*args)
+            plan_func = module.plan
+            ragged_run_func = module.ragged_run
+            paged_run_func = module.paged_run
+$ grep -n 'def get_cuda_path\|CUDA_HOME\|def load_cuda_ops' -A3 flashinfer/jit/core.py | head -20
+80:def load_cuda_ops(
+81-    name: str,
+82-    sources: List[Union[str, Path]],
+83-    extra_cflags: List[str] = [],
+$ grep -n 'prebuilt\|_prebuilt\|has_prebuilt' flashinfer/jit/__init__.py
+20:from .aot_config import prebuilt_ops_uri as prebuilt_ops_uri
+48:    has_prebuilt_ops = True
+50:    has_prebuilt_ops = False
