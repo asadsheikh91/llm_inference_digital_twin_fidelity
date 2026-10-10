@@ -1,0 +1,184 @@
+[2026-10-10T17:49:16+05:00] Task 1.1 README example, cold cache (cache dir empty: 0 entries)
+=== [2026-10-10T17:49:16+05:00] START run=readme_llama3-8b_qps6.45_seed42 model=meta-llama/Meta-Llama-3-8B qps=6.45 seed=42
+cwd=~/fidelity-phase1 WANDB_MODE=disabled PYTHONPATH=~/vidur
+CMD: nice -n 10 /usr/bin/time -v ~/.venv-vidur/bin/python -m vidur.main --seed 42 --replica_config_device a100 --replica_config_model_name meta-llama/Meta-Llama-3-8B --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 42 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 42 --trace_request_length_generator_config_max_tokens 16384 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 42 --poisson_request_interval_generator_config_qps 6.45 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/\{NETWORK_DEVICE\}/\{MODEL\}/cpu_overheads.csv --metrics_config_output_dir ~/fidelity-phase1/results/runs/readme_llama3-8b_qps6.45_seed42 --metrics_config_cache_dir ~/fidelity-phase1/cache
+INFO 10-10 17:49:18 trace_request_length_generator.py:78] Loaded request length trace file ~/vidur/data/processed_traces/splitwise_conv.csv with 19366 requests
+INFO 10-10 17:49:36 sklearn_execution_time_predictor.py:376] Trained model attn_pre_proj and found best parameters: {'max_depth': 16, 'min_samples_split': 2, 'n_estimators': 250} with mean absolute percentage error (MEAP) 0.7832217233544553%
+INFO 10-10 17:49:51 sklearn_execution_time_predictor.py:376] Trained model attn_post_proj and found best parameters: {'max_depth': 8, 'min_samples_split': 2, 'n_estimators': 250} with mean absolute percentage error (MEAP) 1.103902923448748%
+INFO 10-10 17:50:07 sklearn_execution_time_predictor.py:376] Trained model mlp_up_proj and found best parameters: {'max_depth': 32, 'min_samples_split': 2, 'n_estimators': 750} with mean absolute percentage error (MEAP) 0.7292904142607665%
+INFO 10-10 17:50:23 sklearn_execution_time_predictor.py:376] Trained model mlp_down_proj and found best parameters: {'max_depth': 8, 'min_samples_split': 2, 'n_estimators': 750} with mean absolute percentage error (MEAP) 1.0408961894230033%
+INFO 10-10 17:50:38 sklearn_execution_time_predictor.py:376] Trained model mlp_act and found best parameters: {'max_depth': 16, 'min_samples_split': 2, 'n_estimators': 500} with mean absolute percentage error (MEAP) 0.497584983566851%
+INFO 10-10 17:50:55 sklearn_execution_time_predictor.py:376] Trained model input_layernorm and found best parameters: {'max_depth': 16, 'min_samples_split': 2, 'n_estimators': 750} with mean absolute percentage error (MEAP) 0.6364922772068397%
+INFO 10-10 17:51:11 sklearn_execution_time_predictor.py:376] Trained model post_attention_layernorm and found best parameters: {'max_depth': 16, 'min_samples_split': 2, 'n_estimators': 500} with mean absolute percentage error (MEAP) 0.5368553334256332%
+INFO 10-10 17:51:36 sklearn_execution_time_predictor.py:376] Trained model attn_rope and found best parameters: {'max_depth': 16, 'min_samples_split': 2, 'n_estimators': 750} with mean absolute percentage error (MEAP) 0.5238252629027225%
+INFO 10-10 17:52:00 sklearn_execution_time_predictor.py:376] Trained model add and found best parameters: {'max_depth': 32, 'min_samples_split': 2, 'n_estimators': 750} with mean absolute percentage error (MEAP) 0.6519778224447444%
+INFO 10-10 17:53:53 sklearn_execution_time_predictor.py:376] Trained model attn_kv_cache_save and found best parameters: {'max_depth': 32, 'min_samples_split': 10, 'n_estimators': 500} with mean absolute percentage error (MEAP) 101.13621381971042%
+INFO 10-10 17:54:34 sklearn_execution_time_predictor.py:376] Trained model attn_prefill and found best parameters: {'max_depth': 32, 'min_samples_split': 2, 'n_estimators': 500} with mean absolute percentage error (MEAP) 0.5850210843234749%
+INFO 10-10 17:59:54 sklearn_execution_time_predictor.py:376] Trained model attn_decode and found best parameters: {'max_depth': 16, 'min_samples_split': 2, 'n_estimators': 500} with mean absolute percentage error (MEAP) 0.42614546352154176%
+INFO 10-10 18:00:09 sklearn_execution_time_predictor.py:433] Predicting execution time for model attn_pre_proj
+INFO 10-10 18:00:11 sklearn_execution_time_predictor.py:433] Predicting execution time for model attn_post_proj
+INFO 10-10 18:00:13 sklearn_execution_time_predictor.py:433] Predicting execution time for model mlp_up_proj
+INFO 10-10 18:00:24 sklearn_execution_time_predictor.py:433] Predicting execution time for model mlp_down_proj
+INFO 10-10 18:00:30 sklearn_execution_time_predictor.py:433] Predicting execution time for model mlp_act
+INFO 10-10 18:00:31 sklearn_execution_time_predictor.py:433] Predicting execution time for model attn_rope
+INFO 10-10 18:00:32 sklearn_execution_time_predictor.py:433] Predicting execution time for model attn_kv_cache_save
+INFO 10-10 18:00:33 sklearn_execution_time_predictor.py:433] Predicting execution time for model input_layernorm
+INFO 10-10 18:00:34 sklearn_execution_time_predictor.py:433] Predicting execution time for model post_attention_layernorm
+INFO 10-10 18:00:34 sklearn_execution_time_predictor.py:433] Predicting execution time for model add
+INFO 10-10 18:00:52 sklearn_execution_time_predictor.py:433] Predicting execution time for model attn_prefill
+Command terminated by signal 9
+	Command being timed: "~/.venv-vidur/bin/python -m vidur.main --seed 42 --replica_config_device a100 --replica_config_model_name meta-llama/Meta-Llama-3-8B --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 42 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 42 --trace_request_length_generator_config_max_tokens 16384 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 42 --poisson_request_interval_generator_config_qps 6.45 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/{NETWORK_DEVICE}/{MODEL}/cpu_overheads.csv --metrics_config_output_dir ~/fidelity-phase1/results/runs/readme_llama3-8b_qps6.45_seed42 --metrics_config_cache_dir ~/fidelity-phase1/cache"
+	User time (seconds): 91.05
+	System time (seconds): 69.32
+	Percent of CPU this job got: 19%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 13:45.45
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 3422572
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 83653
+	Minor (reclaiming a frame) page faults: 6258083
+	Voluntary context switches: 172694
+	Involuntary context switches: 44430
+	Swaps: 0
+	File system inputs: 28084072
+	File system outputs: 2026424
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+=== [2026-10-10T18:03:02+05:00] END run=readme_llama3-8b_qps6.45_seed42 rc=137 wall_seconds_date=825.493046533
+[2026-10-10T18:03:38+05:00] INVESTIGATION: wrapper rc=137. dmesg shows:
+[ 3632.347196] pt_nccl_watchdg invoked oom-killer: gfp_mask=0x140cca(GFP_HIGHUSER_MOVABLE|__GFP_COMP), order=0, oom_score_adj=0
+[ 3632.351928] Out of memory: Killed process 24480 (python) total-vm:6743700kB, anon-rss:3421396kB, file-rss:1048kB, shmem-rss:0kB, UID:1000 pgtables:8600kB oom_score_adj:0
+[2026-10-10T18:03:38+05:00] Found 16 orphaned joblib loky workers (ppid=init, started Sat Oct 10 17:48:42, ~/.venv-vidur python) left by the killed run, total RSS kB=4463576. Sending SIGTERM to them.
+~/.venv-vidur/lib/python3.10/site-packages/joblib/externals/loky/backend/resource_tracker.py:444: UserWarning: resource_tracker: There appear to be 22 leaked semlock objects to clean up at shutdown: {'/loky-23542-k0f4p3wr': 1, '/loky-23542-qn51wiq0': 1, '/loky-23542-0fykbo3m': 1, '/loky-23542-ul87fc8x': 1, '/loky-23542-tni046do': 1, '/loky-23542-zrypze14': 1, '/loky-23542-iwc0zekf': 1, '/loky-23542-ryxibsuy': 1, '/loky-23542-cfu7wf9g': 1, '/loky-23542-zr75rpnk': 1, '/loky-23542-rnwr2j3b': 1, '/loky-23542-tv452yhy': 1, '/loky-23542-59xgqlov': 1, '/loky-23542-owch7h8g': 1, '/loky-23542-5t4probd': 1, '/loky-23542-jahwbvae': 1, '/loky-23542-1bsbm051': 1, '/loky-23542-bgicgla2': 1, '/loky-23542-5ghmsjei': 1, '/loky-23542-mkegvlze': 1, '/loky-23542-sgt26bpw': 1, '/loky-23542-k7hv4w4l': 1}
+  warnings.warn(
+~/.venv-vidur/lib/python3.10/site-packages/joblib/externals/loky/backend/resource_tracker.py:444: UserWarning: resource_tracker: There appear to be 12 leaked folder objects to clean up at shutdown: {'/dev/shm/joblib_memmapping_folder_23542_177d1a2d46bf44bc8542851cc3abe431_ec1e35bcbcd14accb337139e78fed990': 1, '/dev/shm/joblib_memmapping_folder_23542_3d075043f48b446788b489045b3c85b9_e4a86bf86ec24c45baecaf81228adf4b': 1, '/dev/shm/joblib_memmapping_folder_23542_6dcdcd33503243509a5fdefb1bf6061a_38f59d6cf63347438c90bdb3560687fe': 1, '/dev/shm/joblib_memmapping_folder_23542_ae9534b64fb947d0b948eb03ee8c7d20_0a3d0cf31e54458bad76c24f92322a52': 1, '/dev/shm/joblib_memmapping_folder_23542_909fd2a3bac541adbe4d5097f37c4b04_8b4b06f1a10343ac8f3daefde37c3b97': 1, '/dev/shm/joblib_memmapping_folder_23542_31e6b54d12b948c2b72ca6457934bef6_59a0063ea12b437aad230948baf3cf25': 1, '/dev/shm/joblib_memmapping_folder_23542_dc4970039bbf46beaf44cdd5b05b3356_75621313ec514bffbbef7fc1b3083b0f': 1, '/dev/shm/joblib_memmapping_folder_23542_00faee504b6d4a4f9cf79b51cb4b921c_53ff03eb6a4941e2b59359713ced5a12': 1, '/dev/shm/joblib_memmapping_folder_23542_c69cadddd43d41a380c8ec592535e788_23fb12f0302a449fa5761d0fe2e61288': 1, '/dev/shm/joblib_memmapping_folder_23542_234a7d8a5a4b405fb95553da25adda26_8b63bfdcc8c14cbf8552745c5eef2628': 1, '/dev/shm/joblib_memmapping_folder_23542_9586814ea7c445ccab2a5ca94b75bfd3_871070f117914ad585cf53794922bda8': 1, '/dev/shm/joblib_memmapping_folder_23542_0d074e2e3ff946f097b793332917211d_2400be2c360040b29e67d7c5ba8b5eb8': 1}
+  warnings.warn(
+[2026-10-10T18:03:51+05:00] after SIGTERM: remaining loky workers=0; available MB=6466. Note: the pkill shell itself exited 144 because the -f pattern matched its own command line; workers were terminated.
+[2026-10-10T18:04:38+05:00] cache/attn_prefill_f48e63f6_predictions.pkl fails to load: EOFError Ran out of input (truncated by the OOM kill; no matching .csv). Renaming whole cache dir to cache_oomkilled_run1 and starting a fresh cache for a clean cold-cache measurement.
+[2026-10-10T18:04:38+05:00] DEVIATION: adding --random_forrest_execution_time_predictor_config_num_training_job_threads 4 (default -1 = all 16 cores spawned 16 loky workers holding ~4.4 GB RSS; with main process 3.4 GB this OOMed on a 9.9 GB WSL VM shared with another agent's vLLM process). Parallelism only.
+[2026-10-10T18:04:42+05:00] Task 1.1 attempt 2, cold cache (fresh cache dir), train threads=4. free MB available=5762
+=== [2026-10-10T18:04:42+05:00] START run=readme_llama3-8b_qps6.45_seed42 model=meta-llama/Meta-Llama-3-8B qps=6.45 seed=42
+cwd=~/fidelity-phase1 WANDB_MODE=disabled PYTHONPATH=~/vidur
+CMD: nice -n 10 /usr/bin/time -v ~/.venv-vidur/bin/python -m vidur.main --seed 42 --replica_config_device a100 --replica_config_model_name meta-llama/Meta-Llama-3-8B --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 42 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 42 --trace_request_length_generator_config_max_tokens 16384 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 42 --poisson_request_interval_generator_config_qps 6.45 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/\{NETWORK_DEVICE\}/\{MODEL\}/cpu_overheads.csv --random_forrest_execution_time_predictor_config_num_training_job_threads 4 --metrics_config_output_dir ~/fidelity-phase1/results/runs/readme_llama3-8b_qps6.45_seed42 --metrics_config_cache_dir ~/fidelity-phase1/cache
+INFO 10-10 18:04:45 trace_request_length_generator.py:78] Loaded request length trace file ~/vidur/data/processed_traces/splitwise_conv.csv with 19366 requests
+INFO 10-10 18:05:17 sklearn_execution_time_predictor.py:376] Trained model attn_pre_proj and found best parameters: {'max_depth': 32, 'min_samples_split': 2, 'n_estimators': 250} with mean absolute percentage error (MEAP) 0.7832137576692322%
+INFO 10-10 18:05:48 sklearn_execution_time_predictor.py:376] Trained model attn_post_proj and found best parameters: {'max_depth': 32, 'min_samples_split': 2, 'n_estimators': 250} with mean absolute percentage error (MEAP) 0.7882539257493872%
+INFO 10-10 18:06:19 sklearn_execution_time_predictor.py:376] Trained model mlp_up_proj and found best parameters: {'max_depth': 32, 'min_samples_split': 2, 'n_estimators': 500} with mean absolute percentage error (MEAP) 0.7280585449131272%
+INFO 10-10 18:06:49 sklearn_execution_time_predictor.py:376] Trained model mlp_down_proj and found best parameters: {'max_depth': 8, 'min_samples_split': 2, 'n_estimators': 250} with mean absolute percentage error (MEAP) 1.051149820859028%
+INFO 10-10 18:07:19 sklearn_execution_time_predictor.py:376] Trained model mlp_act and found best parameters: {'max_depth': 32, 'min_samples_split': 2, 'n_estimators': 250} with mean absolute percentage error (MEAP) 0.49960082460228505%
+INFO 10-10 18:07:50 sklearn_execution_time_predictor.py:376] Trained model input_layernorm and found best parameters: {'max_depth': 32, 'min_samples_split': 2, 'n_estimators': 500} with mean absolute percentage error (MEAP) 0.6414326930188597%
+INFO 10-10 18:08:19 sklearn_execution_time_predictor.py:376] Trained model post_attention_layernorm and found best parameters: {'max_depth': 32, 'min_samples_split': 2, 'n_estimators': 250} with mean absolute percentage error (MEAP) 0.5399318618819405%
+INFO 10-10 18:08:50 sklearn_execution_time_predictor.py:376] Trained model attn_rope and found best parameters: {'max_depth': 32, 'min_samples_split': 2, 'n_estimators': 750} with mean absolute percentage error (MEAP) 0.5261820827987641%
+INFO 10-10 18:09:21 sklearn_execution_time_predictor.py:376] Trained model add and found best parameters: {'max_depth': 32, 'min_samples_split': 2, 'n_estimators': 250} with mean absolute percentage error (MEAP) 0.6386242836437025%
+INFO 10-10 18:12:51 sklearn_execution_time_predictor.py:376] Trained model attn_kv_cache_save and found best parameters: {'max_depth': 32, 'min_samples_split': 10, 'n_estimators': 250} with mean absolute percentage error (MEAP) 101.12785992327893%
+INFO 10-10 18:14:13 sklearn_execution_time_predictor.py:376] Trained model attn_prefill and found best parameters: {'max_depth': 16, 'min_samples_split': 2, 'n_estimators': 250} with mean absolute percentage error (MEAP) 0.5882900512408358%
+INFO 10-10 18:20:35 sklearn_execution_time_predictor.py:376] Trained model attn_decode and found best parameters: {'max_depth': 32, 'min_samples_split': 2, 'n_estimators': 250} with mean absolute percentage error (MEAP) 0.4223351937395695%
+INFO 10-10 18:20:36 sklearn_execution_time_predictor.py:433] Predicting execution time for model attn_pre_proj
+INFO 10-10 18:20:36 sklearn_execution_time_predictor.py:433] Predicting execution time for model attn_post_proj
+INFO 10-10 18:20:37 sklearn_execution_time_predictor.py:433] Predicting execution time for model mlp_up_proj
+INFO 10-10 18:20:37 sklearn_execution_time_predictor.py:433] Predicting execution time for model mlp_down_proj
+INFO 10-10 18:20:37 sklearn_execution_time_predictor.py:433] Predicting execution time for model mlp_act
+INFO 10-10 18:20:37 sklearn_execution_time_predictor.py:433] Predicting execution time for model attn_rope
+INFO 10-10 18:20:38 sklearn_execution_time_predictor.py:433] Predicting execution time for model attn_kv_cache_save
+INFO 10-10 18:20:38 sklearn_execution_time_predictor.py:433] Predicting execution time for model input_layernorm
+INFO 10-10 18:20:39 sklearn_execution_time_predictor.py:433] Predicting execution time for model post_attention_layernorm
+INFO 10-10 18:20:39 sklearn_execution_time_predictor.py:433] Predicting execution time for model add
+INFO 10-10 18:20:53 sklearn_execution_time_predictor.py:433] Predicting execution time for model attn_prefill
+INFO 10-10 18:21:58 sklearn_execution_time_predictor.py:433] Predicting execution time for model attn_decode
+INFO 10-10 18:22:02 simulator.py:60] Starting simulation with cluster: Cluster({'id': 0, 'num_replicas': 1}) and 512 requests
+INFO 10-10 18:22:02 simulator.py:80] Simulation ended at: 85.97724680244782s
+INFO 10-10 18:22:05 simulator.py:83] Writing output
+Exception ignored in atexit callback: <bound method Simulator._write_output of <vidur.simulator.Simulator object at 0x78d598f37e20>>
+Traceback (most recent call last):
+  File "~/vidur/vidur/simulator.py", line 85, in _write_output
+    self._metric_store.plot()
+  File "~/vidur/vidur/metrics/metrics_store.py", line 34, in wrapper
+    return func(self, *args, **kwargs)
+  File "~/vidur/vidur/metrics/metrics_store.py", line 481, in plot
+    self._store_request_metrics(dir_plot_path)
+  File "~/vidur/vidur/metrics/metrics_store.py", line 385, in _store_request_metrics
+    dataseries.plot_histogram(base_plot_path, dataseries._y_name)
+  File "~/vidur/vidur/metrics/data_series.py", line 295, in plot_histogram
+    fig.write_image(f"{path}/{plot_name}.png")
+  File "~/.venv-vidur/lib/python3.10/site-packages/plotly/basedatatypes.py", line 3805, in write_image
+    return pio.write_image(self, *args, **kwargs)
+  File "~/.venv-vidur/lib/python3.10/site-packages/plotly/io/_kaleido.py", line 271, in write_image
+    img_data = to_image(
+  File "~/.venv-vidur/lib/python3.10/site-packages/plotly/io/_kaleido.py", line 197, in to_image
+    raise RuntimeError(PLOTLY_GET_CHROME_ERROR_MSG)
+RuntimeError: 
+
+Kaleido requires Google Chrome to be installed.
+
+Either download and install Chrome yourself following Google's instructions for your operating system,
+or install it from your terminal by running:
+
+    $ plotly_get_chrome
+
+
+	Command being timed: "~/.venv-vidur/bin/python -m vidur.main --seed 42 --replica_config_device a100 --replica_config_model_name meta-llama/Meta-Llama-3-8B --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 42 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 42 --trace_request_length_generator_config_max_tokens 16384 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 42 --poisson_request_interval_generator_config_qps 6.45 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/{NETWORK_DEVICE}/{MODEL}/cpu_overheads.csv --random_forrest_execution_time_predictor_config_num_training_job_threads 4 --metrics_config_output_dir ~/fidelity-phase1/results/runs/readme_llama3-8b_qps6.45_seed42 --metrics_config_cache_dir ~/fidelity-phase1/cache"
+	User time (seconds): 3728.01
+	System time (seconds): 120.16
+	Percent of CPU this job got: 367%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 17:26.43
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 4733720
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 67197
+	Minor (reclaiming a frame) page faults: 11498396
+	Voluntary context switches: 190292
+	Involuntary context switches: 6862
+	Swaps: 0
+	File system inputs: 1241864
+	File system outputs: 1745712
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+=== [2026-10-10T18:22:08+05:00] END run=readme_llama3-8b_qps6.45_seed42 rc=0 wall_seconds_date=1046.443398360
+[2026-10-10T18:22:44+05:00] Attempt 2 result: simulation ended (simulated 85.97724680244782s), request_metrics.csv written, then output writing crashed in atexit callback: RuntimeError Kaleido requires Google Chrome (plotly 7.1.0 / kaleido 1.5.0 fig.write_image). Exception ignored in atexit so process exit status 0. Plots/CDF csvs/batch metrics not written. Run dir renamed to results/runs/readme_cold_llama3-8b_qps6.45_seed42.
+[2026-10-10T18:22:44+05:00] DEVIATION: adding --no-metrics_config_store_plots (data_series.py: only gates fig.write_image PNG export; CSVs still saved via _save_df). Chosen instead of downloading Chrome (plotly_get_chrome), per no-large-downloads rule.
+[2026-10-10T18:22:52+05:00] Task 1.1 attempt 3, WARM cache (models+predictions from attempt 2), train threads=4, no plots.
+=== [2026-10-10T18:22:52+05:00] START run=readme_warm_llama3-8b_qps6.45_seed42 model=meta-llama/Meta-Llama-3-8B qps=6.45 seed=42
+cwd=~/fidelity-phase1 WANDB_MODE=disabled PYTHONPATH=~/vidur
+CMD: nice -n 10 /usr/bin/time -v ~/.venv-vidur/bin/python -m vidur.main --seed 42 --replica_config_device a100 --replica_config_model_name meta-llama/Meta-Llama-3-8B --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 42 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 42 --trace_request_length_generator_config_max_tokens 16384 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 42 --poisson_request_interval_generator_config_qps 6.45 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/\{DEVICE\}/\{MODEL\}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/\{NETWORK_DEVICE\}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/\{NETWORK_DEVICE\}/\{MODEL\}/cpu_overheads.csv --random_forrest_execution_time_predictor_config_num_training_job_threads 4 --no-metrics_config_store_plots --metrics_config_output_dir ~/fidelity-phase1/results/runs/readme_warm_llama3-8b_qps6.45_seed42 --metrics_config_cache_dir ~/fidelity-phase1/cache
+INFO 10-10 18:22:55 trace_request_length_generator.py:78] Loaded request length trace file ~/vidur/data/processed_traces/splitwise_conv.csv with 19366 requests
+INFO 10-10 18:23:19 simulator.py:60] Starting simulation with cluster: Cluster({'id': 0, 'num_replicas': 1}) and 512 requests
+INFO 10-10 18:23:20 simulator.py:80] Simulation ended at: 85.97724680244782s
+INFO 10-10 18:23:20 simulator.py:83] Writing output
+INFO 10-10 18:23:20 simulator.py:86] Metrics written
+INFO 10-10 18:23:20 simulator.py:94] Chrome event trace written
+	Command being timed: "~/.venv-vidur/bin/python -m vidur.main --seed 42 --replica_config_device a100 --replica_config_model_name meta-llama/Meta-Llama-3-8B --cluster_config_num_replicas 1 --replica_config_tensor_parallel_size 1 --replica_config_num_pipeline_stages 1 --request_generator_config_type synthetic --synthetic_request_generator_config_seed 42 --synthetic_request_generator_config_num_requests 512 --length_generator_config_type trace --trace_request_length_generator_config_seed 42 --trace_request_length_generator_config_max_tokens 16384 --trace_request_length_generator_config_trace_file ~/vidur/data/processed_traces/splitwise_conv.csv --interval_generator_config_type poisson --poisson_request_interval_generator_config_seed 42 --poisson_request_interval_generator_config_qps 6.45 --replica_scheduler_config_type sarathi --sarathi_scheduler_config_batch_size_cap 512 --sarathi_scheduler_config_chunk_size 512 --random_forrest_execution_time_predictor_config_prediction_max_prefill_chunk_size 16384 --random_forrest_execution_time_predictor_config_prediction_max_batch_size 512 --random_forrest_execution_time_predictor_config_prediction_max_tokens_per_request 16384 --random_forrest_execution_time_predictor_config_compute_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/mlp.csv --random_forrest_execution_time_predictor_config_attention_input_file ~/vidur/data/profiling/compute/{DEVICE}/{MODEL}/attention.csv --random_forrest_execution_time_predictor_config_all_reduce_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/all_reduce.csv --random_forrest_execution_time_predictor_config_send_recv_input_file ~/vidur/data/profiling/network/{NETWORK_DEVICE}/send_recv.csv --random_forrest_execution_time_predictor_config_cpu_overhead_input_file ~/vidur/data/profiling/cpu_overhead/{NETWORK_DEVICE}/{MODEL}/cpu_overheads.csv --random_forrest_execution_time_predictor_config_num_training_job_threads 4 --no-metrics_config_store_plots --metrics_config_output_dir ~/fidelity-phase1/results/runs/readme_warm_llama3-8b_qps6.45_seed42 --metrics_config_cache_dir ~/fidelity-phase1/cache"
+	User time (seconds): 20.12
+	System time (seconds): 12.43
+	Percent of CPU this job got: 107%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:30.30
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 4616580
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 229
+	Minor (reclaiming a frame) page faults: 1248800
+	Voluntary context switches: 3560
+	Involuntary context switches: 226
+	Swaps: 0
+	File system inputs: 1593608
+	File system outputs: 4656
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+=== [2026-10-10T18:23:22+05:00] END run=readme_warm_llama3-8b_qps6.45_seed42 rc=0 wall_seconds_date=30.315123610

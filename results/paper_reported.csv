@@ -1,0 +1,16 @@
+id,source_page_pdf,location,model,metric,condition,value_as_printed,trace_assignment,note
+A1,1,Abstract,several LLMs,inference latency error,all,"less than 9% error",n/a,text statement
+A2,2,Introduction,range of models,error rate,all,"under 9% error rate",n/a,text statement
+S1,9,Section 7.2 Static Workloads text,four models,P95 request execution latency error,static (offline) traces,"upto 3.33% error",n/a,text statement (refers to Figure 3)
+D1,9,Section 7.2 Dynamic Workloads text,four models,normalized E2E latency error,"dynamic, 85% of capacity","<5% error) in almost all scenarios",n/a,text statement (refers to Figure 4)
+X1,15,Appendix A.1 text,LLaMA2-7B,max error,"dynamic, 95% of capacity","up to 12.65% maximum error",n/a,text statement (refers to Figure 7)
+F3a,8,Figure 3(a) Median Normalized Execution Latency,LLaMA2-7B (TP1),median normalized execution latency error,static,"-0.30% | -2.66% | -3.01%",TODO,bar labels in PDF text-layer order; mapping to Chat-1M/Arxiv-4K/BWB-4K not verifiable from text
+F3b,8,Figure 3(b) P95 Normalized Execution Latency,LLaMA2-7B (TP1) [first panel],P95 normalized execution latency error,static,"1.83% | -2.20% | -3.33%",TODO,panel has no title in text layer; first panel assumed LLaMA2-7B by order of (a)
+F4a,9,Figure 4(a) Median normalized end-to-end latency,LLaMA2-7B (TP1),median normalized E2E latency error,"dynamic, 85% of capacity","-2.88% | -8.50% | -6.99%",TODO,bar labels in PDF text-layer order
+F4b,9,Figure 4(b) P95 normalized end-to-end latency,LLaMA2-7B (TP1) [first panel],P95 normalized E2E latency error,"dynamic, 85% of capacity","-4.55% | -7.30% | -7.47%",TODO,first panel assumed LLaMA2-7B by order of (a)
+F7a,16,Figure 7(a) Median normalized E2E latency at 75% of max capacity,LLaMA2-7B (TP1),median normalized E2E latency error,"dynamic, 75% of capacity","-4.04% | -7.18% | -6.42%",TODO,bar labels in PDF text-layer order
+F7b,16,Figure 7(b) P95 normalized E2E latency at 75% of max capacity,LLaMA2-7B (TP1) [first panel],P95 normalized E2E latency error,"dynamic, 75% of capacity","-3.56% | -9.38% | -6.10%",TODO,first panel assumed LLaMA2-7B by order of (a)
+F7c,16,Figure 7(c) Median normalized E2E latency at 95% of max capacity,LLaMA2-7B (TP1),median normalized E2E latency error,"dynamic, 95% of capacity","-3.72% | -12.52% | -8.83%",TODO,bar labels in PDF text-layer order
+F7d,16,Figure 7(d) P95 normalized E2E latency at 95% of max capacity,LLaMA2-7B (TP1) [first panel],P95 normalized E2E latency error,"dynamic, 95% of capacity","-5.35% | -12.65% | -9.14%",TODO,first panel assumed LLaMA2-7B by order of (a)
+T1,TODO,Figures 3/4/7,any,absolute real vs predicted latency values (bar heights),all,TODO,TODO,only axis ticks are in the text layer; bar heights not readable without rendering the figure
+T2,TODO,any,Meta-Llama-3-8B,any fidelity number,any,TODO,TODO,Llama-3-8B does not appear in the extracted paper text

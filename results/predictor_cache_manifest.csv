@@ -1,0 +1,133 @@
+path,size_bytes,mtime,trained_in,sha256
+06bc2760_model_lock.file,0,2026-10-10T18:29:25+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+1317b83a_prediction_lock.file,0,2026-10-10T18:41:35+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+252f66c5_model_lock.file,0,2026-10-10T18:27:12+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+345ffb5f_prediction_lock.file,0,2026-10-10T18:41:33+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+3f6dd157_model_lock.file,0,2026-10-10T18:07:50+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+48772d3b_prediction_lock.file,0,2026-10-10T18:41:33+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+51400a4e_model_lock.file,0,2026-10-10T18:28:40+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+53661595_model_lock.file,0,2026-10-10T18:06:19+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+5de27470_prediction_lock.file,0,2026-10-10T18:20:37+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+684f46d6_prediction_lock.file,0,2026-10-10T18:41:33+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+697e5910_model_lock.file,0,2026-10-10T18:09:21+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+6d170439_model_lock.file,0,2026-10-10T18:35:07+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+70d5abf5_model_lock.file,0,2026-10-10T18:30:08+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+70f1716d_model_lock.file,0,2026-10-10T18:12:51+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+79581cda_prediction_lock.file,0,2026-10-10T18:20:37+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+7ec512eb_model_lock.file,0,2026-10-10T18:26:25+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+855a6010_model_lock.file,0,2026-10-10T18:04:45+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+8c27eeb2_model_lock.file,0,2026-10-10T18:07:19+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+8f57dc1c_model_lock.file,0,2026-10-10T18:05:48+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+91e106f6_model_lock.file,0,2026-10-10T18:25:40+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+9a045ad3_prediction_lock.file,0,2026-10-10T18:41:35+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+9d5f659b_prediction_lock.file,0,2026-10-10T18:20:36+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+a738bc87_model_lock.file,0,2026-10-10T18:24:54+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+a827eb3f_model_lock.file,0,2026-10-10T18:08:19+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+aa4a5d0e_model_lock.file,0,2026-10-10T18:31:53+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+add_70d5abf5.pkl,4752583,2026-10-10T18:30:53+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),d8997f64b998b26f8914b7fe95136ecc9538bf312fe346396c617ddf062d9f7f
+add_70d5abf5_training_predictions.csv,8184,2026-10-10T18:30:53+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),66c2eef384540ae24c7d281dadb105c02ff1d4fec15667acb6223b489df668ca
+add_9a045ad3_predictions.csv,429436,2026-10-10T18:41:36+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),6d36f09879f87ff72f8acf2ae33d24dba9902fc3daf19ffbf6651a9c358422c8
+add_9a045ad3_predictions.pkl,655618,2026-10-10T18:41:36+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),46e8fbe2caf8240e3dabbdcd003301ea1efcea3fcd40ec3e1a8e7d56fc3026aa
+add_9d5f659b_predictions.csv,411132,2026-10-10T18:20:39+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),698ea3f4afdceb6042f58060c9a62877c7d666172ac0fb8ad473dc9ecde000c7
+add_9d5f659b_predictions.pkl,655618,2026-10-10T18:20:39+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),f539bdc00eabc76c34ddb519bda24bf4a6043680591ef1cf717e04a6614d7957
+add_fccb9d87.pkl,6818484,2026-10-10T18:09:21+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),4fa5d53232478cd204bcc7b2aeea5999bbffa974320b86068c9c82ab2463905e
+add_fccb9d87_training_predictions.csv,14246,2026-10-10T18:09:21+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),063c7d14ca8901710148785880b76e8fcf2aad7dbd560cff5f254630969932fe
+attn_decode_345ffb5f_predictions.csv,3607292,2026-10-10T18:43:48+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),70a8ac1073ca5517380679e8e5e44dbab4b655ac35b1779dc414c63b55c32364
+attn_decode_345ffb5f_predictions.pkl,7764916,2026-10-10T18:43:48+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),f8d99d8abee77589c42daccafab737517c7fce4d235204519ac2d75a4b8a92ee
+attn_decode_6d170439.pkl,675049033,2026-10-10T18:41:32+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),d3468ac7dc77ed328a8ac764d508572a0c60e91883dd1199d52d973f23d77882
+attn_decode_6d170439_training_predictions.csv,339482,2026-10-10T18:41:33+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),f2127d035bf6f0111bea061d52368400bef59e0ccb676c6f45bf4e8522ea0c6b
+attn_decode_9d5f659b_predictions.csv,3686443,2026-10-10T18:22:01+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),6563e1cbf1cf186a1db5327c2a35418cf7a9c40a57ea00b64308478eacaeba49
+attn_decode_9d5f659b_predictions.pkl,7764916,2026-10-10T18:22:01+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),2f62f4b4d007cde875a6f929a02a0f41ce52a65088b64e98b76409d0a0138309
+attn_decode_f437ed3f.pkl,324360542,2026-10-10T18:20:35+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),47299e34a7fb69093f0be4319db9873ab9899cd00b89800c44fe27891d1a4487
+attn_decode_f437ed3f_training_predictions.csv,533217,2026-10-10T18:20:36+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),5a0ed330b36395f3fdbfbc272d32eda260b798ccbcbe13bbae476594a9ba2134
+attn_kv_cache_save_1317b83a_predictions.csv,152756,2026-10-10T18:41:35+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),9114e2946071e98a5d225bf285339774d64153370e664217764231492796d95e
+attn_kv_cache_save_1317b83a_predictions.pkl,655618,2026-10-10T18:41:35+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),c5966d30fc64e6a0ef7e74bec3885922cdcf25239f15e6e77c9bea0f51be6af4
+attn_kv_cache_save_697e5910.pkl,7891716,2026-10-10T18:12:51+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),425687f1ea212c520a3b705f8fad0928dd0316c335e6d35d6cfd2db6effa9d29
+attn_kv_cache_save_697e5910_training_predictions.csv,567327,2026-10-10T18:12:51+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),17c396af7c12676721833a2866d8328e4c2a8063eccfca93ecb75b2802d9569b
+attn_kv_cache_save_bc3599c9_predictions.csv,388498,2026-10-10T18:20:38+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),bbb7a85bcabbab044707bd45060d94d1f461d1f5c260f0e7fb11b6197e2db884
+attn_kv_cache_save_bc3599c9_predictions.pkl,655618,2026-10-10T18:20:38+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),b5ee23f9929fb6cf319f22df23573cc2a86100d73d4a362ab1001a691b5b6722
+attn_kv_cache_save_e6015fe1.pkl,74916,2026-10-10T18:31:52+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),e1c97b1fe75542ee54f72e2d4ba8ab1798e228eb5d0a526ad58cf32c65fc30b8
+attn_kv_cache_save_e6015fe1_training_predictions.csv,139651,2026-10-10T18:31:52+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),9e34d2fb5b14ffc43a9efc50ada3716d7f597201500cc85c965047418174cb0d
+attn_post_proj_9d5f659b_predictions.csv,393971,2026-10-10T18:20:37+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),3af7407ba26b2bc9348136c869e8531b36161e751a14dfd40ac83a190652e60f
+attn_post_proj_9d5f659b_predictions.pkl,655618,2026-10-10T18:20:37+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),f50f2915397fea4aeb12a229d5d05d3a2b3c2763784868a41140a7ad29f2d89b
+attn_post_proj_a738bc87.pkl,2293524,2026-10-10T18:25:40+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),3ec17a57ae400da1a688b073c8444a024cad5423be292de1171dd93e5662bf86
+attn_post_proj_a738bc87_training_predictions.csv,7958,2026-10-10T18:25:40+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),575cb9d79adea14d061bd73d2457c4b561872042bf8651cc458c60b64df36175
+attn_post_proj_d2ed5d7d.pkl,9652782,2026-10-10T18:05:48+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),4a42e248a775eac33163def715bbd525dd4b25b87278a8220a5feb3bac8b8bdd
+attn_post_proj_d2ed5d7d_training_predictions.csv,14175,2026-10-10T18:05:48+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),7680b0c1f505e97c3d7dec6148850aee3563d5d6f18ea66649e25e4d0cd0e1b4
+attn_post_proj_e0fd08c2_predictions.csv,400394,2026-10-10T18:41:33+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),a8e6d4d75c76ded3409b69bfee77094ae0eb20af496ecf14e65838e7b0c2af25
+attn_post_proj_e0fd08c2_predictions.pkl,655618,2026-10-10T18:41:33+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),9200593f38da14b46fcfaa53c587f442ee2aaab0720cc8de72c4dbb93a468e09
+attn_pre_proj_684f46d6_predictions.csv,386239,2026-10-10T18:41:33+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),04f8dd7f01f02d1d2624638b1283c0e7b275f41f7b00954b5d0cc2a7ccf8c5af
+attn_pre_proj_684f46d6_predictions.pkl,655618,2026-10-10T18:41:33+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),5364baa93ee87802f3cab32ca8bc3b2b38915472c6419a9842cd9c58aa789958
+attn_pre_proj_855a6010.pkl,9875550,2026-10-10T18:05:17+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),18f881108f413c048b7831f47ced42a3db2c2e0b39c85a4bdbe44e1be56ec22b
+attn_pre_proj_855a6010_training_predictions.csv,14130,2026-10-10T18:05:17+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),10bc54b89ad586f4a58a16199112d4251990ae24abf4d39c606a5811f21ac368
+attn_pre_proj_9d5f659b_predictions.csv,392297,2026-10-10T18:20:36+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),ff81e5ecbab4ac3c08f5930879ead833e048f2e8010a2901a1da899298a890e4
+attn_pre_proj_9d5f659b_predictions.pkl,655618,2026-10-10T18:20:36+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),b652c7307dcc04af1d8ab5156bafc885f03a380502b71c887ebc73c72b4b4efd
+attn_pre_proj_ca3673f6.pkl,11246161,2026-10-10T18:24:54+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),119fe71f54534356de995e2003496ff5fba706650c286bef212d8f992bd6a7e2
+attn_pre_proj_ca3673f6_training_predictions.csv,7855,2026-10-10T18:24:54+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),7b52f286298b72296ed380418a2d3fa7462d7717c068c61afc3288453d9184dc
+attn_prefill_345ffb5f_predictions.csv,140520148,2026-10-10T18:43:40+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),f54f09130cc152652fdbaf9633f6d4b5060c90d3fbab1908f3604333064e2204
+attn_prefill_345ffb5f_predictions.pkl,248473258,2026-10-10T18:43:32+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),3685e6bad4888fb6fb4475c9afa992d469ce28ceb922b5f8945b1318c454b62b
+attn_prefill_70f1716d.pkl,46074420,2026-10-10T18:14:13+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),398adc88b9b660c4974ca7281d9577154e69c8b0d39d80c3352d05744f161a96
+attn_prefill_70f1716d_training_predictions.csv,97847,2026-10-10T18:14:13+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),7df6638f3b562a1b99540cc079f0389c4db6bc178d4e10c45f8b9630732fc732
+attn_prefill_aa4a5d0e.pkl,280751005,2026-10-10T18:35:07+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),ed7f79d0305ddf777ec70722ddd0f69bd9c546db809ac0496fe0af69d336b747
+attn_prefill_aa4a5d0e_training_predictions.csv,163743,2026-10-10T18:35:07+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),49b676201703f41526c352482280383a7154330fbbbd25cbfbbbbd369796ed26
+attn_prefill_fad4c843_predictions.csv,137152446,2026-10-10T18:21:58+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),5a59c9be5954506adbd720ec9a1eeeeaf8b0a1cddf9a6aa164fa0c131b67bef0
+attn_prefill_fad4c843_predictions.pkl,248473258,2026-10-10T18:21:50+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),73b86ee02136e82a0d4c4c64176d74df66b417a5165d3b0301e839ddb0f8c02c
+attn_rope_06bc2760.pkl,7552492,2026-10-10T18:30:08+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),907b008e9a2a2b9bb8d2eaf4f35b8c0664935a3535119fdbe08ae7f2ce0dd392
+attn_rope_06bc2760_training_predictions.csv,8031,2026-10-10T18:30:08+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),394291c40164095bd69c21b2eefaf807a424df06866aab7167e3b84f03a5556b
+attn_rope_5de27470_predictions.csv,409804,2026-10-10T18:20:38+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),5ff209f87795264bf2f38eb667dbc72b4ad2305671cad8be88ea478d31e5e1de
+attn_rope_5de27470_predictions.pkl,655618,2026-10-10T18:20:38+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),599c4dbae3efb56f5e6f9bb1839c33621e75e95e1fc54655c3b10836a22772af
+attn_rope_684f46d6_predictions.csv,415029,2026-10-10T18:41:35+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),e9b897deed87e675ac9865bc4dcac6715b01943b7be7c186f1898f3e38f7f8a3
+attn_rope_684f46d6_predictions.pkl,655618,2026-10-10T18:41:34+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),c4cc0f351befb8b8586cd26b541f86780ade21edc055a166cca0648b7e73aef0
+attn_rope_a827eb3f.pkl,21778168,2026-10-10T18:08:50+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),3af5c1b65090c0abe2cc70c9b3697581e85c16f37fec819c229d09b317d139d8
+attn_rope_a827eb3f_training_predictions.csv,14323,2026-10-10T18:08:50+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),336cc4bbd49388aab0ce2e040336d70c0c520ebbdb1d9d0d7f8ab0629ec13afb
+bc3599c9_prediction_lock.file,0,2026-10-10T18:20:38+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+ca3673f6_model_lock.file,0,2026-10-10T18:24:01+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+d2ed5d7d_model_lock.file,0,2026-10-10T18:05:17+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+d7eea2ea_model_lock.file,0,2026-10-10T18:27:57+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+e0fd08c2_prediction_lock.file,0,2026-10-10T18:41:33+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+e6015fe1_model_lock.file,0,2026-10-10T18:30:54+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+e67c02c6_model_lock.file,0,2026-10-10T18:06:49+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+f437ed3f_model_lock.file,0,2026-10-10T18:14:13+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+f48e63f6_prediction_lock.file,0,2026-10-10T18:20:37+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+fad4c843_prediction_lock.file,0,2026-10-10T18:20:53+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+fccb9d87_model_lock.file,0,2026-10-10T18:08:50+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+input_layernorm_345ffb5f_predictions.csv,415644,2026-10-10T18:41:35+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),5bf0cb98efc0d4d8a561e6cf20ccce9fc2df1bf918f149caee3567b038cdd0cb
+input_layernorm_345ffb5f_predictions.pkl,655618,2026-10-10T18:41:35+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),affc867c78340d29b81f489e22d72e313f4bd7abac5e9270893a633cb8a9f495
+input_layernorm_8c27eeb2.pkl,15489040,2026-10-10T18:07:50+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),cbdc296e89c95302ffcce5e5b11154340dd31f855f7588aee0abe8b8ed30b107
+input_layernorm_8c27eeb2_training_predictions.csv,14357,2026-10-10T18:07:50+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),3baa00d329c49d4bd02a6e0e2578822e1823cde69798bea38c0082c06ff77968
+input_layernorm_d7eea2ea.pkl,10778458,2026-10-10T18:28:40+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),2bbc914d4364a068bee34b1656c224dcfb77979f3757a1e63d6e206f4798087d
+input_layernorm_d7eea2ea_training_predictions.csv,8111,2026-10-10T18:28:40+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),6171da312f687980d810bd7a8749c6229339f1119dfa82572fd746c4f9f24007
+input_layernorm_f48e63f6_predictions.csv,408775,2026-10-10T18:20:39+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),34a410f8633faa236f5970e6e5066b577ff8f911c14d3e99a63380d2ed608100
+input_layernorm_f48e63f6_predictions.pkl,655618,2026-10-10T18:20:38+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),79a32de5642cdd060496a9231997c530af4fa89bd1769ab302f438f26b7ea563
+mlp_act_252f66c5.pkl,13826530,2026-10-10T18:27:57+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),1732b47fe15b21b44c51f5ae41eae17261f13f74b0ca59b7ab71570e4d183b1b
+mlp_act_252f66c5_training_predictions.csv,8002,2026-10-10T18:27:57+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),469011a43156741882d940e4c9f4bf364a02dfa86bfe55f5b5accf0186550d54
+mlp_act_345ffb5f_predictions.csv,414377,2026-10-10T18:41:34+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),fedcf0ea2bceaec365a5060918383a4de844927d4e2e85c8dc349ac5abcb7a95
+mlp_act_345ffb5f_predictions.pkl,655618,2026-10-10T18:41:34+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),ca1a685d1585453ed49f98d57924a0591502318202e4d64e1e7bb7414e5fd7e3
+mlp_act_9d5f659b_predictions.csv,397456,2026-10-10T18:20:37+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),12474768b38fcb1ccf20d1924640fe16b53bc013b1af02dfac62956f51e75cb8
+mlp_act_9d5f659b_predictions.pkl,655618,2026-10-10T18:20:37+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),801270c476be8e91ba31be29dcaaee65bae36ebf3d401cd481ebc228b317207b
+mlp_act_e67c02c6.pkl,9109758,2026-10-10T18:07:19+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),a9b629403213b4557a4fa0187b05122a152631acd3abbb635242af246c188721
+mlp_act_e67c02c6_training_predictions.csv,14107,2026-10-10T18:07:19+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),6a1d81da75cdc3256cc98895d3e22e0e5cf60fdc1cd2e5a501ab166c6f8e993d
+mlp_down_proj_345ffb5f_predictions.csv,398389,2026-10-10T18:41:34+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),35577db516259eda0b1d331ec35349b2bc9769a6c376d1e74ffa1b5df76d8af8
+mlp_down_proj_345ffb5f_predictions.pkl,655618,2026-10-10T18:41:34+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),57f66c6b8f042783e6a287e2a6455ecf8956ed5d5959cc9414dd1e0ba394ee26
+mlp_down_proj_53661595.pkl,5575611,2026-10-10T18:06:49+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),8590451461fa1e14ab2c1a8dd7cbd8e17bd03523882fad3fb4278deb03b974f3
+mlp_down_proj_53661595_training_predictions.csv,14276,2026-10-10T18:06:49+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),49c92a559b9597b047a96dde129ffa3dd730482e4eec0eb9be124020e88da4a7
+mlp_down_proj_79581cda_predictions.csv,387286,2026-10-10T18:20:37+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),9d380958afb64b05157b2853fc9fc9ae3938ca7e998045b69065457b044e3d55
+mlp_down_proj_79581cda_predictions.pkl,655618,2026-10-10T18:20:37+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),6b75a5f10e3ea093b5efed0dba947d5530104e510496fe1c5787c102860efd6d
+mlp_down_proj_7ec512eb.pkl,16501450,2026-10-10T18:27:12+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),141c6a64a68c84ae03377809f2cf294e07f44a5b21cc8afb4a6532a268c5e6b5
+mlp_down_proj_7ec512eb_training_predictions.csv,7863,2026-10-10T18:27:12+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),40afb3a95808f3c0a60e1f59f54da17beff925afadcb90d3dec1f41e627f6122
+mlp_up_proj_48772d3b_predictions.csv,384752,2026-10-10T18:41:33+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),3e44c9089d5472e4c726daf34f52ffc5ea9c2ca89159897c83ef880d0f14fabc
+mlp_up_proj_48772d3b_predictions.pkl,655618,2026-10-10T18:41:33+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),5fd4c21749161facefb8f604e2baf88d74408851baec4dc8916abe89e4ee1379
+mlp_up_proj_8f57dc1c.pkl,20555374,2026-10-10T18:06:19+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),79c86d7eff1362689c116854a7e7a02848b662ee6cf23db4b4dae6978e6d633a
+mlp_up_proj_8f57dc1c_training_predictions.csv,14167,2026-10-10T18:06:19+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),5e55255b9ee5305de02ef8d5a47e7e063c6522d2f78e0aae3710c902636d4cab
+mlp_up_proj_91e106f6.pkl,5845476,2026-10-10T18:26:25+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),4cfdb19572ecacc3628ed31b9886e3fbb307c50c20f740d875e3aa1ceea30bd9
+mlp_up_proj_91e106f6_training_predictions.csv,8133,2026-10-10T18:26:25+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),0982b326d2909ef73b32dbf81bb1a665819348fd2f3bd00770132e2896f6b914
+mlp_up_proj_f48e63f6_predictions.csv,388876,2026-10-10T18:20:37+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),a52fa3256b4526b3b57723edd6e122b688f72abe97746d5665f028cf3329a9f9
+mlp_up_proj_f48e63f6_predictions.pkl,655618,2026-10-10T18:20:37+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),8adae8f810cdf33e0140f05befe533653da1dfdd2f8f22a448020f0b2528c7bf
+post_attention_layernorm_3f6dd157.pkl,7263012,2026-10-10T18:08:19+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),d746be25d9eb08afe8c2baa6a6569045f61ff85701c8b61191fcd46feb31d4e3
+post_attention_layernorm_3f6dd157_training_predictions.csv,14292,2026-10-10T18:08:19+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),f6b8f8cc450d301789d5e26c6d1a2446aa192bf791e8458668b56b46095226fe
+post_attention_layernorm_51400a4e.pkl,6098083,2026-10-10T18:29:25+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),1b5625e4c53f5a904c2ccae34c5d7185237aec369510ae366457ec5691331209
+post_attention_layernorm_51400a4e_training_predictions.csv,8121,2026-10-10T18:29:25+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),33d8f96b0a5f727e1aa5f84e5dc42db604d46f4a606e6aa94add4539d5c01e3e
+post_attention_layernorm_9a045ad3_predictions.csv,415604,2026-10-10T18:41:35+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),b8a1097c85962c520856bf449aa85b5a899ab7e36b60b080423791852bdc9578
+post_attention_layernorm_9a045ad3_predictions.pkl,655618,2026-10-10T18:41:35+05:00,sweep_Llama-2-7b-hf_qps2_seed42 (meta-llama/Llama-2-7b-hf),069a3e332546f3898201520c41d04c7b72e2be561743354bdb1e706cf7180de0
+post_attention_layernorm_9d5f659b_predictions.csv,407477,2026-10-10T18:20:39+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),81b78183edd42c81230fb79f60e2a61ee84597e8efc642518ce23bcc82a0192e
+post_attention_layernorm_9d5f659b_predictions.pkl,655618,2026-10-10T18:20:39+05:00,1.1 attempt 2 (meta-llama/Meta-Llama-3-8B),455ae2d6cfadcd5cf8c71dd715a895cc0de861a6d3e7cb5f0e202124e91028e5

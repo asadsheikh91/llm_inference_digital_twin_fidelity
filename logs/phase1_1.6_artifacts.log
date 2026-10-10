@@ -1,0 +1,6 @@
+[2026-10-10T19:15:27+05:00] cp -a ~/fidelity-phase1/cache -> ~/fidelity-artifacts/phase1_vidur_predictor_cache
+verify source vs manifest: 132 OK, 0 not OK
+133 ~/fidelity-artifacts/phase1_vidur_predictor_cache_manifest.csv
+2339621283	~/fidelity-artifacts/phase1_vidur_predictor_cache
+7362c11f124e5eba30ed1d46be1c59819857c4337f1b15c96e69363c36e48a19  ~/fidelity-artifacts/phase1_vidur_predictor_cache.sha256
+[2026-10-10T19:16:41+05:00] manifest with trained_in column (mtime windows: 1.1 attempt 2 18:04:45-18:22:08 -> 66 files; Llama-2 cold sweep run 18:23:56-18:43:54 -> 66 files) written to results/predictor_cache_manifest.csv and ~/fidelity-artifacts/phase1_vidur_predictor_cache_manifest.csv

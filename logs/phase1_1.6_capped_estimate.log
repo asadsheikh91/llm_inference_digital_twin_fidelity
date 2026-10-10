@@ -1,0 +1,3 @@
+warm Llama-2 runs n=11 sum=362.916865044 mean=32.992442277 max=43.581230164
+estimate 12 runs = 12*mean = 395.909307321 s
+[2026-10-10T19:08:25+05:00] Told user: estimate 395.909307321 s (12 x mean of 11 warm Llama-2 sweep runs), assumes warm predictor cache hit. Starting.

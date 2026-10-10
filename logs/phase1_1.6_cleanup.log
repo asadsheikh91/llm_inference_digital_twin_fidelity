@@ -1,0 +1,2 @@
+[2026-10-10T19:08:45+05:00] Deleting cache_oomkilled_run1/ (user approved). du -sh: 989M, files: 65. RESULTS.md cites it only as the destination of the set-aside cache; evidence for the OOM and truncation is in logs/phase1_1.1_readme.log lines 56 and 63. No result in results/ was produced from it.
+[2026-10-10T19:08:45+05:00] deleted; exists now: no
