@@ -1,4 +1,4 @@
-# Phase 0 Feasibility Log
+# Feasibility Log (Phase 0 and Phase 2)
 
 Last updated: 2026-10-10
 
@@ -8,9 +8,14 @@ Every number in this file comes from a log in `logs/`. The log is named next to 
 |------|---------|
 | 0.1 GPU visible in WSL | GO |
 | 0.2 vLLM serves TinyLlama-1.1B | GO (with deviation D1) |
-| 0.3 sarathi-serve installs and imports | GO for install and import (with deviation D2, fix 2a); serving a model not yet tested |
+| 0.3 sarathi-serve installs and imports | GO for install and import (with deviation D2, fix 2a); serving tested in 2.C |
 | 0.4 vLLM serves LLaVA-OneVision-0.5B with an image | GO (with deviation D1) |
 | 0.5 Vidur cloned and installed | GO |
+| 2.1 sarathi venv pins (transformers, numpy) | DONE |
+| 2.2 Vidur MLP profiling smoke test (TinyLlama) | GO (with deviations D3, D4) |
+| 2.A Profiling CSV compatibility with shipped A100 data | Format compatible; timing method differs (see 2.A) |
+| 2.B Vidur attention profiling smoke test (TinyLlama) | GO (with deviations D3, D4, D5) |
+| 2.C sarathi-serve serves TinyLlama, one request | GO (with deviation D6) |
 
 ## Deviations
 
@@ -26,6 +31,29 @@ Every number in this file comes from a log in `logs/`. The log is named next to 
 - Setting: `CUDA_HOME=~/micromamba/envs/cuda-12.1` on the pip command line, for the build only. Not exported, not in any file.
 - Reason: sarathi-serve's `setup.py` compiles CUDA extensions and needs `nvcc`. WSL has no CUDA toolkit, and PyPI's `nvidia-cuda-nvcc-cu12` wheels (12.1 to 12.9) ship no `nvcc` binary (fix 1).
 - Effect: the kernels were compiled with nvcc 12.1.105, which matches torch 2.3.0's CUDA 12.1 build. The README's mamba env was replaced by `~/.venv-sarathi` per the project setup notes; micromamba is used only to provide the toolchain.
+
+### D3: Vidur profilers run as modules from the worktree root (2.2, 2.B)
+
+- Setting: `python -m vidur.profiling.mlp.main` and `python -m vidur.profiling.attention.main`, run from `~/vidur-phase2`.
+- Reason: `docs/profiling.md` says `python vidur/profiling/mlp/main.py`. That fails with `ModuleNotFoundError: No module named 'vidur'` because `vidur/` has no `__init__.py`, so `find_packages` returns `[]` and the editable install maps nothing (`MAPPING = {}`) (`logs/phase2_vidur_install.log`). Vidur's README runs its simulator the same way (`python -m vidur.main`).
+
+### D4: `cuda_event` timing instead of trace-based timing (2.2, 2.B)
+
+- MLP: `--profile_method cuda_event`. The default `record_function` run exited 0, but its CSV had no `time_stats.*` columns. Its profiler trace has 201 `vidur_*` annotations and 362 `cuda_runtime` events but 0 GPU kernel events, so every operation's time came out as 0 and was dropped (`logs/phase2_mlp_profiling_outputs.log`, `logs/phase2_mlp_record_function_trace_sample.json`).
+- Attention: the method is hard-coded to `kineto` in `attention_wrapper.py`. Changed to `cuda_event` in the worktree, on instruction (commit `6a45295` on `ext-profiling`).
+- Effect: CUDA-event timing spans everything between two events, which can include gaps between kernel launches. Trace-based timing sums kernel durations only. The shipped A100 data appears to be trace-based (see 2.A). So profiles from this machine are not directly comparable with the shipped profiles. This is a methodology confound.
+
+### D5: Vidur attention profiling changes and FlashInfer pin (2.B)
+
+- `get_max_num_blocks` asserted `num_layers % 8 == 0`. TinyLlama has 22 layers. Changed to use the largest pipeline degree <= 8 that divides `num_layers`. Unchanged for every shipped model (32, 48 and 80 layers) (commit `6a45295` on `ext-profiling`).
+- Attention runs set `PATH=~/.venv-sarathi/bin:$PATH` (what activating the venv does) and `CUDA_HOME=~/micromamba/envs/cuda-12.1` on the command line only.
+- flashinfer pinned to 0.1.1+cu121torch2.3 in `~/.venv-sarathi`, replacing 0.2.0.post1, which has an incompatible `append_paged_kv_cache` signature (see 2.B).
+
+### D6: sarathi-serve `step_async` fix on a local branch (2.C)
+
+- Branch `local-fixes` in `~/sarathi-serve`, made from `vidur`. Commit `03233cb`. The `vidur` branch is unchanged (`vidur` and `origin/vidur` both at `c94dbf4`).
+- Change: `step_async` passes `block=False` to `engine.step` only when the engine is a `PipelineParallelLLMEngine` (`logs/phase2_sarathi_fix1.log`).
+- Reason: commit `c94dbf4` (2024-07-23) made `step_async` always pass `False`. `BaseLLMEngine.step(self)`, used when pipeline parallel size is 1, takes no arguments, so the OpenAI server failed every request with `TypeError: BaseLLMEngine.step() takes 1 positional argument but 2 were given` (`logs/phase2_sarathi_serve_server.log`).
 
 ## Host (`logs/phase0_host_gpu.log`, `logs/phase0_vllm_env.log`)
 
@@ -155,7 +183,7 @@ Evidence: `logs/phase0_sarathi_size.log`, `logs/phase0_sarathi_install.log`
 - Caveats as originally recorded (the first two are resolved by the pins above):
   - transformers resolved to 5.19.0, because `requirements.txt` says only `>= 4.37.0`. It prints `Disabling PyTorch because PyTorch >= 2.5 is required but found 2.3.0`. sarathi only imports config and tokenizer classes from transformers, and those import fine. Whether transformers 5.x configs behave the way this 2024 code expects will only show when a model is served.
   - numpy resolved to 2.2.6 alongside torch 2.3.0
-  - The README says sarathi-serve was tested with CUDA 12.1 on A100 and A40 GPUs. Serving a model on this RTX 3060 (sm_86, 6 GB) has not been tried.
+  - The README says sarathi-serve was tested with CUDA 12.1 on A100 and A40 GPUs. Serving a model on this RTX 3060 (sm_86, 6 GB) was tried in Phase 2 (see 2.C).
 
 ## 0.4 vLLM serves LLaVA-OneVision-0.5B with an image: GO (with deviation D1)
 
@@ -201,11 +229,126 @@ Evidence: `logs/phase0_vidur.log`, `logs/phase0_vidur_unshallow.log`, `logs/phas
 - Vidur's `environment.yml` also lists ray, randomname, paretoset and streamlit, which are not in requirements.txt. They are not installed because the simulator imports without them.
 - Caveat: numpy resolved to 2.x. Vidur predates numpy 2. If the simulator hits numpy-2 incompatibilities, pin `numpy<2`.
 
+## Phase 2
+
+Phase 2 logs are `logs/phase2_*`. The transformers and numpy pins (2.1) were logged as `logs/phase1_*`.
+
+### 2.1 sarathi venv pins: DONE
+
+Evidence: `logs/phase1_sarathi_pins.log`, `logs/phase1_sarathi_import_after_pins.log`. Details are under 0.3 (Follow-up after Phase 0).
+
+- transformers 4.42.4 (uploaded 2024-07-11) and numpy 1.26.4 (uploaded 2024-02-05), the newest releases before the sarathi `vidur` branch commit date
+- `rms_norm` check still passes, max abs diff 0.0
+
+### 2.2 Vidur MLP profiling smoke test: GO (with deviations D3, D4)
+
+Evidence: `logs/phase2_vidur_worktree.log`, `logs/phase2_tinyllama_model_config.log`, `logs/phase2_vidur_install.log`, `logs/phase2_mlp_profiling_prep.log`, `logs/phase2_mlp_profiling_run.log`, `logs/phase2_mlp_profiling_outputs.log`, `logs/phase2_mlp_profiling_run_cuda_event.log`, `logs/phase2_mlp_profiling_outputs_cuda_event.log`, `logs/phase2_mlp_tinyllama_cuda_event.csv`
+
+- Worktree: `~/vidur-phase2`, branch `ext-profiling`, from `~/vidur` `main` at `abae7f6`. `~/vidur` itself stayed on `main` with a clean working tree.
+- Model config: `docs/profiling.md` refers to `data/model_configs/*.yml`, which does not exist at this commit. The profiler reads Python classes from `vidur/config/model_config.py`, so `TinyLlama_1_1BModelConfig` was added there from the model's `config.json` (commit `c9b473b` on `ext-profiling`).
+- Install: `pip install -e . --no-deps` into `~/.venv-sarathi`. No other packages were needed. The freeze diff shows only the added editable `vidur`. torch 2.3.0, transformers 4.42.4 and numpy 1.26.4 unchanged.
+- GPU idle baseline: 317 MiB, no compute processes
+- Default `record_function` run: exit 0 in 26.06 s, but no timing columns (see D4)
+- `cuda_event` run: `--models TinyLlama/TinyLlama-1.1B-Chat-v1.0 --num_gpus 1 --num_tensor_parallel_workers 1 --max_tokens 8 --profile_method cuda_event`
+  - exit 0 in 20.65 s, peak RSS 677,076 KB
+  - `mlp.csv`: 5,712 bytes, 4 rows (8, 4, 2 and 1 tokens), 58 columns
+  - `mlp_up_proj` mean in ms: 0.2178463988006115 (8 tokens), 0.16837440207600593 (1 token)
+
+### 2.A Profiling CSV compatibility with shipped A100 data
+
+Evidence: `logs/phase2_compat_check.log`
+
+- Our `mlp.csv` and the shipped `data/profiling/compute/a100/meta-llama/Llama-2-7b-hf/mlp.csv` have the same 58 columns in the same order. The shipped file has 1,044 rows: 259 token counts (1 to 4,096) at TP 1, 2, 4 and 8.
+- The execution time predictor (`vidur/execution_time_predictor/sklearn_execution_time_predictor.py`):
+  - filters rows on `n_head`, `n_kv_head`, `n_embd`, `n_expanded_embd`, `use_gated_mlp`, `vocab_size` and `num_tensor_parallel_workers`
+  - uses `num_tokens` as its only feature
+  - trains on `time_stats.<op>.median` for 9 operations: `attn_pre_proj`, `attn_post_proj`, `mlp_up_proj`, `mlp_down_proj`, `mlp_act`, `input_layernorm`, `post_attention_layernorm`, `attn_rope`, `add`. `emb` and the min, max, mean and std columns are not used.
+- Profile method of the shipped A100 data: no record in the docs or data folders.
+  - `record_function` was the default when the data was committed (`bee57da`, 2024-05-14).
+  - All 10,440 shipped median values lie on a 0.5 microsecond grid: 9,726 whole microseconds and 714 half-microseconds. All 40 of our `cuda_event` medians are off that grid.
+  - So the shipped data is not from `cuda_event`. The data does not show whether it came from `record_function` or `kineto`.
+
+### 2.B Vidur attention profiling smoke test: GO (with deviations D3, D4, D5)
+
+Evidence: `logs/phase2_attn_profiling_prep.log`, `logs/phase2_attn_profiling_run0.log`, `logs/phase2_attn_profiling_run1.log`, `logs/phase2_attn_profiling_run2_prep.log`, `logs/phase2_attn_profiling_run2.log`, `logs/phase2_attn_profiling_run2_mem.csv`, `logs/phase2_flashinfer_version_choice.log`, `logs/phase2_flashinfer011_install.log`, `logs/phase2_sarathi_import_after_flashinfer011.log`, `logs/phase2_attn_profiling_run3_prep.log`, `logs/phase2_attn_profiling_run3.log`, `logs/phase2_attn_profiling_run3_mem.csv`, `logs/phase2_attn_profiling_run3_outputs.log`, `logs/phase2_attn_tinyllama_cuda_event.csv`
+
+Command: `python -m vidur.profiling.attention.main --models TinyLlama/TinyLlama-1.1B-Chat-v1.0 --num_gpus 1 --num_tensor_parallel_workers 1 --max_seq_len 64 --max_model_len 64 --min_batch_size 1 --max_batch_size 1`
+
+- Attempt 0, with the `cuda_event` change: `AssertionError` in `get_max_num_blocks` after 8.77 s (22 layers, see D5). Phase 1's Llama-2-7b rerun was using about 106% CPU during attempts 0 and 1.
+- Fix 1 (layer-count change): failed after 32.99 s with `RuntimeError: Ninja is required to load C++ extensions`, because FlashInfer 0.2.0.post1 tried to compile a prefill kernel it does not ship precompiled
+- Fix 2 (PATH and CUDA_HOME):
+  - FlashInfer compiled the kernel (19:29:49.721 to 19:30:09.598)
+  - then failed after 45.97 s with `TypeError: append_paged_kv_cache() missing 1 required positional argument: 'kv_last_page_len'`
+  - lowest available RAM was 6,384,624 KiB
+- Cause: sarathi requires only `flashinfer >= 0.0.5`. FlashInfer 0.2 changed `append_paged_kv_cache` from 7 to 8 arguments.
+- Version research:
+  - sarathi set `>= 0.0.5` on 2024-06-20, the day v0.0.5 was released, and last edited its wrapper on 2024-06-23
+  - sarathi's call signatures match FlashInfer source at every tag checked from v0.0.5 to v0.1.1
+  - v0.1.1 (2024-07-20) is the newest release before the branch commit
+- Renewed fix: pinned `flashinfer==0.1.1+cu121torch2.3`, approved download 1,262,500,987 bytes, installed with `--no-deps`
+  - the freeze diff shows only the flashinfer line changed
+  - torch, transformers and numpy unchanged
+  - `rms_norm` max abs diff 0.0
+- Final run:
+  - machine quiet, GPU baseline 430 MiB
+  - exit 0 in 24.26 s, peak RSS 761,928 KB
+  - no compile step, no kernel or architecture errors
+  - lowest available RAM 8,533,120 KiB
+- `attention.csv`: 2,682 bytes, 3 rows, 36 columns. Medians in ms:
+
+| is_prefill | prefill_chunk_size | kv_cache_size | batch_size | attn_prefill | attn_decode | attn_kv_cache_save |
+|---|---|---|---|---|---|---|
+| True | 64 | 0 | 1 | 0.05939200147986412 | 0.008191999979317188 | 0.043007999658584595 |
+| True | 32 | 0 | 1 | 0.0942080020904541 | 0.01929599978029728 | 0.03276799991726875 |
+| False | 0 | 32 | 1 | 0.006912000011652708 | 0.062463998794555664 | 0.03155200183391571 |
+
+- Caveats:
+  - sarathi wraps each `if contains_prefill` / `if contains_decode` block in a timer, so the timer records even when the block does no work. With `cuda_event`, these empty regions measure 0.006912 to 0.019296 ms here. That floor needs filtering in real profiles.
+  - Compared with the shipped A100 `attention.csv`, ours has 5 extra columns (`time_stats.attn_kv_cache_save.*`) and none missing. The predictor fills `attn_kv_cache_save.median` with 0 when absent.
+  - The attention profiler runs only 5 active steps per input.
+
+### 2.C sarathi-serve serves TinyLlama: GO (with deviation D6)
+
+Evidence: `logs/phase2_sarathi_serve_prep.log`, `logs/phase2_sarathi_serve_server.log`, `logs/phase2_sarathi_serve_request.log`, `logs/phase2_sarathi_serve_summary.log`, `logs/phase2_sarathi_serve_gpumem.csv`, `logs/phase2_sarathi_serve_mem.csv`, `logs/phase2_sarathi_fix1.log`, `logs/phase2_sarathi_serve_run2_prep.log`, `logs/phase2_sarathi_serve_run2_server.log`, `logs/phase2_sarathi_serve_run2_request.log`, `logs/phase2_sarathi_serve_run2_summary.log`, `logs/phase2_sarathi_serve_run2_gpumem.csv`, `logs/phase2_sarathi_serve_run2_mem.csv`
+
+Command: `python -m sarathi.entrypoints.openai.api_server --model_config_model TinyLlama/TinyLlama-1.1B-Chat-v1.0 --parallel_config_pipeline_parallel_size 1 --parallel_config_tensor_parallel_size 1 --log_level info --output_dir <scratch> --port 8000`. PATH and CUDA_HOME were set on the command line. Pipeline parallel size defaults to 2, so it is set to 1 explicitly.
+
+- No download: sarathi loads `*.safetensors` first, and TinyLlama's `model.safetensors` was already cached
+- Run 1, on the `vidur` branch:
+  - startup 27 s (launched 20:16:04, first `/v1/models` 200 at 20:16:31)
+  - peak 5235 MiB above a 0 MiB baseline, during startup
+  - the request returned HTTP 500 with the `step_async` `TypeError` (see D6)
+- Run 2, on `local-fixes` `03233cb`:
+  - startup 34 s (launched 20:23:00, `# GPU blocks: 7329` at 20:23:33, first `/v1/models` 200 at 20:23:34)
+  - request: same prompt and sampling settings as 0.2. HTTP 200, latency 1.367453 s (curl `time_total`), 6 prompt tokens, 32 completion tokens, `finish_reason` `length`.
+  - response text: `" a city that holds a deep historical significance. The city was founded in 31 BCE by Julius Caesar, and it played a pivotal role"`
+  - GPU memory: baseline 0 MiB (8 samples), peak 5271 MiB at 20:23:41.583 during the request, so peak minus baseline is 5271 MiB
+  - lowest available RAM 5,930,080 KiB
+  - shutdown: SIGINT did not stop the server within 30 s, so SIGTERM was sent. Afterwards no Ray processes were left and the GPU was back at 0 MiB.
+- Differences from the vLLM run in 0.2:
+  - dtype: vLLM served `torch.bfloat16`, the model's `torch_dtype`. sarathi logged `Casting torch.bfloat16 to torch.float16` and ran in `torch.float16` (its `--model_config_dtype` default).
+  - latency for the same request: 1.367453 s on sarathi, 0.673328 s on vLLM. These are single requests on engines with different compile and CUDA-graph settings, so this is not a performance comparison.
+
+### sarathi-serve benchmark runner (read from code, not run)
+
+Evidence: `logs/phase2_sarathi_benchmark_runner_static.log`
+
+- Entry point: `python -m sarathi.benchmark.main` (`BenchmarkRunnerLauncher` in `sarathi/benchmark/benchmark_runner.py`)
+  - it builds `LLMEngine.from_system_config`, calls `add_request`, and drives the synchronous `step()`, with no HTTP client
+  - it uses Ray for replicas
+- Flags follow `sarathi/config/flat_dataclass.py`: a selectable config gets `--<field>_type`, and each subclass's fields get `--<snake_case(ClassName)>_<field>`. Examples:
+  - `--request_generator_config_type SYNTHETIC|TRACE`
+  - `--synthetic_request_generator_config_num_requests`
+  - `--length_generator_config_type UNIFORM|ZIPF|TRACE|FIXED` and `--interval_generator_config_type POISSON|GAMMA|STATIC|TRACE`
+  - `--trace_request_generator_config_trace_file`
+  - plus the engine flags the server takes. Pipeline parallel size defaults to 2 here too.
+- The default trace paths (`data/processed_traces/...`) are not in the sarathi clone. `sarathi/benchmark/README.md` describes an older YAML config.
+
 ## Environment versions
 
 | Venv | Python | Key packages |
 |------|--------|--------------|
 | `~/.venv-vidur` | 3.10.12 | see `docs/environment/vidur-freeze.txt` |
 | `~/.venv-vllm` | 3.10.12 | vllm 0.31.0, torch 2.13.0+cu130, transformers 5.17.0 (`logs/phase0_vllm_env.log`); py-spy 0.4.2 added for diagnosis |
-| `~/.venv-sarathi` | 3.10.12 | sarathi 0.1.7 (editable, `~/sarathi-serve`), torch 2.3.0+cu121, flashinfer 0.1.1+cu121torch2.3 (was 0.2.0.post1; pinned in Phase 2, `logs/phase2_flashinfer011_install.log`), triton 2.3.0, ray 2.59.0; pinned after Phase 0: transformers 4.42.4, numpy 1.26.4 (`logs/phase1_sarathi_pins.log`) |
+| `~/.venv-sarathi` | 3.10.12 | sarathi 0.1.7 (editable, `~/sarathi-serve`, branch `local-fixes` `03233cb`), vidur 0.0.1 (editable, `~/vidur-phase2`, branch `ext-profiling`), torch 2.3.0+cu121, flashinfer 0.1.1+cu121torch2.3 (was 0.2.0.post1; pinned in Phase 2, `logs/phase2_flashinfer011_install.log`), triton 2.3.0, ray 2.59.0; pinned after Phase 0: transformers 4.42.4, numpy 1.26.4 (`logs/phase1_sarathi_pins.log`) |
 | `~/micromamba/envs/cuda-12.1` | n/a | CUDA 12.1 build toolchain for sarathi-serve (nvcc 12.1.105), used only via `CUDA_HOME` (`logs/phase0_sarathi_fix2.log`) |
